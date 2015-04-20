@@ -1,0 +1,53 @@
+# -------------------------------------------------------------------+
+# file:     .mkshrc                                                  +
+# author:   Ypnose - http://ywstd.fr                                 +
+# -------------------------------------------------------------------+
+
+# -- TEST LOVELY MKSH ------------------------------------------------
+[[ $- != *i* ]] && return
+
+case $KSH_VERSION in
+	*MIRBSD\ KSH*) ;;
+	*) return 0 ;;
+esac
+
+# -- PS1 -------------------------------------------------------------
+# PS1=$'\1\r\1\033[0;33m\1$PWD\1\e[0m\1 >> '
+PS1=$'\001\r\001\033[1;34m\001 > \001\033[1;32m\001${
+	typeset e=$? d=${PWD:-?} p=~
+	[[ $p = ?(*/) ]] || d=${d/#$p/~}
+	print -nr -- "$d"
+	return $e
+	}\001\033[1;34m\001 >>\001\033[0m\001 '
+
+# -- OPTIONS ---------------------------------------------------------
+set -o emacs
+
+# -- BINDINGS --------------------------------------------------------
+bind '^L'=clear-screen
+stty -ixon
+
+# -- FUNCTIONS -------------------------------------------------------
+function dif {
+	diff -u "$@" | yiff
+}
+function lr {
+	find . -maxdepth 1 -iname "*${1}*" | sort \
+		| while IFS=$'\n' read -r FILE; do
+			print -- "${FILE##*/}"; done
+}
+function massdiff {
+	diff -rq "$@" | grep '^Files '
+}
+function nd {
+	mkdir "$1" && cd "$1"
+}
+function whatfile {
+	diff -rq "$@" | grep '^Only '
+}
+
+# -- ALIASES ---------------------------------------------------------
+[[ -r $HOME/.aliases ]] && . $HOME/.aliases
+
+# -- COLORS ----------------------------------------------------------
+#[[ -r $HOME/.dir_colors ]] && eval $(dircolors -b $HOME/.dir_colors)
