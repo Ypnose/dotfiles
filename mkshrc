@@ -47,7 +47,7 @@ function whatfile {
 }
 
 # -- ALIASES ---------------------------------------------------------
-[[ -r $HOME/.aliases ]] && . $HOME/.aliases
+[[ -r $HOME/.aliases ]] && . "$HOME/.aliases"
 
 # -- COLORS ----------------------------------------------------------
-#[[ -r $HOME/.dir_colors ]] && eval $(dircolors -b $HOME/.dir_colors)
+#[[ -r $HOME/.dir_colors ]] && eval "$(dircolors -b "$HOME/.dir_colors")"
