@@ -3,53 +3,57 @@
 # author:   Ypnose - http://ywstd.fr                                 +
 # -------------------------------------------------------------------+
 
-borderwidth		3
-gap				30 30 30 30
-snapdist		10
-sticky			yes
+
+borderwidth     3
+gap             30 30 30 30
+snapdist        10
+sticky          yes
 
 # Apps to group
-autogroup 2		Firefox
-autogroup 2		Iceweasel
-autogroup 3		Claws-mail
-autogroup 4		Geany
+autogroup 2     Firefox
+autogroup 2     Iceweasel
+autogroup 3     Claws-mail
+autogroup 4     Geany
 
 # Commands
-command lock	slock
-command mail	claws-mail
-command term	uxterm
-command web		firefox
+command lock    slock
+command mail    claws-mail
+command term    uxterm
+command www     firefox
 
 # Unbind
-bind CM-Delete	unmap
-bind CM-Return	unmap
-bind CM-x		unmap
+bind CM-Delete  unmap
+bind CM-Return  unmap
+bind CM-x       unmap
 
 # Switch to group
-bind M-1		grouponly1
-bind M-2		grouponly2
-bind M-3		grouponly3
-bind M-4		grouponly4
-bind M-5		grouponly5
+bind M-1        grouponly1
+bind M-2        grouponly2
+bind M-3        grouponly3
+bind M-4        grouponly4
+bind M-5        grouponly5
+bind M-6        grouponly6
 # Meta + *
-bind M-e		exec
-bind M-k		cycle
-bind M-Return	maximize
-bind M-s		lock
-bind M-x		hide
+bind M-e        exec
+bind M-h        fullscreen
+bind M-k        cycle
+bind M-Return   maximize
+bind M-s        lock
+bind M-x        hide
 # Send to group
-bind MS-1		movetogroup1
-bind MS-2		movetogroup2
-bind MS-3		movetogroup3
-bind MS-4		movetogroup4
-bind MS-5		movetogroup5
+bind MS-1       movetogroup1
+bind MS-2       movetogroup2
+bind MS-3       movetogroup3
+bind MS-4       movetogroup4
+bind MS-5       movetogroup5
+bind MS-6       movetogroup6
 # Meta + Shift + *
-bind MS-c		delete
-bind MS-h		htile
-bind MS-q		quit
-bind MS-r		restart
-bind MS-Return	terminal
-bind MS-v		vtile
+bind MS-c       delete
+bind MS-h       htile
+bind MS-q       quit
+bind MS-r       restart
+bind MS-Return  terminal
+bind MS-v       vtile
 
 # Mouse
-mousebind M-3	window_resize
+mousebind M-3   window_resize
