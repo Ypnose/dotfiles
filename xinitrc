@@ -3,10 +3,10 @@
 # author:   Ypnose - http://ywstd.fr                                 +
 # -------------------------------------------------------------------+
 
-xrdb -merge "$HOME/.Xresources"
+xrdb -merge "${HOME}/.Xresources"
 
 xset +fp "/usr/share/fonts/artwiz-fonts"
-xset +fp "$HOME/.fonts/bitmaps"
+xset +fp "${HOME}/.fonts/bitmaps"
 xset fp rehash
 
 urxvtd -q -o -f

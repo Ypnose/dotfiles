@@ -17,19 +17,15 @@ else
 fi
 
 # -- MAIL ------------------------------------------------------------
-if [[ -r $HOME/.yusr/conf/nailrc ]]; then
-	MAILRC="$HOME/.yusr/conf/nailrc"
-elif [[ -r $HOME/.yusr/conf/mailrc ]]; then
-	MAILRC="$HOME/.yusr/conf/mailrc"
+if [[ -r ${HOME}/.yusr/conf/nailrc ]]; then
+	MAILRC="${HOME}/.yusr/conf/nailrc"
+elif [[ -r ${HOME}/.yusr/conf/mailrc ]]; then
+	MAILRC="${HOME}/.yusr/conf/mailrc"
 fi
 
 # -- *PATH -----------------------------------------------------------
-if [[ $(uname -s) = "OpenBSD" ]]; then
-	PKG_PATH="http://ftp.fr.openbsd.org/pub/OpenBSD/snapshots/amd64/"
-	export PKG_PATH
-fi
-[[ -d $HOME/.yusr/bin ]] && PATH="$PATH:$HOME/.yusr/bin"
-CDPATH="$HOME:$CDPATH"
+[[ -d ${HOME}/.yusr/bin ]] && PATH="${PATH}:${HOME}/.yusr/bin"
+CDPATH="${HOME}:${CDPATH}"
 
 # -- EXPORT ----------------------------------------------------------
 export EDITOR VISUAL TERMINAL MAILRC PATH CDPATH
@@ -50,5 +46,5 @@ LESSHISTFILE="-"
 export GREP_COLOR BROWSER PAGER LESS LESSHISTFILE
 
 # -- NOFUDIRS --------------------------------------------------------
-[[ -d $HOME/Desktop ]] && rm -r "$HOME/Desktop"
-[[ -d $HOME/.config/git ]] && rm -r "$HOME/.config/git"
+[[ -d ${HOME}/Desktop ]] && rm -r "${HOME}/Desktop"
+[[ -d ${HOME}/.config/git ]] && rm -r "${HOME}/.config/git"

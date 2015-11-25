@@ -13,7 +13,10 @@ esac
 
 # -- PS1 -------------------------------------------------------------
 # PS1=$'\1\r\1\033[0;33m\1$PWD\1\e[0m\1 >> '
-PS1=$'\001\r\001\033[1;34m\001 > \001\033[1;32m\001${
+PS1=$'\001\r\001\033[1;34m\001 > \001\033[1;31m\001${
+	[[ -n $SSH_CONNECTION ]] && print -nr -- "[REMOTE] "
+	return $?
+	}\001\033[1;32m\001${
 	typeset e=$? d=${PWD:-?} p=~
 	[[ $p = ?(*/) ]] || d=${d/#$p/~}
 	print -nr -- "$d"
@@ -32,9 +35,9 @@ function dif {
 	diff -u "$@" | yiff
 }
 function lr {
-	find . -maxdepth 1 -iname "*${1}*" | sort \
-		| while IFS=$'\n' read -r FILE; do
-			print -- "${FILE##*/}"; done
+	find . -maxdepth 1 -iname "*${1}*" \
+		| sort \
+		| while IFS=$'\n' read -r FILE; do print -r -- "${FILE##*/}"; done
 }
 function massdiff {
 	diff -rq "$@" | grep '^Files '
@@ -42,12 +45,12 @@ function massdiff {
 function nd {
 	mkdir "$1" && cd "$1"
 }
+function sprunge {
+	curl -F 'sprunge=<-' http://sprunge.us
+}
 function whatfile {
 	diff -rq "$@" | grep '^Only '
 }
 
 # -- ALIASES ---------------------------------------------------------
-[[ -r $HOME/.aliases ]] && . "$HOME/.aliases"
-
-# -- COLORS ----------------------------------------------------------
-#[[ -r $HOME/.dir_colors ]] && eval "$(dircolors -b "$HOME/.dir_colors")"
+[[ -r ${HOME}/.aliases ]] && . "${HOME}/.aliases"
