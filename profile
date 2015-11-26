@@ -10,11 +10,6 @@ else
 	EDITOR=vi
 fi
 VISUAL=$EDITOR
-if [[ -n $(whence -p urxvt) ]]; then
-	TERMINAL=urxvt
-else
-	TERMINAL=uxterm
-fi
 
 # -- MAIL ------------------------------------------------------------
 if [[ -r ${HOME}/.yusr/conf/nailrc ]]; then
@@ -28,14 +23,11 @@ fi
 CDPATH="${HOME}:${CDPATH}"
 
 # -- EXPORT ----------------------------------------------------------
-export EDITOR VISUAL TERMINAL MAILRC PATH CDPATH
+export EDITOR VISUAL MAILRC PATH CDPATH
 
 # -- ENVIRONMENT -----------------------------------------------------
 # GREP
 GREP_COLOR='1;36'
-
-# Default browser
-BROWSER=firefox
 
 # LESS
 PAGER=less
@@ -43,7 +35,7 @@ LESS="-R"
 LESSHISTFILE="-"
 
 # -- EXPORT ----------------------------------------------------------
-export GREP_COLOR BROWSER PAGER LESS LESSHISTFILE
+export GREP_COLOR PAGER LESS LESSHISTFILE
 
 # -- NOFUDIRS --------------------------------------------------------
 [[ -d ${HOME}/Desktop ]] && rm -r "${HOME}/Desktop"
