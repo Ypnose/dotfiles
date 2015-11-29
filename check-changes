@@ -1,0 +1,10 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+
+find . -maxdepth 1 -type f | sort | while IFS=$'\n' read -r FILE; do
+	if [ -f "${HOME}/.${FILE##*/}" ]; then
+		diff -q "$FILE" "${HOME}/.${FILE##*/}"
+	fi
+done
+
+exit
