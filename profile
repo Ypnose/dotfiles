@@ -22,20 +22,14 @@ fi
 [[ -d ${HOME}/.yusr/bin ]] && PATH="${PATH}:${HOME}/.yusr/bin"
 CDPATH="${HOME}:${CDPATH}"
 
-# -- EXPORT ----------------------------------------------------------
-export EDITOR VISUAL MAILRC PATH CDPATH
-
 # -- ENVIRONMENT -----------------------------------------------------
-# GREP
-GREP_COLOR='1;36'
-
 # LESS
 PAGER=less
-LESS="-R"
+LESS="-KR"
 LESSHISTFILE="-"
 
 # -- EXPORT ----------------------------------------------------------
-export GREP_COLOR PAGER LESS LESSHISTFILE
+export EDITOR VISUAL MAILRC PATH CDPATH PAGER LESS LESSHISTFILE
 
 # -- NOFUDIRS --------------------------------------------------------
 [[ -d ${HOME}/Desktop ]] && rm -r "${HOME}/Desktop"
