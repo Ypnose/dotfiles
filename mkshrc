@@ -19,7 +19,7 @@ PS1=$'\001\r\001\033[1;34m\001 > \001\033[1;31m\001${
 	return $e
 	}\001\033[1;32m\001${
 	typeset e=$? d=${PWD:-?} p=~
-	[[ $p = ?(*/) ]] || d=${d/#$p/\~}
+	[[ $p = ?(*/) ]] || d=${d/#$p/\\~}
 	print -nr -- "$d"
 	return $e
 	}\001\033[1;34m\001 >>\001\033[0m\001 '
@@ -36,9 +36,11 @@ function dif {
 	diff -u "$@" | yiff
 }
 function lr {
+	typeset F_FILE
 	find . -maxdepth 1 -iname "*${1}*" \
 		| sort \
-		| while IFS=$'\n' read -r FILE; do print -r -- "${FILE##*/}"; done
+		| while IFS=$'\n' read -r F_FILE; do \
+			print -r -- "${F_FILE##*/}"; done
 }
 function massdiff {
 	diff -rq "$@" | grep '^Files '
