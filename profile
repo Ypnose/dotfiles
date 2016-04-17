@@ -35,7 +35,7 @@ LESS="-KR"
 LESSHISTFILE="-"
 
 # -- EXPORT ------------------------------------------------------------
-export RYPP_DEST RYPP_REPO RYPP_PUBK PATH CDPATH MANPATH \
+export RYPP_DEST RYPP_REPO PATH CDPATH MANPATH \
 	EDITOR VISUAL MAILRC PAGER LESS LESSHISTFILE
 
 # -- VARIOUS -----------------------------------------------------------
