@@ -1,63 +1,56 @@
 # Makefile
 # Ypnose - http://ywstd.fr
 
-DEST = dest
-DFILE = jupprc \
-	mkshrc \
-	profile \
-	tmux.conf
-HFILE = Xresources \
-	aliases \
-	xinitrc
+DESTDIR ?= dest
+REQFILE = jupprc mkshrc profile tmux.conf
+
+####################
 
 all: list
 
 list:
-	@echo "options: list bash bsd clean def geany git moc ssh svn work"
+	@echo "Targets:"
+	@awk -F':' '!/(all|list)/&&/^[a-z]+:/{printf(" * %s\n", $$1);next}' Makefile
+
+newbox: clean base ssh rypp
+
+####################
+
+base:
+	for f in ${REQFILE}; do cp "$${f}" "${DESTDIR}/.$${f}"; done
 
 bash:
-	@cp bashrc ${DEST}/.bashrc
-	@cp bash_profile ${DEST}/.bash_profile
-	@ln -s ${DEST}/.bash_profile ${DEST}/.profile
+	cp bashrc ${DESTDIR}/.bashrc
+	cp bash_profile ${DESTDIR}/.bash_profile
+	ln -s ${DESTDIR}/.bash_profile ${DESTDIR}/.profile
 
 bsd:
-	@cp kshrc ${DEST}/.kshrc
+	cp kshrc ${DESTDIR}/.kshrc
 
 clean:
-	@cd ${DEST} && rm -f .bash_history .bash_logout .bash_profile \
-		.inputrc .lesshst .login .logout .rnd .xsession .xsession-errors
+	cd ${DESTDIR} && rm -f .bash_history .bash_logout .bash_profile \
+		.bashrc .inputrc .lesshst .login .logout .rnd .xsession \
+		.xsession-errors
 
-def:
-	@for f in ${DFILE}; do \
-		cp "$${f}" "${DEST}/.$${f}"; \
-	done
-
-geany:
-	@mkdir -p ${DEST}/.config/geany/colorschemes
-	@cp geany/ycolor.conf ${DEST}/.config/geany/colorschemes
-
-git:
-	@cp gitconfig ${DEST}/.gitconfig
-
-moc:
-	@mkdir -p ${DEST}/.moc/themes
-	@cp moc/config ${DEST}/.moc
-	@cp moc/bluedream ${DEST}/.moc/themes
+rypp:
+	curl -o ${DESTDIR}/rypp https://git.framasoft.org/Ypnose/rypp/raw/master/rypp
+	chmod +x ${DESTDIR}/rypp
 
 ssh:
-	@mkdir -pm 700 ${DEST}/.ssh
-	@cp ssh/config ${DEST}/.ssh
-	@chmod 644 ${DEST}/.ssh/config
+	mkdir -pm 700 ${DESTDIR}/.ssh
+	cp ssh/config ${DESTDIR}/.ssh
+	chmod 644 ${DESTDIR}/.ssh/config
 
 svn:
-	@mkdir -pm 700 ${DEST}/.subversion
-	@cp svn/servers ${DEST}/.subversion
-	@chmod 644 ${DEST}/.subversion/servers
+	mkdir -pm 700 ${DESTDIR}/.subversion
+	cp misc/svn/servers ${DESTDIR}/.subversion
+	chmod 644 ${DESTDIR}/.subversion/servers
 
-work:
-	@cp cwmrc ${DEST}/.cwmrc
-	@cp work/Xdefaults ${DEST}/.Xdefaults
-	@cp work/aliases ${DEST}/.aliases
-	@cp work/xinitrc ${DEST}/.xinitrc
+# Needs tweaking
+work: svn
+	cp cwmrc ${DESTDIR}/.cwmrc
+	cp work/Xdefaults ${DESTDIR}/.Xdefaults
+	cp work/aliases ${DESTDIR}/.aliases
+	cp work/xinitrc ${DESTDIR}/.xinitrc
 
-.PHONY: all list bash bsd clean def geany git moc ssh svn work
+.PHONY: all list newbox base bash bsd clean rypp ssh svn work
