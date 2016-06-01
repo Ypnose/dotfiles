@@ -4,7 +4,12 @@
 # ---------------------------------------------------------------------+
 
 # -- OPTIONS -----------------------------------------------------------
+#AddKeysToAgent yes
 CheckHostIP yes
+ForwardAgent no
+GSSAPIAuthentication no
+HashKnownHosts yes
 ServerAliveInterval 60
+UseRoaming no
 
 # -- HOSTS -------------------------------------------------------------
