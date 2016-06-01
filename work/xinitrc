@@ -1,0 +1,13 @@
+# ---------------------------------------------------------------------+
+# file:     .xinitrc                                                   +
+# author:   Ypnose - http://ywstd.fr                                   +
+# ---------------------------------------------------------------------+
+
+xrandr --output DisplayPort-0 --off \
+	--output DisplayPort-1 --mode "1920x1200"
+xsetroot -solid "#CCC"
+xautolock -secure -time 10 -locker slock &
+
+kymap
+
+exec cwm 2>"$HOME/.yusr/cwmlog"

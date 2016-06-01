@@ -1,0 +1,37 @@
+# ---------------------------------------------------------------------+
+# file:     .moc/themes/bluedream                                      +
+# author:   Ypnose - http://ywstd.fr                                   +
+# ---------------------------------------------------------------------+
+
+background              = default     default
+frame                   = white       default
+window_title            = green       default     bold
+directory               = blue        default
+selected_directory      = yellow      default
+playlist                = green       default
+selected_playlist       = yellow      default
+file                    = default     default
+selected_file           = yellow      default     bold
+marked_file             = cyan        default
+marked_selected_file    = cyan        default
+info                    = magenta     default
+status                  = white       default
+title                   = green       default
+state                   = yellow      default
+current_time            = blue        default     bold
+time_left               = blue        default
+total_time              = cyan        default     bold
+time_total_frames       = white       default
+sound_parameters        = yellow      default
+legend                  = yellow      default
+disabled                = black       default     bold
+enabled                 = green       default     bold
+empty_mixer_bar         = green       default
+filled_mixer_bar        = black       green
+empty_time_bar          = white       default
+filled_time_bar         = black       white
+entry                   = white       default
+entry_title             = black       cyan
+error                   = red         default     bold
+message                 = green       default     bold
+plist_time              = magenta     default     bold

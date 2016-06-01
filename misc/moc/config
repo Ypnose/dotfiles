@@ -1,7 +1,7 @@
-# -------------------------------------------------------------------+
-# file:     .moc/config                                              +
-# author:   Ypnose - http://ywstd.fr                                 +
-# -------------------------------------------------------------------+
+# ---------------------------------------------------------------------+
+# file:     .moc/config                                                +
+# author:   Ypnose - http://ywstd.fr                                   +
+# ---------------------------------------------------------------------+
 
 # This is a configuration file for the MOC player.  It should be named
 # 'config' and placed in the ~/.moc directory.  As this file can specify

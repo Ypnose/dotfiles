@@ -1,0 +1,13 @@
+# ---------------------------------------------------------------------+
+# file:     .subversion/servers                                        +
+# author:   Ypnose - http://ywstd.fr                                   +
+# ---------------------------------------------------------------------+
+
+### 'config' file seems to be deprecated in favour of 'servers'
+
+[global]
+# Password / passphrase caching parameters:
+store-passwords = no
+store-plaintext-passwords = no
+store-ssl-client-cert-pp = no
+store-ssl-client-cert-pp-plaintext = no
