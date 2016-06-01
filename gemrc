@@ -1,13 +1,7 @@
 # ---------------------------------------------------------------------+
-# file:     .evilwmrc                                                  +
+# file:     .gemrc                                                     +
 # author:   Ypnose - http://ywstd.fr                                   +
 # ---------------------------------------------------------------------+
 
-app     Navigator
-vdesk   1
-
-bw      3
-fn      -*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*
-mask1   shift+alt
-snap    10
-term    urxvtc
+# Can be replaced by --no-document since Ruby 2.0.0
+gem: --no-ri --no-rdoc
