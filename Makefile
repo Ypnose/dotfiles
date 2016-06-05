@@ -12,7 +12,7 @@ list:
 	@echo "Targets:"
 	@awk -F':' '!/(all|list)/&&/^[a-z]+:/{printf(" * %s\n", $$1);next}' Makefile
 
-newbox: clean base ssh rypp
+newbox: clean base ssh rypp fonts
 
 ####################
 
@@ -31,6 +31,10 @@ clean:
 	cd ${DESTDIR} && rm -f .bash_history .bash_logout .bash_profile \
 		.bashrc .inputrc .lesshst .login .logout .rnd .xsession \
 		.xsession-errors
+
+fonts:
+	mkdir -p ${DESTDIR}/.config/fontconfig
+	cp misc/fonts/fonts.conf ${DESTDIR}/.config/fontconfig
 
 rypp:
 	curl -o ${DESTDIR}/rypp https://git.framasoft.org/Ypnose/rypp/raw/master/rypp
@@ -53,4 +57,4 @@ work: svn
 	cp work/aliases ${DESTDIR}/.aliases
 	cp work/xinitrc ${DESTDIR}/.xinitrc
 
-.PHONY: all list newbox base bash bsd clean rypp ssh svn work
+.PHONY: all list newbox base bash bsd clean fonts rypp ssh svn work
