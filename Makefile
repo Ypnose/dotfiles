@@ -2,7 +2,7 @@
 # Ypnose - http://ywstd.fr
 
 DESTDIR ?= dest
-REQFILE = jupprc mkshrc profile tmux.conf
+REQFILE = jupprc mkshrc profile terminfo.cdb tmux.conf
 
 ####################
 
