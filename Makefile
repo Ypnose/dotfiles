@@ -12,7 +12,7 @@ list:
 	@echo "Targets:"
 	@awk -F':' '!/(all|list)/&&/^[a-z]+:/{printf(" * %s\n", $$1);next}' Makefile
 
-newbox: clean base ssh rypp fonts
+newbox: clean base ssh rypp fonts xkb
 
 ####################
 
@@ -57,4 +57,8 @@ work: svn
 	cp work/aliases ${DESTDIR}/.aliases
 	cp work/xinitrc ${DESTDIR}/.xinitrc
 
-.PHONY: all list newbox base bash bsd clean fonts rypp ssh svn work
+xkb:
+	mkdir -p ${DESTDIR}/.yusr
+	cp -r xkb/ ${DESTDIR}/.yusr
+
+.PHONY: all list newbox base bash bsd clean fonts rypp ssh svn work xkb
