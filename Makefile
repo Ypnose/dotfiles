@@ -12,7 +12,7 @@ list:
 	@echo "Targets:"
 	@awk -F':' '!/(all|list)/&&/^[a-z]+:/{printf(" * %s\n", $$1);next}' Makefile
 
-newbox: clean base ssh rypp fonts xkb
+newbox: clean base ssh bin rypp fonts xkb
 
 ####################
 
@@ -23,6 +23,11 @@ bash:
 	cp bashrc ${DESTDIR}/.bashrc
 	cp bash_profile ${DESTDIR}/.bash_profile
 	ln -s ${DESTDIR}/.bash_profile ${DESTDIR}/.profile
+
+bin:
+	mkdir -p ${DESTDIR}/.yusr/bin
+	cp bin/scrup ${DESTDIR}/.yusr/bin
+	chmod +x ${DESTDIR}/.yusr/bin/scrup
 
 bsd:
 	cp kshrc ${DESTDIR}/.kshrc
@@ -61,4 +66,4 @@ xkb:
 	mkdir -p ${DESTDIR}/.yusr
 	cp -r xkb/ ${DESTDIR}/.yusr
 
-.PHONY: all list newbox base bash bsd clean fonts rypp ssh svn work xkb
+.PHONY: all list newbox base bash bin bsd clean fonts rypp ssh svn work xkb
