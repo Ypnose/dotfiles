@@ -14,7 +14,7 @@ fi
 bind -m '^L'=clear'^J'
 
 # -- ALIASES -----------------------------------------------------------
-alias ls='ls -F'
+alias ls='ls -Fh'
 alias repf='doas pfctl -nf /etc/pf.conf && doas pfctl -f /etc/pf.conf'
 alias brute='clear && tail -40 /var/log/authlog'
 alias ressh='doas kill -HUP $(</var/run/sshd.pid)'
