@@ -35,7 +35,7 @@ stty -ixon
 function dif {
 	diff -u "$@" | yiff
 }
-function lr {
+function lf {
 	typeset F_FIL
 	find . -maxdepth 1 -iname "*${1}*" \
 		| sort \
