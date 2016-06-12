@@ -4,23 +4,25 @@
 # ---------------------------------------------------------------------+
 
 borderwidth     3
-gap             30 30 30 30
+gap             20 20 20 20
 snapdist        10
 sticky          yes
 
 # Apps to group
 autogroup 2     Firefox
-autogroup 2     Iceweasel
-autogroup 3     Claws-mail
 autogroup 4     Geany
 
 # Commands
 command lock    slock
-command mail    claws-mail
 command term    uxterm
-command www     firefox
 
 # Unbind
+# Disable move window (small amount)
+bind M-h        unmap
+bind M-j        unmap
+bind M-k        unmap
+bind M-l        unmap
+bind M-Return   unmap
 bind CM-Delete  unmap
 bind CM-Return  unmap
 bind CM-x       unmap
@@ -48,7 +50,6 @@ bind MS-5       movetogroup5
 bind MS-6       movetogroup6
 # Meta + Shift + *
 bind MS-c       delete
-bind MS-h       htile
 bind MS-q       quit
 bind MS-r       restart
 bind MS-Return  terminal
