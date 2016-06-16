@@ -21,6 +21,7 @@ user_pref("browser.pocket.site", "");
 user_pref("browser.pocket.oAuthConsumerKey", "");
 user_pref("browser.search.defaultenginename", "DuckDuckGo");
 user_pref("browser.search.selectedEngine", "DuckDuckGo");
+user_pref("browser.search.suggest.enabled", false);
 user_pref("browser.slowStartup.notificationDisabled", true);
 user_pref("browser.startup.homepage", "https://duckduckgo.com/");
 user_pref("browser.startup.page", 3);
