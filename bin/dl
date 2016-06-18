@@ -1,0 +1,20 @@
+#!/usr/bin/mksh
+# Script by Ypnose - http://ywstd.fr
+
+if [[ -z $1 || $1 = "-h" ]]; then
+	print "usage: ${0##*/} [URL]"
+	exit
+fi
+
+if [[ -x $(whence -p curl) ]]; then
+	for f in "$@"; do
+		curl -fOL --ipv4 -- "$f"
+	done
+elif [[ -x $(whence -p wget) ]]; then
+	wget -- "$@"
+else
+	print -u2 "Unable to find curl or wget"
+	exit 1
+fi
+
+exit
