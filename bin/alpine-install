@@ -1,0 +1,145 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+# Inspired by 'http://wiki.alpinelinux.org/wiki/Installing_Alpine_Linux_in_a_chroot'
+# fdisk(8) and mkfs(8) will be directly done by the users
+set -e
+
+AL_DEDISK="$1"
+AL_NUMBER="3.3"
+AL_MIRROR="http://nl.alpinelinux.org/alpine/v${AL_NUMBER}"
+AL_APKTAR="apk-tools-static-2.6.5-r1.apk"
+AL_CHROOT="${AL_CHROOT:-syschroot}"
+AL_HOSTNA="${AL_HOSTNA:-alpineserv}"
+
+##############################
+
+# 1 = / | 2 = swap | 3 = other
+if [ -z "$1" ] || [ "$1" = "-h" ]; then
+	printf "%s\n" "usage: ${0##*/} [DISK]"
+	exit
+fi
+
+if [ "$(id -u)" -ne 0 ]; then
+	printf "%s\n" "${0##*/} needs to be called as root" >&2
+	exit 1
+fi
+
+# Verify destination filesystem is mounted
+if [ ! -d "$AL_CHROOT" ]; then
+	printf "%s\n" "$AL_CHROOT directory is missing" >&2
+	exit 1
+elif ! mount | grep -q "^/dev/${AL_DEDISK}1"; then
+	printf "%s\n" "/dev/${AL_DEDISK}1 is not mounted inside $AL_CHROOT" >&2
+	exit 1
+fi
+
+# Get and extract apk-static
+if [ ! -e "${PWD}/${AL_APKTAR}" ]; then
+	wget "${AL_MIRROR}/main/x86_64/${AL_APKTAR}"
+fi
+tar -xvf "${PWD}/${AL_APKTAR}" "sbin/apk.static"
+
+# Install inside chroot
+./sbin/apk.static -X "${AL_MIRROR}/main" -U --allow-untrusted --root \
+	"${AL_CHROOT}" --initdb add alpine-base e2fsprogs syslinux
+
+##############################
+
+# APK
+mkdir -p "${AL_CHROOT}/etc/apk"
+cat >"${AL_CHROOT}/etc/apk/repositories" <<-EOF
+	http://nl.alpinelinux.org/alpine/v${AL_NUMBER}/main
+	http://dl-5.alpinelinux.org/alpine/v${AL_NUMBER}/main
+EOF
+
+# TTY (3 ttys are enough)
+sed -i -e 's|^tty4|#tty4|g;s|^tty5|#tty5|g;s|^tty6|#tty6|g;' \
+	"${AL_CHROOT}/etc/inittab"
+
+# Loopback interface
+mkdir -p "${AL_CHROOT}/etc/network"
+cat >"${AL_CHROOT}/etc/network/interfaces" <<-EOF
+	# The loopback network interface
+	auto lo
+	iface lo inet loopback
+
+	# Static IPv4 example on eth0
+	#auto eth0
+	#iface eth0 inet static
+	#	address 192.168.10.20
+	#	netmask 255.255.255.0
+	#	gateway 192.168.10.1
+EOF
+
+# /etc/fstab
+AL_DEUUID="$(lsblk -no UUID /dev/${AL_DEDISK}1)"
+printf "%s\n" "UUID=${AL_DEUUID} / ext4 defaults,rw 0 1" >"${AL_CHROOT}/etc/fstab"
+
+# HISTFILE
+printf "\n%s\n" "unset HISTFILE" >>"${AL_CHROOT}/etc/profile"
+
+# Syslinux + initramfs
+sed -i -e 's|^modules=.*|modules=sd-mod,usb-storage,ext4|g' \
+	-e "s|^root=|root=UUID=${AL_DEUUID}|g" \
+	"${AL_CHROOT}/etc/update-extlinux.conf"
+printf "%s\n" 'features="ata base ide scsi usb virtio ext4"' \
+	>"${AL_CHROOT}/etc/mkinitfs/mkinitfs.conf"
+
+##############################
+
+# Prepare the chroot...
+if [ -f "/etc/resolv.conf" ]; then
+	cp "/etc/resolv.conf" "${AL_CHROOT}/etc"
+fi
+
+mount -t proc proc "${AL_CHROOT}/proc"
+mount -t sysfs sys "${AL_CHROOT}/sys"
+mount -o bind /dev "${AL_CHROOT}/dev"
+
+# Run commands inside the chroot (added the scripts after checking them)
+# For local.d at startup, put .start as the script extension
+chroot "${AL_CHROOT}" /bin/sh -l <<-EOF
+	setup-hostname $AL_HOSTNA
+	setup-keymap uk
+	setup-timezone -z Europe/Paris
+
+	rc-update add bootmisc boot
+	rc-update add fsck boot
+	rc-update add hostname boot
+	rc-update add hwclock boot
+	rc-update add local boot
+	rc-update add modules boot
+	rc-update add networking boot
+	rc-update add swap boot
+	rc-update add syslog boot
+	rc-update add urandom boot
+
+	rc-update add acpid default
+	rc-update add cron default
+
+	rc-update add killprocs shutdown
+	rc-update add mount-ro shutdown
+	rc-update add savecache shutdown
+
+	rc-update add devfs sysinit
+	rc-update add dmesg sysinit
+	rc-update add hwdrivers sysinit
+	rc-update add mdev sysinit
+
+	dd if=/usr/share/syslinux/mbr.bin of=/dev/${AL_DEDISK}
+
+	apk update
+EOF
+
+printf "\n%s\n\n" "Verify the fstab, define the root password, \
+verify update-extlinux.conf and install a kernel"
+
+# Go inside and do your business...
+chroot "${AL_CHROOT}" /bin/sh -l
+
+##############################
+
+umount "${AL_CHROOT}/dev" "${AL_CHROOT}/sys" "${AL_CHROOT}/proc"
+printf "%s\n" "DONE"
+
+exit

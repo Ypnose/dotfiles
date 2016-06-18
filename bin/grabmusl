@@ -1,0 +1,51 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+set -e
+
+REQ_MUSL="1.1.14"
+REQ_KERN="4.4.6"
+REQ_DEST="${PWD}/musl-cc"
+
+####################
+
+get_arc() {
+	if [ -x "$(command -v curl)" ]; then
+		curl -fLO "$1"
+	elif [ -x "$(command -v wget)" ]; then
+		wget "$1"
+	fi
+}
+
+####################
+
+# Compile and install musl
+if [ ! -e "${PWD}/musl-${REQ_MUSL}.tar.gz" ]; then
+	get_arc "http://www.musl-libc.org/releases/musl-${REQ_MUSL}.tar.gz"
+fi
+tar -zxf "${PWD}/musl-${REQ_MUSL}.tar.gz"
+(
+	cd "musl-${REQ_MUSL}"
+	./configure \
+			--prefix="$REQ_DEST" \
+			--disable-shared \
+			--enable-static \
+			--enable-wrapper="gcc"
+	make -j4
+	make install
+)
+rm -r "${PWD}/musl-${REQ_MUSL}"
+
+# Install kernel headers
+if [ ! -e "${PWD}/linux-${REQ_KERN}.tar.xz" ]; then
+	get_arc "https://cdn.kernel.org/pub/linux/kernel/v${REQ_KERN%%.*}.x/linux-${REQ_KERN}.tar.xz"
+fi
+tar -Jxf "${PWD}/linux-${REQ_KERN}.tar.xz"
+(
+	cd "linux-${REQ_KERN}"
+	make ARCH="x86" headers_check
+	make ARCH="x86" INSTALL_HDR_PATH="$REQ_DEST" headers_install
+)
+rm -r "${PWD}/linux-${REQ_KERN}"
+
+printf "%s\n" "DONE"
+exit

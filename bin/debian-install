@@ -1,0 +1,131 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+# wget(1) is needed
+set -e
+
+DE_DEDISK="$1"
+DE_CHROOT="${DE_CHROOT:-debchroot}"
+DE_RELEAS="jessie"
+DE_REPURL="http://packages.devuan.org/merged"
+DE_HOSTNA="${DE_HOSTNA:-ypnbox}"
+# Set PATH because the same value will be used by debootstrap. If not
+# set, it may fail on distro like Archlinux
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH
+
+##############################
+
+# 1 = / | 2 = swap | 3 = other
+if [ -z "$1" ] || [ "$1" = "-h" ]; then
+	printf "%s\n" "usage: ${0##*/} [DISK]"
+	exit
+fi
+
+if [ "$(id -u)" -ne 0 ]; then
+	printf "%s\n" "${0##*/} needs to be called as root" >&2
+	exit 1
+fi
+
+if [ ! -x "${PWD}/debootstrap/debootstrap" ]; then
+	printf "%s\n" "debootstrap executable not found in ${PWD}/debootstrap" >&2
+	exit 1
+fi
+
+# Verify destination filesystem is mounted
+if [ ! -d "$DE_CHROOT" ]; then
+	printf "%s\n" "$DE_CHROOT directory is missing" >&2
+	exit 1
+elif ! mount | grep -q "^/dev/${DE_DEDISK}1"; then
+	printf "%s\n" "/dev/${DE_DEDISK}1 is not mounted inside $DE_CHROOT" >&2
+	exit 1
+fi
+
+# Launch the sauce
+# Remove mkdir
+mkdir -p "$DE_CHROOT"
+DEBOOTSTRAP_DIR="${PWD}/debootstrap/"
+export DEBOOTSTRAP_DIR
+./debootstrap/debootstrap --arch=amd64 --variant=minbase "$DE_RELEAS" "$DE_CHROOT" "$DE_REPURL"
+
+# /etc/fstab
+DE_DEUUID="$(lsblk -no UUID /dev/${DE_DEDISK}1)"
+cat >"${DE_CHROOT}/etc/fstab" <<-EOF
+	# /etc/fstab
+
+	UUID=${DE_DEUUID} / ext4 defaults,rw 0 1
+EOF
+
+# No cruft
+cat >"${DE_CHROOT}/etc/apt/apt.conf.d/99yp" <<-EOF
+	APT::Install-Recommends "false";
+	APT::Install-Suggests "false";
+EOF
+
+# hostname + /etc/hosts
+printf "%s\n" "$DE_HOSTNA" >"${DE_CHROOT}/etc/hostname"
+cat >"${DE_CHROOT}/etc/hosts" <<-EOF
+	# /etc/hosts
+
+	127.0.0.1    localhost
+	127.0.1.1    $DE_HOSTNA
+	# IPv6
+	::1          ip6-localhost ip6-loopback
+	fe00::0      ip6-localnet
+	ff00::0      ip6-mcastprefix
+EOF
+
+# Loopback interface
+mkdir -p "${DE_CHROOT}/etc/network"
+cat >"${DE_CHROOT}/etc/network/interfaces" <<-EOF
+	# The loopback network interface
+	auto lo
+	iface lo inet loopback
+EOF
+
+# IPv6
+mkdir -p "${DE_CHROOT}/etc/sysctl.d"
+cat >"${DE_CHROOT}/etc/sysctl.d/yp.conf" <<-EOF
+	# IPv6 Privacy Extensions
+
+	net.ipv6.conf.all.use_tempaddr = 2
+	net.ipv6.conf.default.use_tempaddr = 2
+	net.ipv6.conf.eth0.use_tempaddr = 2
+	#net.ipv6.conf.wlan0.use_tempaddr = 2
+EOF
+
+# HISTFILE
+printf "\n%s\n" "unset HISTFILE" >>"${DE_CHROOT}/etc/profile"
+
+##############################
+
+# Prepare the chroot...
+if [ -f "/etc/resolv.conf" ]; then
+	cp "/etc/resolv.conf" "${DE_CHROOT}/etc"
+fi
+
+mount -t proc proc "${DE_CHROOT}/proc"
+mount -t sysfs sys "${DE_CHROOT}/sys"
+mount -o bind /dev "${DE_CHROOT}/dev"
+mount -o bind /dev/pts "${DE_CHROOT}/dev/pts"
+
+# Run commands inside the chroot
+chroot "${DE_CHROOT}" /bin/sh -l <<-EOF
+	LC_ALL=C
+	export LC_ALL
+
+	rm -r /var/cache/apt/archives/
+	apt-get update
+	apt-get install -y dialog iproute2 netbase
+	dpkg-reconfigure tzdata
+	printf "%s\n" "Do not forget to change root password!"
+EOF
+
+# Go inside and do your business...
+chroot "${DE_CHROOT}" /bin/sh -l
+
+##############################
+
+umount "${DE_CHROOT}/dev/pts" "${DE_CHROOT}/dev" "${DE_CHROOT}/sys" "${DE_CHROOT}/proc"
+printf "%s\n" "DONE"
+
+exit
