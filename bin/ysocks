@@ -1,0 +1,26 @@
+#!/usr/bin/mksh
+# Script by Ypnose - http://ywstd.fr
+set -e
+
+SO_TMPF="/tmp/socks_${USER}"
+SO_PORT="1337"
+
+trap 'un_sock' ERR EXIT
+
+function un_sock {
+	if [[ -f $SO_TMPF ]]; then
+		rm "$SO_TMPF"
+	fi
+}
+
+if [[ -z $1 || $1 = "-h" ]]; then
+	print "usage: ${0##*/} [SSH_ARGS]"
+	exit 1
+fi
+
+un_sock
+>"$SO_TMPF"
+# Additional options can be passed using command line
+ssh -C -D "$SO_PORT" -N "$@"
+
+exit

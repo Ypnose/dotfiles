@@ -1,0 +1,161 @@
+#!/usr/bin/mksh
+# Script by Ypnose - http://ywstd.fr
+
+################
+# UNMAINTAINED #
+################
+
+CHDEST="/home/ypnose/Builds/ARCH-CHROOT"
+AUTHF="/home/ypnose/.Xauthority"
+
+if [[ -z $CHDEST ]]; then
+	print -u2 "error: chroot directory isn't set!"
+	exit 1
+fi
+
+function usage {
+	cat <<-EOF
+	usage: ywrap [-cehrS]
+	options:
+	   -c        Create a new chroot
+	   -e        Enter in the existing chroot
+	   -h        Display this help
+	   -r        Remove an existing chroot
+	   -S        Install pkg(s) in the existing chroot
+	EOF
+}
+
+function test_user {
+	# DON'T FUCKIN' TELL ME I SHOULD USE EUID, SINCE IT DOESN'T EXIST IN KSH!
+	if (( $(id -u) != 0 )); then
+		print -u2 "=> ERROR: You must run this script as root!"
+		exit 1
+	fi
+}
+
+function test_chroot {
+	if [[ ! -f ${CHDEST}/etc/passwd ]]; then
+		print -u2 "=> ERROR: chroot doesn't exist"
+		exit 1
+	fi
+}
+
+function create_chroot {
+	if [[ ! -d $CHDEST ]]; then
+		print "=> Creating a new chroot in ${CHDEST}"
+		mkdir -p ${CHDEST}/var/{cache/pacman/pkg,lib/pacman}
+	elif [[ -d $CHDEST && -f ${CHDEST}/etc/os-release ]]; then
+		print -u2 "=> ERROR: an existing chroot already exists"
+		exit 1
+	fi
+	pacman -r "$CHDEST" -Syyuu bash bzip2 coreutils diffutils file filesystem findutils gawk \
+		gcc-libs gettext glibc grep gzip less logrotate pacman perl procps-ng psmisc sed \
+		shadow sysfsutils tar texinfo vi which
+	RET=$?
+	if (( RET == 0 )); then
+		print "=> Packages succesfully installed"
+	else
+		print -u2 "=> ERROR: an error occurred"
+		exit 1
+	fi
+	cat >> ${CHDEST}/root/.bashrc <<- EOF
+	PS1='\e[31m(chroot)\e[0m [\u@\h \W]\$ '
+	export DISPLAY=:0
+	export XAUTHORITY=/root/.Xauthority
+	alias c='clear'
+	alias ll='ls -ACp --group-directories-first'
+	EOF
+	cat <<-EOF
+	=> You should probably create a regular user, instead of using root!
+	   # useradd -g users -m -s /bin/bash <user>
+	EOF
+}
+
+function rm_chroot {
+	TIM=5
+	[[ ! -d $CHDEST ]] && print -u2 "=> ERROR: chroot doesn't exist" && exit 1
+	print "=> Removing chroot in ${TIM} seconds..."
+	sleep "$TIM"
+	rm -r "$CHDEST"
+	RET=$?
+	(( RET == 0 )) && print "Chroot successfully removed"
+}
+
+function mount_part {
+	print "=> Mouting partitions..."
+	mount -t proc proc ${CHDEST}/proc
+	mount -t sysfs sys ${CHDEST}/sys
+	mount -o bind /dev ${CHDEST}/dev
+	#mount -t devpts pts ${CHDEST}/dev/pts/
+	mount -o bind /tmp ${CHDEST}/tmp
+	print "=> Partitions mounted"
+}
+
+function umount_part {
+	#umount ${CHDEST}/{proc,sys,dev/pts,dev,tmp}
+	umount ${CHDEST}/{proc,sys,dev,tmp}
+}
+
+function go_chroot {
+	print "=> Exporting host configs to chroot..."
+	cp /etc/resolv.conf ${CHDEST}/etc/resolv.conf
+	cp /etc/pacman.d/mirrorlist ${CHDEST}/etc/pacman.d/mirrorlist
+	[[ ! -d ${CHDEST}/usr/share/terminfo/r/ ]] && mkdir -p ${CHDEST}/usr/share/terminfo/r/
+	cp /usr/share/terminfo/r/rxvt* ${CHDEST}/usr/share/terminfo/r/
+	[[ -f $AUTHF ]] && cp ${AUTHF} ${CHDEST}/root/.Xauthority
+	print "=> Starting chroot"
+	chroot ${CHUSER:+--userspec="$CHUSER"} "$CHDEST" /bin/bash
+}
+
+function pac_install {
+	print "Installing package(s) in $CHDEST in 5 seconds..."
+	sleep 5
+	pacman -r "$CHDEST" -Syu "$OPTARG"
+}
+
+if [[ -z $1 ]]; then
+	usage
+	exit 1
+fi
+
+while getopts ":cehi:rS:" option
+do
+	case $option in
+		c)
+			test_user
+			create_chroot
+			;;
+		e)
+			test_user
+			test_chroot
+			mount_part
+			go_chroot
+			umount_part
+			;;
+		h)
+			usage
+			exit
+			;;
+		i)
+			pac_install
+			;;
+		r)
+			test_user
+			rm_chroot
+			;;
+		S)
+			test_user
+			test_chroot
+			pac_install
+			;;
+		:)
+			print "Option -$OPTARG requires an argument."
+			exit 1
+			;;
+		?)
+			print "Invalid option: -$OPTARG"
+			exit 1
+			;;
+	esac
+done
+
