@@ -19,10 +19,10 @@ get_arc() {
 ####################
 
 # Compile and install musl
-if [ ! -e "${PWD}/musl-${REQ_MUSL}.tar.gz" ]; then
+if [ ! -e "musl-${REQ_MUSL}.tar.gz" ]; then
 	get_arc "http://www.musl-libc.org/releases/musl-${REQ_MUSL}.tar.gz"
 fi
-tar -zxf "${PWD}/musl-${REQ_MUSL}.tar.gz"
+tar -zxf "musl-${REQ_MUSL}.tar.gz"
 (
 	cd "musl-${REQ_MUSL}"
 	./configure \
@@ -33,19 +33,19 @@ tar -zxf "${PWD}/musl-${REQ_MUSL}.tar.gz"
 	make -j4
 	make install
 )
-rm -r "${PWD}/musl-${REQ_MUSL}"
+rm -r "musl-${REQ_MUSL}"
 
 # Install kernel headers
-if [ ! -e "${PWD}/linux-${REQ_KERN}.tar.xz" ]; then
+if [ ! -e "linux-${REQ_KERN}.tar.xz" ]; then
 	get_arc "https://cdn.kernel.org/pub/linux/kernel/v${REQ_KERN%%.*}.x/linux-${REQ_KERN}.tar.xz"
 fi
-tar -Jxf "${PWD}/linux-${REQ_KERN}.tar.xz"
+tar -Jxf "linux-${REQ_KERN}.tar.xz"
 (
 	cd "linux-${REQ_KERN}"
 	make ARCH="x86" headers_check
 	make ARCH="x86" INSTALL_HDR_PATH="$REQ_DEST" headers_install
 )
-rm -r "${PWD}/linux-${REQ_KERN}"
+rm -r "linux-${REQ_KERN}"
 
 printf "%s\n" "DONE"
 exit
