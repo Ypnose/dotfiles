@@ -1,0 +1,34 @@
+#!/usr/bin/mksh
+# Script by Ypnose - http://ywstd.fr
+
+M_SYMB="0123456789ABCDEF"
+
+if [[ -z $1 || $1 = "-h" ]]; then
+	print "usage: ${0##*/} [INTERFACE]"
+	exit
+fi
+
+if ! ip link show "$1" >/dev/null 2>&1; then
+	print -u2 -- "$1 does not exist"
+	exit 1
+fi
+
+if (( USER_ID != 0 )); then
+	print -u2 "${0##*/} must be run as root"
+	exit 1
+fi
+
+i=0
+while (( i < 10 )); do
+	R="$(( RANDOM % 16 ))"
+	S[$i]="${M_SYMB:${R}:1}"
+	(( i++ ))
+done
+
+M_ADDR="00:${S[0]}${S[1]}:${S[2]}${S[3]}:${S[4]}${S[5]}:${S[6]}${S[7]}:\
+${S[8]}${S[9]}"
+
+ip link set dev "$1" down
+ip link set dev "$1" addr "$M_ADDR" 
+
+exit

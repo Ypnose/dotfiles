@@ -1,0 +1,90 @@
+#!/usr/bin/mksh
+# Script by Ypnose - http://ywstd.fr
+
+W_SCR="${0##*/}"
+W_INF="wlan0"
+
+function p_err {
+	print -u2 "$1"
+	exit 1
+}
+
+function usage {
+	print "usage: $W_SCR [-d] [-f WPA_FILE] [-h] [-i INTERFACE] [-n] [-r]"
+	exit
+}
+
+function chk_inf {
+	if ! ip link show "$W_INF" >/dev/null 2>&1; then
+		p_err "$W_INF does not exist"
+	fi
+}
+
+function get_con {
+	if [[ -z $W_CON ]]; then
+		p_err "wpa_supplicant configuration file is not specified"
+	elif [[ ! -r $W_CON ]]; then
+		p_err "$W_CON is missing or not readable"
+	fi
+	chk_inf
+	if pgrep -f "wpa_supplicant -i $W_INF" >/dev/null 2>&1; then
+		p_err "wpa_supplicant already running for $W_INF"
+	fi
+	if [[ -x $(whence -p rfkill) ]]; then
+		rfkill unblock wlan
+	fi
+	wpa_supplicant -i "$W_INF" -B -c "$W_CON"
+	if (( W_NIP != 1 )); then
+		dhcpcd "$W_INF"
+	fi
+}
+
+function end_con {
+	chk_inf
+	if pgrep -f "dhcpcd $W_INF" >/dev/null 2>&1; then
+		dhcpcd -x "$W_INF"
+	fi
+	# Make sure addresses are purged
+	ip addr flush dev "$W_INF"
+	pkill -f "wpa_supplicant -i $W_INF"
+	ip link set dev "$W_INF" down
+	if [[ -x $(whence -p rfkill) ]]; then
+		rfkill block wlan
+	fi
+}
+
+if [[ $1 = "-h" ]]; then
+	usage
+fi
+
+if (( USER_ID != 0 )); then
+	p_err "${0##*/} must be run as root"
+fi
+
+while getopts "df:i:nr" arg; do
+	case "$arg" in
+		d) W_DIS="1"       ;;
+		f) W_CON="$OPTARG" ;;
+		i) W_INF="$OPTARG" ;;
+		n) W_NIP="1"       ;;
+		r) W_RES="1"       ;;
+		*) usage           ;;
+	esac
+done
+shift $(( OPTIND - 1 ))
+
+if (( $# != 0 )); then
+	usage
+fi
+
+if (( W_RES == 1 )); then
+	end_con
+	sleep 3
+	get_con
+elif (( W_DIS == 1 )); then
+	end_con
+else
+	get_con
+fi
+
+exit
