@@ -46,12 +46,14 @@ rypp:
 	chmod +x ${DESTDIR}/rypp
 
 ssh:
-	mkdir -pm 700 ${DESTDIR}/.ssh
+	mkdir -p ${DESTDIR}/.ssh
+	chmod 700 ${DESTDIR}/.ssh
 	cp ssh/config ${DESTDIR}/.ssh
 	chmod 644 ${DESTDIR}/.ssh/config
 
 svn:
-	mkdir -pm 700 ${DESTDIR}/.subversion
+	mkdir -p ${DESTDIR}/.subversion
+	chmod 700 ${DESTDIR}/.subversion
 	cp misc/svn/servers ${DESTDIR}/.subversion
 	chmod 644 ${DESTDIR}/.subversion/servers
 
