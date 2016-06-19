@@ -2,7 +2,7 @@
 # Script by Ypnose - http://ywstd.fr
 set -e
 
-trap '[[ -f $SCR_TPF ]] && rm "$SCR_TPF"' INT EXIT
+trap '[[ -f $SCR_TPF ]] && rm "$SCR_TPF"' ERR INT EXIT
 
 SCR_TPF="$(mktemp /tmp/${0##*/}.XXXXXXXXXX)"
 SCR_GIT="https://raw.githubusercontent.com/Ypnose/dotfiles/master/bin"
