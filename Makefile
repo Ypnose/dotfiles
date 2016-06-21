@@ -48,7 +48,7 @@ rypp:
 ssh:
 	mkdir -p ${DESTDIR}/.ssh
 	chmod 700 ${DESTDIR}/.ssh
-	cp ssh/config ${DESTDIR}/.ssh
+	test -f ${DESTDIR}/.ssh/config || cp ssh/config ${DESTDIR}/.ssh
 	chmod 644 ${DESTDIR}/.ssh/config
 
 svn:
