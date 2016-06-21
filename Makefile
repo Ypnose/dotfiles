@@ -2,7 +2,7 @@
 # Ypnose - http://ywstd.fr
 
 DESTDIR ?= dest
-REQFILE = jupprc mkshrc profile terminfo.cdb tmux.conf
+REQFILE = aliases jupprc mkshrc profile terminfo.cdb tmux.conf
 
 ####################
 
@@ -61,7 +61,6 @@ svn:
 work: svn
 	cp cwmrc ${DESTDIR}/.cwmrc
 	cp work/Xdefaults ${DESTDIR}/.Xdefaults
-	cp work/aliases ${DESTDIR}/.aliases
 	cp work/xinitrc ${DESTDIR}/.xinitrc
 
 xkb:
