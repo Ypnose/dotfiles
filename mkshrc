@@ -45,6 +45,11 @@ function lf {
 function massdiff {
 	diff -rq "$@" | grep '^Files '
 }
+function muslenv {
+	REALGCC="$1"
+	CC="${HOME}/Dev/musl-cc/bin/musl-gcc"
+	export REALGCC CC
+}
 function nd {
 	mkdir "$1" && cd "$1"
 }
