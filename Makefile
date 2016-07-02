@@ -40,6 +40,8 @@ clean:
 fonts:
 	mkdir -p ${DESTDIR}/.config/fontconfig
 	cp misc/fonts/fonts.conf ${DESTDIR}/.config/fontconfig
+	mkdir -p ${DESTDIR}/.fonts
+	cp misc/fonts/*.ttf ${DESTDIR}/.fonts
 
 rypp:
 	curl -o ${DESTDIR}/rypp https://git.framasoft.org/Ypnose/rypp/raw/master/rypp
