@@ -2,7 +2,7 @@
 # Script by Ypnose - http://ywstd.fr
 set -e
 
-SO_TMPF="/tmp/socks_${USER}"
+SO_TMPF="/tmp/socks_${USER_ID}"
 SO_PORT="1337"
 
 trap 'un_sock' ERR EXIT
