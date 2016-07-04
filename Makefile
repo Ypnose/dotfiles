@@ -12,7 +12,7 @@ list:
 	@echo "Targets:"
 	@awk -F':' '!/(all|list)/&&/^[a-z]+:/{printf(" * %s\n", $$1);next}' Makefile
 
-newbox: clean base ssh bin rypp fonts xkb
+newbox: clean base ssh bin rypp fonts conf xkb
 
 ####################
 
@@ -36,6 +36,11 @@ clean:
 	cd ${DESTDIR} && rm -f .bash_history .bash_logout .bash_profile \
 		.bashrc .inputrc .lesshst .login .logout .rnd .xsession \
 		.xsession-errors
+
+conf:
+	mkdir -p ${DESTDIR}/.yusr/conf
+	cp misc/firefox/prefs.js ${DESTDIR}/.yusr/conf
+	cp misc/wpa_supplicant/wpa-example.conf ${DESTDIR}/.yusr/conf
 
 fonts:
 	mkdir -p ${DESTDIR}/.config/fontconfig
@@ -69,4 +74,4 @@ xkb:
 	mkdir -p ${DESTDIR}/.yusr
 	cp -r xkb/ ${DESTDIR}/.yusr
 
-.PHONY: all list newbox base bash bin bsd clean fonts rypp ssh svn work xkb
+.PHONY: all list newbox base bash bin bsd clean conf fonts rypp ssh svn work xkb
