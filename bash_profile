@@ -8,7 +8,7 @@
 
 # -- ENVIRONMENT -------------------------------------------------------
 # LESS
-if [[ -n $(command -v less) ]]; then
+if [[ -x $(command -v less) ]]; then
 	PAGER=less
 	LESS="-R"
 	LESSHISTFILE="-"
