@@ -1,0 +1,14 @@
+#!/usr/bin/mksh
+# Script by Ypnose - http://ywstd.fr
+
+BF_DIR="${HOME}/.fonts/bitmaps"
+
+if [[ ! -d $BF_DIR ]]; then
+	print -u2 -- "$BF_DIR is missing"
+	exit 1
+fi
+
+cd "$BF_DIR"
+mkfontdir && xset fp rehash
+
+exit
