@@ -1,0 +1,20 @@
+#!/usr/bin/mksh
+# Script by Ypnose - http://ywstd.fr
+
+if [[ ! -x $(whence -p xev) ]]; then
+	print -u2 "xev not found in the PATH"
+	exit 1
+fi
+
+xev | awk '
+	/keysym/ {
+		gsub(/[(),]/,"")
+		out = $4 $6 $7
+		if (out != oldout) {
+			printf("%-9s%-6s%s\n", $6, $4, $7)
+		}
+		oldout = out
+	}
+'
+
+exit

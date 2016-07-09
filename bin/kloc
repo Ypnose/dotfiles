@@ -1,0 +1,25 @@
+#!/usr/bin/awk -f
+# Script by Ypnose - http://ywstd.fr
+
+# Init vars
+BEGIN { x = 0; w = 0; l = 0 }
+
+/^[\t ]*#/ {
+	x++
+	next
+}
+
+/^[\t ]*$/ {
+	w++
+	next
+}
+
+END {
+	if (NR == 0) {
+		printf("%s is empty!\n", ARGV[1])
+	} else {
+		l = NR-x-w
+		printf("%s has %s LOC, %s comment(s), %s blank(s) & %s SLOC\n",
+			ARGV[1], NR, x, w, l)
+	}
+}
