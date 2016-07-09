@@ -1,0 +1,25 @@
+#!/usr/bin/mksh
+# Script by Ypnose - http://ywstd.fr
+
+P="█"
+
+while (( SKARE_LIN < LINES )); do
+	SKARE_COL=0
+	while (( SKARE_COL < COLUMNS )); do
+		SKARE_LUCK="$(( RANDOM % 2 ))"
+		SKARE_FATE="$(( RANDOM % 7 + 1 ))"
+		SKARE_HOLE="$(( COLUMNS - SKARE_COL ))"
+		if (( SKARE_HOLE < 2 )); then
+			print -n -- "\033[${SKARE_LUCK};3${SKARE_FATE}m${P}"
+		else
+			print -n -- "\033[${SKARE_LUCK};3${SKARE_FATE}m${P}${P}"
+		fi
+		(( SKARE_COL = SKARE_COL + 2 ))
+	done
+	(( SKARE_LIN++ ))
+done
+print -n -- "\033[0m"
+
+read
+
+exit

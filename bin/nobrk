@@ -1,0 +1,22 @@
+#!/usr/bin/awk -f
+# Script by Ypnose - http://ywstd.fr
+
+function pline(TYPE) {
+	if ($0 ~ /^[\t  ]+$/) {
+		printf("%s on line %d\n", TYPE, NR)
+	} else {
+		printf("%s on line %d: %s\n", TYPE, NR, $0)
+	}
+}
+
+# NO-BREAK SPACE (U+00A0)
+/ / {
+	pline("NO-BREAK")
+	next
+}
+
+# TRAILING SPACE(S)
+/[\t ]+$/ {
+	pline("TRAILING")
+	next
+}
