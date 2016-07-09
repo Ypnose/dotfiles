@@ -1,0 +1,62 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+
+usage() {
+	printf "%s\n" "usage: ${0##*/} [-b ISO] [-h] [-i IMG] [-m RAM] [-p PORT] [-w PORT]"
+	exit
+}
+
+p_err() {
+	printf "%s\n" "$1" >&2
+	exit 1
+}
+
+qemu_launch() {
+	qemu-system-x86_64 -m "${VM_RAM:-512M}" -enable-kvm -vga std \
+		-drive file="$VM_IMG",format=raw -net nic \
+		-net user,hostfwd=tcp::"${VM_SSH:-9922}"-:22,hostfwd=tcp::"${VM_WWW:-8080}"-:8080 \
+		"$@"
+}
+
+if [ -z "$1" ]; then
+	usage
+fi
+
+while getopts ":b:hi:m:p:w:" opt; do
+	case $opt in
+		b) VM_ISO="$OPTARG" ;;
+		h) usage ;;
+		i) VM_IMG="$OPTARG" ;;
+		m) VM_RAM="$OPTARG" ;;
+		p) VM_SSH="$OPTARG" ;;
+		w) VM_WWW="$OPTARG" ;;
+		*) usage ;;
+	esac
+done
+shift $(( OPTIND - 1 ))
+
+if [ "$#" -ne 0 ]; then
+	usage
+fi
+
+if [ -z "$VM_IMG" ]; then
+	p_err "Image not specified"
+elif [ ! -f "$VM_IMG" ]; then
+	p_err "$VM_IMG not found. You need to create it with qemu-img"
+fi
+
+if ! grep -q 'kvm' /proc/modules; then
+	p_err "kvm module is not loaded"
+fi
+
+if [ -n "$VM_ISO" ]; then
+	if [ ! -f "$VM_ISO" ]; then
+		p_err "$VM_ISO not found"
+	else
+		qemu_launch -cdrom "$VM_ISO" -boot order=d
+	fi
+else
+	qemu_launch
+fi
+
+exit
