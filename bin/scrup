@@ -24,6 +24,7 @@ while IFS=$'\n' read -r SCR_REQ; do
 	if [[ -s $SCR_TPF ]]; then
 		cat "$SCR_TPF" >"$SCR_REQ"
 		chmod +x "$SCR_REQ"
+		print "Updated $SCR_REQ"
 	fi
 done <CHKLIST
 
