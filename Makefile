@@ -70,6 +70,5 @@ svn:
 work: svn
 	cp cwmrc ${DESTDIR}/.cwmrc
 	cp work/Xdefaults ${DESTDIR}/.Xdefaults
-	cp work/xinitrc ${DESTDIR}/.xinitrc
 
 .PHONY: all list newbox base bash bin bsd clean conf fonts rypp ssh svn work
