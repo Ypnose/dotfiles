@@ -40,6 +40,8 @@ clean:
 		.xsession-errors
 
 conf:
+	mkdir -p ${DESTDIR}/.config
+	cp misc/xdg/user-dirs.dirs ${DESTDIR}/.config
 	mkdir -p ${DESTDIR}/.yusr/conf
 	cp -r xkb/ ${DESTDIR}/.yusr
 	cp misc/firefox/prefs.js ${DESTDIR}/.yusr/conf
