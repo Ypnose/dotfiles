@@ -7,7 +7,7 @@
 	ui = true
 
 [alias]
-	a = add .
+	a  = add .
 	br = branch
 	co = checkout
 	ct = commit -m
