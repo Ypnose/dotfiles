@@ -18,6 +18,7 @@ newbox: clean base ssh bin rypp fonts conf
 
 base:
 	for f in ${REQFILE}; do cp "$${f}" "${DESTDIR}/.$${f}"; done
+	test -f ${DESTDIR}/.gitconfig || cp gitconfig ${DESTDIR}/.gitconfig
 	test -f ${DESTDIR}/.xinitrc || cp xinitrc ${DESTDIR}/.xinitrc
 
 bash:
