@@ -117,8 +117,9 @@ chroot "${DE_CHROOT}" /bin/sh -l <<-EOF
 	apt-get update
 	apt-get install -y dialog iproute2 netbase
 	dpkg-reconfigure tzdata
-	printf "%s\n" "Do not forget to change root password!"
 EOF
+
+printf "%s\n" "Do not forget to change root password!"
 
 # Go inside and do your business...
 chroot "${DE_CHROOT}" /bin/sh -l
