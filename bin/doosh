@@ -1,0 +1,73 @@
+#!/usr/bin/mksh
+# Script by Ypnose - http://ywstd.fr
+# 4 Ultraviolent, 5 Nightmare. Previous skill levels are designed for milksops.
+# Make sure your DOOM2.WAD is in $HOME/.prboom(-plus)
+
+function usage {
+	print "usage: doosh [-d WAD DIRECTORY] [-h] [-s SKILL LVL]"
+	exit
+}
+
+function p_err {
+	print -ru2 -- "$1"
+	exit 1
+}
+
+while getopts ":d:s:" opt; do
+	case "$opt" in
+		d) DOO_MLDIR="$OPTARG"
+			;;
+		s) DOO_SKIW="$OPTARG"
+			;;
+		*) usage
+			;;
+	esac
+done
+shift $(( OPTIND - 1 ))
+
+if [[ -z $DOO_MLDIR ]]; then
+	p_err "WAD directory not specified"
+elif [[ ! -d $DOO_MLDIR ]]; then
+	p_err "$DOO_MLDIR is missing"
+fi
+
+if [[ -n $DOO_SKIW ]] && (( DOO_SKIW < 1 || DOO_SKIW > 5 )); then
+	p_err "Wrong skill level"
+fi
+
+PS3='Choose the Master Levels WAD: '
+select DOO_NAMW in ATTACK BLACKTWR BLOODSEA CANYON CATWALK COMBINE \
+	FISTULA GARRISON GERYON MANOR MEPHISTO MINOS NESSUS PARADOX \
+	SUBSPACE SUBTERRA TEETH TTRAP VESPERAS VIRGIL; do
+	case $REPLY in
+		1)  DOO_LVLW="01" ;;
+		2)  DOO_LVLW="25" ;;
+		3)  DOO_LVLW="07" ;;
+		4)  DOO_LVLW="01" ;;
+		5)  DOO_LVLW="01" ;;
+		6)  DOO_LVLW="01" ;;
+		7)  DOO_LVLW="01" ;;
+		8)  DOO_LVLW="01" ;;
+		9)  DOO_LVLW="08" ;;
+		10) DOO_LVLW="01" ;;
+		11) DOO_LVLW="07" ;;
+		12) DOO_LVLW="05" ;;
+		13) DOO_LVLW="07" ;;
+		14) DOO_LVLW="01" ;;
+		15) DOO_LVLW="01" ;;
+		16) DOO_LVLW="01" ;;
+		17) DOO_LVLW="31" ;; # 32 Secret Level
+		18) DOO_LVLW="01" ;;
+		19) DOO_LVLW="09" ;;
+		20) DOO_LVLW="03" ;;
+		*)  p_err "Wrong number" ;;
+	esac
+	if [[ -f "${DOO_MLDIR}/${DOO_NAMW}.WAD" ]]; then
+		prboom -complevel 2 -iwad DOOM2.WAD -file "${DOO_MLDIR}/${DOO_NAMW}.WAD" \
+			-warp "$DOO_LVLW" -skill "${DOO_SKIW:-4}"
+	else
+		p_err "${DOO_NAMW}.WAD is missing in $DOO_MLDIR"
+	fi
+done
+
+exit
