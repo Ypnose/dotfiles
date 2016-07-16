@@ -16,7 +16,6 @@ bind -m '^L'=clear'^J'
 # -- ALIASES -----------------------------------------------------------
 alias ls='ls -Fh'
 alias pflog='doas tcpdump -n -e -ttt -r /var/log/pflog'
-
 alias repf='doas pfctl -nf /etc/pf.conf && doas pfctl -f /etc/pf.conf'
 alias ressh='doas kill -HUP $(</var/run/sshd.pid)'
 alias rehttp='doas kill -HUP $(</var/run/httpd.sock)'
