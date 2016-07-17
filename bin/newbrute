@@ -1,0 +1,35 @@
+#!/bin/ksh
+# Script by Ypnose - http://ywstd.fr
+# Add trap INT / TERM
+set -e
+
+PF_TABLENAME="bruteforce"
+PF_TABLEFILE="/etc/${PF_TABLENAME}"
+
+trap 'print "An error occured. Exiting." && exit 1' ERR
+trap 'clean_oldtable' EXIT
+
+function clean_oldtable {
+	[[ -f /tmp/${PF_TABLENAME}_OLD ]] && rm "/tmp/${PF_TABLENAME}_OLD"
+}
+
+if [[ ! -r $PF_TABLEFILE ]]; then
+	print -u2 "No existing table file found"
+	exit 1
+fi
+
+clean_oldtable
+cp "$PF_TABLEFILE" "/tmp/${PF_TABLENAME}_OLD"
+pfctl -t "$PF_TABLENAME" -Tshow >"$PF_TABLEFILE"
+
+if ! diff -q "/tmp/${PF_TABLENAME}_OLD" "$PF_TABLEFILE" >/dev/null 2>&1; then
+	PF_TABLEDIFF="$(diff -u "/tmp/${PF_TABLENAME}_OLD" "$PF_TABLEFILE" \
+		| awk '/^\+/&&!/\+\+\+/{gsub(/\+/,"");print}')"
+
+	print "The following address(es) was/were added to the $PF_TABLENAME table:\n\n$PF_TABLEDIFF" \
+		| mail -s "New IP address(es) summary" root
+else
+	print "No IP added in the $PF_TABLENAME table"
+fi
+
+exit
