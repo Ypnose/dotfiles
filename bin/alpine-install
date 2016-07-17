@@ -5,9 +5,9 @@
 set -e
 
 AL_DEDISK="$1"
-AL_NUMBER="3.3"
+AL_NUMBER="3.4"
 AL_MIRROR="http://nl.alpinelinux.org/alpine/v${AL_NUMBER}"
-AL_APKTAR="apk-tools-static-2.6.5-r1.apk"
+AL_APKVER="2.6.7-r0"
 AL_CHROOT="${AL_CHROOT:-syschroot}"
 AL_HOSTNA="${AL_HOSTNA:-alpineserv}"
 
@@ -34,10 +34,10 @@ elif ! mount | grep -q "^/dev/${AL_DEDISK}1"; then
 fi
 
 # Get and extract apk-static
-if [ ! -e "${PWD}/${AL_APKTAR}" ]; then
-	wget "${AL_MIRROR}/main/x86_64/${AL_APKTAR}"
+if [ ! -e "${PWD}/apk-tools-static-${AL_APKVER}.apk" ]; then
+	wget "${AL_MIRROR}/main/x86_64/apk-tools-static-${AL_APKVER}.apk"
 fi
-tar -xvf "${PWD}/${AL_APKTAR}" "sbin/apk.static"
+tar -xvf "${PWD}/apk-tools-static-${AL_APKVER}.apk" "sbin/apk.static"
 
 # Install inside chroot
 ./sbin/apk.static -X "${AL_MIRROR}/main" -U --allow-untrusted --root \
