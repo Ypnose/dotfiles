@@ -41,8 +41,6 @@ elif ! mount | grep -q "^/dev/${DE_DEDISK}1"; then
 fi
 
 # Launch the sauce
-# Remove mkdir
-mkdir -p "$DE_CHROOT"
 DEBOOTSTRAP_DIR="${PWD}/debootstrap/"
 export DEBOOTSTRAP_DIR
 ./debootstrap/debootstrap --arch=amd64 --variant=minbase "$DE_RELEAS" "$DE_CHROOT" "$DE_REPURL"
