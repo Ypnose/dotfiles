@@ -2,7 +2,8 @@
 # Ypnose - http://ywstd.fr
 
 DESTDIR ?= dest
-REQFILE = aliases jupprc mkshrc profile terminfo.cdb tmux.conf
+REQFILE = jupprc mkshrc profile terminfo.cdb tmux.conf
+OPTFILE = aliases gitconfig xinitrc
 
 ####################
 
@@ -18,8 +19,9 @@ newbox: clean base ssh bin rypp fonts conf
 
 base:
 	for f in ${REQFILE}; do cp "$${f}" "${DESTDIR}/.$${f}"; done
-	test -f ${DESTDIR}/.gitconfig || cp gitconfig ${DESTDIR}/.gitconfig
-	test -f ${DESTDIR}/.xinitrc || cp xinitrc ${DESTDIR}/.xinitrc
+	for o in ${OPTFILE}; \
+		do test -f ${DESTDIR}/.$${o} || cp $${o} ${DESTDIR}/.$${o}; \
+	done
 
 bash:
 	cp bashrc ${DESTDIR}/.bashrc
