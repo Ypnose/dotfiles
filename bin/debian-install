@@ -72,13 +72,13 @@ cat >"${DE_CHROOT}/etc/hosts" <<-EOF
 	ff00::0      ip6-mcastprefix
 EOF
 
-# Loopback interface
-mkdir -p "${DE_CHROOT}/etc/network"
-cat >"${DE_CHROOT}/etc/network/interfaces" <<-EOF
-	# The loopback network interface
-	auto lo
-	iface lo inet loopback
-EOF
+# Loopback interface (only used by ifup(8))
+#mkdir -p "${DE_CHROOT}/etc/network"
+#cat >"${DE_CHROOT}/etc/network/interfaces" <<-EOF
+#	# The loopback network interface
+#	auto lo
+#	iface lo inet loopback
+#EOF
 
 # IPv6
 mkdir -p "${DE_CHROOT}/etc/sysctl.d"
