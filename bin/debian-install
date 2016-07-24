@@ -51,6 +51,7 @@ cat >"${DE_CHROOT}/etc/fstab" <<-EOF
 	# /etc/fstab
 
 	UUID=${DE_DEUUID} / ext4 defaults,rw 0 1
+	#UUID=SWAP        none swap defaults 0 0
 EOF
 
 # No cruft
