@@ -32,6 +32,7 @@ tar -zxf "musl-${REQ_MUSL}.tar.gz"
 			--enable-wrapper="gcc"
 	make -j4
 	make install
+	cp VERSION WHATSNEW "$REQ_DEST"
 )
 rm -r "musl-${REQ_MUSL}"
 
