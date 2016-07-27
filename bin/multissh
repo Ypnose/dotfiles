@@ -1,0 +1,49 @@
+#!/bin/mksh
+# Script by Ypnose - http://ywstd.fr
+
+MSSH_FILE="${HOME}/Dev/clusters"
+
+function file_group {
+	typeset MSSH_LINE MSSH_READ
+
+	while IFS=$' \t\n' read -r MSSH_LINE; do
+		[[ ${MSSH_LINE:0:1} = "#" ]] && continue
+		# Check if the group name exists
+		[[ ${MSSH_LINE%% *} = "$1" ]] && MSSH_READ=1
+		# If MSSH_READ is equal to 1, the group was found
+		(( MSSH_READ != 1 )) && continue
+		# If the MSSH_LINE is empty, the group is over
+		if [[ -n $MSSH_LINE ]]; then
+			MSSH_ADDR+="$MSSH_LINE "
+		else
+			break
+		fi
+	done <"$MSSH_FILE"
+
+	if [[ -z $MSSH_ADDR ]]; then
+		print -u2 -- "$1 group not found"
+		exit 2
+	fi
+}
+
+if [[ -z $1 || $1 = "-h" ]]; then
+	print "usage: ${0##*/} [GROUP]"
+	exit
+fi
+
+if [[ ! -e $MSSH_FILE ]]; then
+	print -u2 -- "$MSSH_FILE not found"
+	exit 1
+fi
+
+file_group "$1"
+
+for h in ${MSSH_ADDR#* }; do
+	tmux split-window "ssh $h"
+	tmux select-layout tiled
+done
+
+tmux set-window-option synchronize-panes on
+tmux display-panes
+
+exit
