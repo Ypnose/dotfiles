@@ -15,6 +15,7 @@ bind -m '^L'=clear'^J'
 
 # -- ALIASES -----------------------------------------------------------
 alias ls='ls -Fh'
+alias authssh='grep "sshd" /var/log/authlog'
 alias pflog='doas tcpdump -n -e -ttt -r /var/log/pflog'
 alias repf='doas pfctl -nf /etc/pf.conf && doas pfctl -f /etc/pf.conf'
 alias ressh='doas kill -HUP $(</var/run/sshd.pid)'
