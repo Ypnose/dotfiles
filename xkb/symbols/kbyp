@@ -20,12 +20,12 @@ xkb_symbols "basic" {
     key <AE09> { [          9,   parenleft                             ] };  // 9 (
     key <AE10> { [          0,  parenright                             ] };  // 0 )
     key <AE11> { [      minus,  underscore,   backslash, NoSymbol      ] };  // - _ \
-    key <AE12> { [      equal,        plus,    notequal, NoSymbol      ] };  // = + ≠
+    key <AE12> { [      equal,        plus,    notequal, plusminus     ] };  // = + ≠ ±
 
     // IGNORE KEY (XKBCOMP OUTPUT)
     key <AE13> { [      NoSymbol,   NoSymbol                           ] };
 
-    key <AD01> { [             q,          Q                           ] };  // q Q
+    key <AD01> { [             q,          Q,         ae, AE           ] };  // q Q æ Æ
     key <AD02> { [             w,          W                           ] };  // w W
     key <AD03> { [             e,          E,     eacute, Eacute       ] };  // e E é É
     key <AD04> { [             r,          R, registered, copyright    ] };  // r R ® ©
