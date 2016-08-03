@@ -5,7 +5,7 @@
 
 # -- RYPP --------------------------------------------------------------
 RYPP_DEST="/opt/rypp"
-RYPP_REPO="http://files.ywstd.fr/p/rypp"
+RYPP_REPO="http://ywstd.fr/repo"
 
 # -- *PATH -------------------------------------------------------------
 [[ -d ${RYPP_DEST}/bin ]] && PATH="${RYPP_DEST}/bin:${PATH}"
