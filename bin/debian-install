@@ -85,11 +85,13 @@ EOF
 # IPv6
 mkdir -p "${DE_CHROOT}/etc/sysctl.d"
 cat >"${DE_CHROOT}/etc/sysctl.d/yp.conf" <<-EOF
-	# IPv6 Privacy Extensions
+	# /etc/sysctl.d/yp.conf
 
+	# IPv6 Privacy Extensions
 	net.ipv6.conf.all.use_tempaddr = 2
 	net.ipv6.conf.default.use_tempaddr = 2
 	net.ipv6.conf.eth0.use_tempaddr = 2
+	#net.ipv6.conf.eth1.use_tempaddr = 2
 	#net.ipv6.conf.wlan0.use_tempaddr = 2
 EOF
 
