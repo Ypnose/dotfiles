@@ -53,6 +53,13 @@ function muslenv {
 function nd {
 	mkdir -p "$1" && cd "$1"
 }
+function pad {
+	typeset N_DIR
+	N_DIR="${HOME}/Dev/${0}"
+	mkdir -p "$N_DIR"
+	if [[ $1 = "ls" ]]; then ls "$N_DIR"; return; fi
+	"$EDITOR" "${N_DIR}/${1:-DEFAULT}"
+}
 function sprunge {
 	curl -F 'sprunge=<-' http://sprunge.us
 }
