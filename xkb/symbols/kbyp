@@ -50,7 +50,7 @@ xkb_symbols "basic" {
     key <AC10> { [  semicolon,      colon,  dead_diaeresis, NoSymbol   ] };  // ; : ¨
     key <AC11> { [ apostrophe,         at, dead_circumflex, NoSymbol   ] };  // ' @ ^
     // ISO UK LAYOUT
-    key <BKSL> { [ numbersign, asciitilde                              ] };  // # ~
+    key <BKSL> { [ numbersign, asciitilde,           grave, NoSymbol   ] };  // # ~ `
 
     // ISO UK LAYOUT
     key <LSGT> { [ backslash,      bar                                 ] };  // \ |
