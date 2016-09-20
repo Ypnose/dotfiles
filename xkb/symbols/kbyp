@@ -34,7 +34,7 @@ xkb_symbols "basic" {
     key <AD07> { [             u,          U,     ugrave, Ugrave       ] };  // u U ù Ù
     key <AD08> { [             i,          I                           ] };  // i I
     key <AD09> { [             o,          O,         oe, OE           ] };  // o O œ Œ
-    key <AD10> { [             p,          P,      Prior, NoSymbol     ] };  // p P ⇑
+    key <AD10> { [             p,          P                           ] };  // p P
     key <AD11> { [   bracketleft,  braceleft,  leftarrow, NoSymbol     ] };  // [ { ←
     key <AD12> { [  bracketright, braceright, rightarrow, NoSymbol     ] };  // ] } →
 
@@ -46,7 +46,7 @@ xkb_symbols "basic" {
     key <AC06> { [          h,          H                              ] };  // h H
     key <AC07> { [          j,          J                              ] };  // j J
     key <AC08> { [          k,          K                              ] };  // k K
-    key <AC09> { [          l,          L,            Next, NoSymbol   ] };  // l L ⇓
+    key <AC09> { [          l,          L                              ] };  // l L
     key <AC10> { [  semicolon,      colon,  dead_diaeresis, NoSymbol   ] };  // ; : ¨
     key <AC11> { [ apostrophe,         at, dead_circumflex, NoSymbol   ] };  // ' @ ^
     // ISO UK LAYOUT
