@@ -43,7 +43,7 @@ function lf {
 			print -r -- "${F_FIL##*/}"; done
 }
 function massdiff {
-	diff -rq "$@" | grep '^Files '
+	LC_ALL=C diff -rq "$@" | grep '^Files '
 }
 function muslenv {
 	REALGCC="$1"
@@ -64,7 +64,7 @@ function sprunge {
 	curl -F 'sprunge=<-' http://sprunge.us
 }
 function whatfile {
-	diff -rq "$@" | grep '^Only '
+	LC_ALL=C diff -rq "$@" | grep '^Only '
 }
 
 # -- ALIASES -----------------------------------------------------------
