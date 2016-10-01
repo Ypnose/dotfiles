@@ -10,9 +10,8 @@ xev | awk '
 	/keysym/ {
 		gsub(/[(),]/,"")
 		out = $4 $6 $7
-		if (out != oldout) {
+		if (out != oldout)
 			printf("%-9s%-6s%s\n", $6, $4, $7)
-		}
 		oldout = out
 	}
 '
