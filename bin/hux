@@ -1,0 +1,23 @@
+#!/usr/bin/awk -f
+# Script by Ypnose - http://ywstd.fr
+# HTTP url extractor
+
+BEGIN { FS = " " }
+
+{
+	split($0,field)
+	for (i in field) {
+		if (field[i] ~ /^(href|src)=/) {
+			match(field[i],/^(href|src)=".*"/)
+			# Extract URL
+			if (field[i] ~ /^href=/)
+				url = substr(field[i],RSTART+6,RLENGTH-7)
+			else if (field[i] ~ /^src=/)
+				url = substr(field[i],RSTART+5,RLENGTH-6)
+			# Clear a few unnecessary lines
+			if (url !~ /^(\/|#)?$/ && url != oldurl)
+				printf("%s\n", url)
+			oldurl = url
+		}
+	}
+}
