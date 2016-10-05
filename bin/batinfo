@@ -1,0 +1,26 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+
+BAT_PATH="/sys/class/power_supply/${1:-BAT0}/"
+
+if [ ! -d "$BAT_PATH" ]; then
+	exit 1
+fi
+
+# Capacity
+IFS=$'\n' read -r BAT_CAPA <"${BAT_PATH}/capacity"
+if [ "$BAT_CAPA" -eq 100 ]; then
+	BAT_CAPA="FULL"
+fi
+
+# Status (ignoring Full or Unknown)
+IFS=$'\n' read -r BAT_STAT <"${BAT_PATH}/status"
+if [ "$BAT_STAT" = "Charging" ]; then
+	BAT_DISP="AC"
+elif [ "$BAT_STAT" = "Discharging" ]; then
+	BAT_DISP="DIS"
+fi
+
+printf "%s %s\n" "$BAT_CAPA" "${BAT_DISP:--}"
+
+exit
