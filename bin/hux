@@ -5,6 +5,9 @@
 BEGIN { FS = " " }
 
 {
+	# Sanitize
+	gsub(/[Hh][Rr][Ee][Ff]/,"href")
+	gsub(/[Ss][Rr][Cc]/,"src")
 	split($0,field)
 	for (i in field) {
 		if (field[i] ~ /^(href|src)=/) {
