@@ -8,6 +8,7 @@
 
 [alias]
 	a  = add .
+	ad = add -p
 	br = branch
 	co = checkout
 	ct = commit -m
