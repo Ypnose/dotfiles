@@ -51,7 +51,7 @@ DE_DEUUID="$(lsblk -no UUID /dev/${DE_DEDISK}1)"
 cat >"${DE_CHROOT}/etc/fstab" <<-EOF
 	# /etc/fstab
 
-	UUID=${DE_DEUUID} / ext4 defaults,rw 0 1
+	UUID=${DE_DEUUID} / ext4 defaults,rw,errors=remount-ro 0 1
 	#UUID=SWAP        none swap defaults 0 0
 EOF
 
