@@ -7,11 +7,9 @@
 	ui = true
 
 [alias]
-	a  = add .
 	ad = add -p
 	br = branch
 	co = checkout
 	ct = commit -m
 	ls = ls-files
 	pm = push origin master
-	st = status
