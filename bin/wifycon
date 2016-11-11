@@ -5,7 +5,7 @@ W_SCR="${0##*/}"
 W_INF="wlan0"
 
 function p_err {
-	print -u2 "$1"
+	print -u2 -- "$1"
 	exit 1
 }
 
