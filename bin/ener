@@ -10,7 +10,7 @@ function display_usage {
 }
 
 function launch_cmds {
-	[[ -n $(pgrep mocp) ]] && mocp -x
+	pgrep mocp >/dev/null 2>&1 && mocp -x
 	sleep "$TIME"
 }
 
