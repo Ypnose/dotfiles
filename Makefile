@@ -2,7 +2,7 @@
 # Ypnose - http://ywstd.fr
 
 DESTDIR ?= dest
-REQFILE = jupprc mkshrc profile terminfo.cdb tmux.conf
+REQFILE = cwmrc jupprc mkshrc profile terminfo.cdb tmux.conf
 OPTFILE = aliases gitconfig xinitrc
 
 ####################
@@ -74,7 +74,6 @@ svn:
 
 # Needs tweaking
 work: svn
-	cp cwmrc ${DESTDIR}/.cwmrc
 	cp work/Xdefaults ${DESTDIR}/.Xdefaults
 
 .PHONY: all list newbox base bash bin bsd clean conf fonts rypp ssh svn work
