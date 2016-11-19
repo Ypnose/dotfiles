@@ -57,3 +57,10 @@ bind MS-v       vtile
 
 # Mouse
 mousebind M-3   window_resize
+
+# Apps shortcuts
+# moc
+bind 4-Down     "mocp -s"
+bind 4-Left     "mocp -r"
+bind 4-Right    "mocp -f"
+bind 4-Up       "mocp -P"
