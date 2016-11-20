@@ -13,6 +13,9 @@ list:
 	@echo "Targets:"
 	@awk -F':' '!/(all|list)/&&/^[a-z]+:/{printf(" * %s\n", $$1);next}' Makefile
 
+diff:
+	@sh check-changes -v | yiff
+
 newbox: clean base ssh bin rypp fonts conf
 
 ####################
@@ -76,4 +79,4 @@ svn:
 work: svn
 	cp work/Xdefaults ${DESTDIR}/.Xdefaults
 
-.PHONY: all list newbox base bash bin bsd clean conf fonts rypp ssh svn work
+.PHONY: all list diff newbox base bash bin bsd clean conf fonts rypp ssh svn work
