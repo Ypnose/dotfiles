@@ -3,7 +3,7 @@
 set -e
 
 REQ_MUSL="1.1.15"
-REQ_KERN="4.4.24"
+REQ_KERN="4.4.35"
 REQ_DEST="${PWD}/musl-cc"
 
 ####################
@@ -29,7 +29,7 @@ tar -zxf "musl-${REQ_MUSL}.tar.gz"
 			--prefix="$REQ_DEST" \
 			--disable-shared \
 			--enable-static \
-			--enable-wrapper="gcc"
+			--enable-wrapper="all"
 	make -j4
 	make install
 	cp VERSION WHATSNEW "$REQ_DEST"
