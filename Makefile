@@ -3,7 +3,7 @@
 
 DESTDIR ?= dest
 REQFILE = jupprc mkshrc profile terminfo.cdb tmux.conf
-OPTFILE = aliases cwmrc gitconfig xinitrc
+OPTFILE = aliases cwmrc gitconfig xinitrc Xresources
 
 ####################
 
@@ -75,8 +75,4 @@ svn:
 	cp misc/svn/servers ${DESTDIR}/.subversion
 	chmod 644 ${DESTDIR}/.subversion/servers
 
-# Needs tweaking
-work: svn
-	cp work/Xdefaults ${DESTDIR}/.Xdefaults
-
-.PHONY: all list diff newbox base bash bin bsd clean conf fonts rypp ssh svn work
+.PHONY: all list diff newbox base bash bin bsd clean conf fonts rypp ssh svn

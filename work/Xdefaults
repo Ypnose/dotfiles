@@ -1,8 +1,0 @@
-! ---------------------------------------------------------------------+
-! file:     .Xdefaults                                                 +
-! author:   Ypnose - http://ywstd.fr                                   +
-! ---------------------------------------------------------------------+
-
-! Terminus alias
-xterm*font:            terminus-16
-xterm*internalBorder:  10

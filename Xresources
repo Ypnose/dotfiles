@@ -1,0 +1,31 @@
+! ---------------------------------------------------------------------+
+! file:     .Xresources                                                +
+! author:   Ypnose - http://ywstd.fr                                   +
+! ---------------------------------------------------------------------+
+
+! -- Fonts -------------------------------------------------------------
+!URxvt*font:      -*-envypn-medium-*-*-*-15-*-*-*-*-*-*-*
+!URxvt*boldFont:  -*-envypn-medium-*-*-*-15-*-*-*-*-*-*-*
+
+URxvt*font:      -*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*
+URxvt*boldFont:  -*-terminus-bold-*-*-*-16-*-*-*-*-*-*-*
+
+xterm*font:      -*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*
+xterm*boldfont:  -*-terminus-bold-*-*-*-16-*-*-*-*-*-*-*
+
+! -- URxvt -------------------------------------------------------------
+URxvt*cursorBlink:      true
+URxvt*geometry:         80x17
+URxvt*internalBorder:   24
+URxvt*perl-ext-common:  default,matcher
+URxvt*print-pipe:       cat >>"/tmp/urxvt.out"
+URxvt*saveLines:        200
+URxvt*scrollBar:        false
+URxvt*termName:         rxvt-unicode
+
+! -- XTerm -------------------------------------------------------------
+xterm*cursorBlink:      true
+xterm*internalBorder:   24
+xterm*locale:           true
+xterm*scrollBar:        false
+xterm*utf8:             2
