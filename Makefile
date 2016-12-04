@@ -57,7 +57,8 @@ fonts:
 	cp misc/fonts/fonts.conf ${DESTDIR}/.config/fontconfig
 	mkdir -p ${DESTDIR}/.fonts/bitmaps
 	cp misc/fonts/*.ttf ${DESTDIR}/.fonts
-	cp misc/fonts/*.pcf.gz misc/fonts/fonts.dir ${DESTDIR}/.fonts/bitmaps
+	cp misc/fonts/*.pcf.gz ${DESTDIR}/.fonts/bitmaps
+	test -f ${DESTDIR}/.fonts/bitmaps/fonts.dir || cp misc/fonts/fonts.dir ${DESTDIR}/.fonts/bitmaps
 
 rypp:
 	curl -o ${DESTDIR}/rypp https://git.framasoft.org/Ypnose/rypp/raw/master/rypp
