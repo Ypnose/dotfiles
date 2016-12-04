@@ -29,3 +29,5 @@ xterm*internalBorder:   24
 xterm*locale:           true
 xterm*scrollBar:        false
 xterm*utf8:             2
+
+! -- Colors ------------------------------------------------------------
