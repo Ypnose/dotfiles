@@ -25,6 +25,8 @@ bind M-h        unmap
 bind M-j        unmap
 bind M-k        unmap
 bind M-l        unmap
+bind M-Left     unmap
+bind M-Right    unmap
 bind M-Return   unmap
 bind CM-Delete  unmap
 bind CM-Return  unmap
