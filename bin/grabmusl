@@ -22,7 +22,7 @@ get_arc() {
 if [ ! -e "musl-${REQ_MUSL}.tar.gz" ]; then
 	get_arc "http://www.musl-libc.org/releases/musl-${REQ_MUSL}.tar.gz"
 fi
-tar -zxf "musl-${REQ_MUSL}.tar.gz"
+tar -zvxf "musl-${REQ_MUSL}.tar.gz"
 (
 	cd "musl-${REQ_MUSL}"
 	./configure \
@@ -40,7 +40,7 @@ rm -r "musl-${REQ_MUSL}"
 if [ ! -e "linux-${REQ_KERN}.tar.xz" ]; then
 	get_arc "https://cdn.kernel.org/pub/linux/kernel/v${REQ_KERN%%.*}.x/linux-${REQ_KERN}.tar.xz"
 fi
-tar -Jxf "linux-${REQ_KERN}.tar.xz"
+tar -Jvxf "linux-${REQ_KERN}.tar.xz"
 (
 	cd "linux-${REQ_KERN}"
 	make ARCH="x86" headers_check
