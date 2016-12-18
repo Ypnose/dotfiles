@@ -1,0 +1,129 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+set -e
+
+VO_OSDISK="$1"
+VO_HOSTNA="$2"
+VO_HOSTNA="${VO_HOSTNA:-ypnbox}"
+VO_CHROOT="syschroot"
+VO_REPURL="http://repo3.voidlinux.eu/current/"
+
+##############################
+
+# 1 = / | 2 = swap | 3 = other
+if [ -z "$1" ] || [ "$1" = "-h" ]; then
+	printf "%s\n" "usage: ${0##*/} [DISK] [HOSTNAME]"
+	exit
+fi
+
+if [ "$(id -u)" -ne 0 ]; then
+	printf "%s\n" "${0##*/} needs to be called as root" >&2
+	exit 1
+fi
+
+if [ ! -x "$(command -v xbps-install)" ]; then
+	printf "%s\n" "xbps-install not found" >&2
+	exit 1
+fi
+
+# Verify destination filesystem is mounted
+if [ ! -d "$VO_CHROOT" ]; then
+	printf "%s\n" "$VO_CHROOT directory is missing" >&2
+	exit 1
+elif ! mount | grep -q "^/dev/${VO_OSDISK}"; then
+	printf "%s\n" "/dev/${VO_OSDISK} is not mounted inside $VO_CHROOT" >&2
+	exit 1
+fi
+
+# Launch the xbps sauce
+xbps-install -S -R "$VO_REPURL" -r "$VO_CHROOT" base-files ncurses \
+	coreutils findutils diffutils libgcc dash bash grep gzip file sed \
+	gawk less util-linux tar man-pages mdocml shadow e2fsprogs psmisc \
+	procps-ng tzdata pciutils iana-etc kbd iproute2 xbps nvi kmod eudev \
+	runit-void
+
+# /etc/fstab
+VO_OSUUID="$(lsblk -no UUID /dev/${VO_OSDISK})"
+cat >"${VO_CHROOT}/etc/fstab" <<-EOF
+	# /etc/fstab
+
+	UUID=${VO_OSUUID} / ext4 defaults,rw,errors=remount-ro 0 1
+	#UUID=SWAP        none swap defaults 0 0
+	tmpfs /tmp tmpfs nodev,nosuid,size=2G 0 0
+EOF
+
+# hostname + /etc/hosts
+printf "%s\n" "$VO_HOSTNA" >"${VO_CHROOT}/etc/hostname"
+cat >"${VO_CHROOT}/etc/hosts" <<-EOF
+	# /etc/hosts
+
+	127.0.0.1    localhost
+	127.0.1.1    $VO_HOSTNA
+
+	# IPv6
+	#::1          ip6-localhost ip6-loopback
+	#fe00::0      ip6-localnet
+	#ff00::0      ip6-mcastprefix
+EOF
+
+# HISTFILE
+printf "\n%s\n" "unset HISTFILE" >>"${VO_CHROOT}/etc/profile"
+
+# rc.conf
+sed -i -e '/HARDWARECLOCK/s/^#//g' \
+	-e 's|^#\?TIMEZONE=.*|TIMEZONE="Europe/Paris"|g' \
+	-e 's|^#\?KEYMAP=.*|KEYMAP="uk"|g' \
+	"${VO_CHROOT}/etc/rc.conf"
+
+# IPv6
+mkdir -p "${VO_CHROOT}/etc/sysctl.d"
+cat >"${VO_CHROOT}/etc/sysctl.d/yp.conf" <<-EOF
+	# /etc/sysctl.d/yp.conf
+
+	# Disable IPv6
+	net.ipv6.conf.all.disable_ipv6 = 1
+	net.ipv6.conf.default.disable_ipv6 = 1
+	net.ipv6.conf.lo.disable_ipv6 = 1
+
+	# IPv6 Privacy Extensions
+	#net.ipv6.conf.all.use_tempaddr = 2
+	#net.ipv6.conf.default.use_tempaddr = 2
+	#net.ipv6.conf.eth0.use_tempaddr = 2
+	#net.ipv6.conf.eth1.use_tempaddr = 2
+	#net.ipv6.conf.wlan0.use_tempaddr = 2
+EOF
+
+##############################
+
+# Prepare the chroot...
+if [ -f "/etc/resolv.conf" ]; then
+	cp "/etc/resolv.conf" "${VO_CHROOT}/etc"
+fi
+
+mount -t proc proc "${VO_CHROOT}/proc"
+mount -t sysfs sys "${VO_CHROOT}/sys"
+mount -o bind /dev "${VO_CHROOT}/dev"
+mount -o bind /dev/pts "${VO_CHROOT}/dev/pts"
+
+# Run commands inside the chroot
+chroot "${VO_CHROOT}" /bin/sh -l <<-EOF
+	LC_ALL=C
+	export LC_ALL
+
+	xbps-alternatives -g sh -s dash
+	rm /var/service/agetty-tty4
+	rm /var/service/agetty-tty5
+	rm /var/service/agetty-tty6
+EOF
+
+printf "%s\n" "Do not forget to change root password!"
+
+# Go inside and do your business...
+chroot "${VO_CHROOT}" /bin/sh -l
+
+##############################
+
+umount "${VO_CHROOT}/dev/pts" "${VO_CHROOT}/dev" "${VO_CHROOT}/sys" "${VO_CHROOT}/proc"
+printf "%s\n" "DONE"
+
+exit
