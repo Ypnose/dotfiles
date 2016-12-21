@@ -70,9 +70,9 @@ cat >"${DE_CHROOT}/etc/hosts" <<-EOF
 	127.0.0.1    localhost
 	127.0.1.1    $DE_HOSTNA
 	# IPv6
-	::1          ip6-localhost ip6-loopback
-	fe00::0      ip6-localnet
-	ff00::0      ip6-mcastprefix
+	#::1          ip6-localhost ip6-loopback
+	#fe00::0      ip6-localnet
+	#ff00::0      ip6-mcastprefix
 EOF
 
 # Loopback interface (only used by ifup(8))
@@ -91,10 +91,15 @@ mkdir -p "${DE_CHROOT}/etc/sysctl.d"
 cat >"${DE_CHROOT}/etc/sysctl.d/yp.conf" <<-EOF
 	# /etc/sysctl.d/yp.conf
 
+	# Disable IPv6
+	net.ipv6.conf.all.disable_ipv6 = 1
+	net.ipv6.conf.default.disable_ipv6 = 1
+	net.ipv6.conf.lo.disable_ipv6 = 1
+
 	# IPv6 Privacy Extensions
-	net.ipv6.conf.all.use_tempaddr = 2
-	net.ipv6.conf.default.use_tempaddr = 2
-	net.ipv6.conf.eth0.use_tempaddr = 2
+	#net.ipv6.conf.all.use_tempaddr = 2
+	#net.ipv6.conf.default.use_tempaddr = 2
+	#net.ipv6.conf.eth0.use_tempaddr = 2
 	#net.ipv6.conf.eth1.use_tempaddr = 2
 	#net.ipv6.conf.wlan0.use_tempaddr = 2
 EOF
