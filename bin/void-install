@@ -111,9 +111,6 @@ chroot "${VO_CHROOT}" /bin/sh -l <<-EOF
 	export LC_ALL
 
 	xbps-alternatives -g sh -s dash
-	rm /var/service/agetty-tty4
-	rm /var/service/agetty-tty5
-	rm /var/service/agetty-tty6
 EOF
 
 printf "%s\n" "Do not forget to change root password!"
