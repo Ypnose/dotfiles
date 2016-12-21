@@ -3,7 +3,7 @@
 # wget(1) is needed
 set -e
 
-DE_DEDISK="$1"
+DE_OSDISK="$1"
 DE_HOSTNA="$2"
 DE_HOSTNA="${DE_HOSTNA:-ypnbox}"
 DE_CHROOT="syschroot"
@@ -36,8 +36,8 @@ fi
 if [ ! -d "$DE_CHROOT" ]; then
 	printf "%s\n" "$DE_CHROOT directory is missing" >&2
 	exit 1
-elif ! mount | grep -q "^/dev/${DE_DEDISK}1"; then
-	printf "%s\n" "/dev/${DE_DEDISK}1 is not mounted inside $DE_CHROOT" >&2
+elif ! mount | grep -q "^/dev/${DE_OSDISK}"; then
+	printf "%s\n" "/dev/${DE_OSDISK} is not mounted inside $DE_CHROOT" >&2
 	exit 1
 fi
 
@@ -53,11 +53,11 @@ cat >"${DE_CHROOT}/etc/apt/apt.conf.d/99yp" <<-EOF
 EOF
 
 # /etc/fstab
-DE_DEUUID="$(lsblk -no UUID /dev/${DE_DEDISK}1)"
+DE_OSUUID="$(lsblk -no UUID /dev/${DE_OSDISK})"
 cat >"${DE_CHROOT}/etc/fstab" <<-EOF
 	# /etc/fstab
 
-	UUID=${DE_DEUUID} / ext4 defaults,rw,errors=remount-ro 0 1
+	UUID=${DE_OSUUID} / ext4 defaults,rw,errors=remount-ro 0 1
 	#UUID=SWAP        none swap defaults 0 0
 	tmpfs /tmp tmpfs nodev,nosuid,size=2G 0 0
 EOF
