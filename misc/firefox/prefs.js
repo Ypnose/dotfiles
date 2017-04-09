@@ -32,7 +32,7 @@ user_pref("browser.urlbar.suggest.openpage", false);
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("dom.battery.enabled", false);
 user_pref("dom.event.clipboardevents.enabled", false);
-user_pref("dom.storage.enabled", false);
+/* user_pref("dom.storage.enabled", false); */
 user_pref("general.smoothScroll", false);
 user_pref("geo.enabled", false);
 user_pref("geo.wifi.uri", "http://127.0.0.1");
