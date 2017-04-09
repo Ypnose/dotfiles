@@ -13,3 +13,7 @@
 	ct = commit -m
 	ls = ls-files
 	pm = push origin master
+
+#[user]
+#	email = 
+#	name = 
