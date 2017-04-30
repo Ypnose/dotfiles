@@ -10,7 +10,7 @@ RYPP_REPO="http://ywstd.fr/repo"
 # -- *PATH -------------------------------------------------------------
 [[ -d ${RYPP_DEST}/bin ]] && PATH="${RYPP_DEST}/bin:${PATH}"
 [[ -d ${HOME}/.yusr/bin ]] && PATH="${PATH}:${HOME}/.yusr/bin"
-CDPATH="${HOME}:${CDPATH}"
+CDPATH=".:${HOME}"
 MANPATH=":${RYPP_DEST}/man"
 
 # -- ENVIRONMENT -------------------------------------------------------
