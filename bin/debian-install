@@ -59,7 +59,7 @@ cat >"${DE_CHROOT}/etc/fstab" <<-EOF
 
 	UUID=${DE_OSUUID} / ext4 defaults,rw,errors=remount-ro 0 1
 	#UUID=SWAP        none swap defaults 0 0
-	tmpfs /tmp tmpfs nodev,nosuid,size=2G 0 0
+	tmpfs /tmp tmpfs nodev,nosuid 0 0
 EOF
 
 # hostname + /etc/hosts
