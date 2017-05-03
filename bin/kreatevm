@@ -2,7 +2,7 @@
 # Script by Ypnose - http://ywstd.fr
 
 usage() {
-	printf "%s\n" "usage: ${0##*/} [-b ISO] [-h] [-i IMG] [-m RAM] [-p PORT] [-w PORT]"
+	printf "%s\n" "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-i IMG] [-m RAM] [-p PORT] [-w PORT]"
 	exit
 }
 
@@ -13,7 +13,7 @@ p_err() {
 
 qemu_launch() {
 	qemu-system-x86_64 -m "${VM_RAM:-512M}" -enable-kvm -vga std \
-		-drive file="$VM_IMG",format=raw -net nic \
+		-drive file="$VM_IMG",format="${VM_FMT:-raw}" -net nic \
 		-net user,hostfwd=tcp::"${VM_SSH:-9922}"-:22,hostfwd=tcp::"${VM_WWW:-8080}"-:8080 \
 		"$@"
 }
@@ -22,9 +22,10 @@ if [ -z "$1" ]; then
 	usage
 fi
 
-while getopts ":b:hi:m:p:w:" opt; do
+while getopts ":b:f:hi:m:p:w:" opt; do
 	case $opt in
 		b) VM_ISO="$OPTARG" ;;
+		f) VM_FMT="$OPTARG" ;;
 		h) usage ;;
 		i) VM_IMG="$OPTARG" ;;
 		m) VM_RAM="$OPTARG" ;;
