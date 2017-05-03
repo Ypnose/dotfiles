@@ -1,8 +1,10 @@
 #!/bin/sh
 # Script by Ypnose - http://ywstd.fr
 
+VM_IMG="$1"
+
 usage() {
-	printf "%s\n" "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-i IMG] [-m RAM] [-p PORT] [-w PORT]"
+	printf "%s\n" "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-m RAM] [-p PORT] [-w PORT] [IMG]"
 	exit
 }
 
@@ -22,12 +24,11 @@ if [ -z "$1" ]; then
 	usage
 fi
 
-while getopts ":b:f:hi:m:p:w:" opt; do
+while getopts ":b:f:hm:p:w:" opt; do
 	case $opt in
 		b) VM_ISO="$OPTARG" ;;
 		f) VM_FMT="$OPTARG" ;;
 		h) usage ;;
-		i) VM_IMG="$OPTARG" ;;
 		m) VM_RAM="$OPTARG" ;;
 		p) VM_SSH="$OPTARG" ;;
 		w) VM_WWW="$OPTARG" ;;
@@ -36,13 +37,11 @@ while getopts ":b:f:hi:m:p:w:" opt; do
 done
 shift $(( OPTIND - 1 ))
 
-if [ "$#" -ne 0 ]; then
+if [ "$#" -ne 1 ]; then
 	usage
 fi
 
-if [ -z "$VM_IMG" ]; then
-	p_err "Image not specified"
-elif [ ! -f "$VM_IMG" ]; then
+if [ ! -f "$VM_IMG" ]; then
 	p_err "$VM_IMG not found. You need to create it with qemu-img"
 fi
 
