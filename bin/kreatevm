@@ -1,8 +1,6 @@
 #!/bin/sh
 # Script by Ypnose - http://ywstd.fr
 
-VM_IMG="$1"
-
 usage() {
 	printf "%s\n" "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-m RAM] [-p PORT] [-w PORT] [IMG]"
 	exit
@@ -40,6 +38,8 @@ shift $(( OPTIND - 1 ))
 if [ "$#" -ne 1 ]; then
 	usage
 fi
+
+VM_IMG="$1"
 
 if [ ! -f "$VM_IMG" ]; then
 	p_err "$VM_IMG not found. You need to create it with qemu-img"
