@@ -1,0 +1,25 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+
+FTAG_FILE="$1"
+
+query_tag() {
+	metaflac --show-tag="$1" "$FTAG_FILE"
+}
+
+printf "%s\n" "Tagging '$FTAG_FILE'..."
+if [ "$2" = "-r" ]; then
+	metaflac --remove-all-tags "$FTAG_FILE"
+fi
+# TRACKNUMBER, ARTIST, ALBUM, TITLE, GENRE, DATE
+for t in ARTIST ALBUM TITLE; do
+	FTAG_STR="$(query_tag "$t")"
+	printf "%s [%s]? " "$t" "${FTAG_STR#*=}"
+	read FTAG_INPUT
+	if [ -n "$FTAG_INPUT" ]; then
+		metaflac --remove-tag="$t" "$FTAG_FILE"
+		metaflac --set-tag="${t}=${FTAG_INPUT}" "$FTAG_FILE"
+	fi
+done
+
+exit
