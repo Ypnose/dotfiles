@@ -34,9 +34,12 @@ PAGER=less
 LESS="-KR"
 LESSHISTFILE="-"
 
+# XDG
+XDG_CACHE_HOME="/tmp"
+
 # -- EXPORT ------------------------------------------------------------
 export RYPP_DEST RYPP_REPO PATH CDPATH MANPATH \
-	EDITOR VISUAL MAILRC PAGER LESS LESSHISTFILE
+	EDITOR VISUAL MAILRC PAGER LESS LESSHISTFILE XDG_CACHE_HOME
 
 # -- VARIOUS -----------------------------------------------------------
 unset HISTFILE
