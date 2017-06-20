@@ -1,10 +1,26 @@
 #!/bin/sh
 # Script by Ypnose - http://ywstd.fr
+# Read metaflac(1) if your brain explodes
 
 FTAG_FILE="$1"
 
 query_tag() {
-	metaflac --show-tag="$1" "$FTAG_FILE"
+	# local isn't specified by POSIX!
+	local FTAG_QUERY
+
+	FTAG_QUERY="$(metaflac --show-tag="$1" "$FTAG_FILE")"
+	printf "%s\n" "${FTAG_QUERY#*=}"
+}
+
+set_tag() {
+	# local isn't specified by POSIX!
+	local FTAG_INPUT
+
+	read FTAG_INPUT
+	if [ -n "$FTAG_INPUT" ]; then
+		metaflac --remove-tag="$1" "$FTAG_FILE"
+		metaflac --set-tag="${1}=${FTAG_INPUT}" "$FTAG_FILE"
+	fi
 }
 
 printf "%s\n" "Tagging '$FTAG_FILE'..."
@@ -13,13 +29,6 @@ if [ "$2" = "-r" ]; then
 fi
 # TRACKNUMBER, ARTIST, ALBUM, TITLE, GENRE, DATE
 for t in ARTIST ALBUM TITLE; do
-	FTAG_STR="$(query_tag "$t")"
-	printf "%s [%s]? " "$t" "${FTAG_STR#*=}"
-	read FTAG_INPUT
-	if [ -n "$FTAG_INPUT" ]; then
-		metaflac --remove-tag="$t" "$FTAG_FILE"
-		metaflac --set-tag="${t}=${FTAG_INPUT}" "$FTAG_FILE"
-	fi
+	printf "%s [%s]? " "$t" "$(query_tag "$t")"
+	set_tag "$t"
 done
-
-exit
