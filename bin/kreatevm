@@ -2,7 +2,7 @@
 # Script by Ypnose - http://ywstd.fr
 
 usage() {
-	printf "%s\n" "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-m RAM] [-p PORT] [-w PORT] [IMG]"
+	printf "%s\n" "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-m RAM] [-p SSH PORT] [-w HTTP PORT] [IMG]"
 	exit
 }
 
