@@ -2,7 +2,7 @@
 # Script by Ypnose - http://ywstd.fr
 
 usage() {
-	printf "%s\n" "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-m RAM] [-p SSH PORT] [-w HTTP PORT] [IMG]"
+	printf "%s\n" "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-m RAM] [-p SSH PORT] [-w HTTP PORT] [-s HTTPS PORT] [IMG]"
 	exit
 }
 
@@ -14,7 +14,7 @@ p_err() {
 qemu_launch() {
 	qemu-system-x86_64 -m "${VM_RAM:-512M}" -enable-kvm -vga std \
 		-drive file="$VM_IMG",format="${VM_FMT:-raw}" -net nic \
-		-net user,hostfwd=tcp::"${VM_SSH:-9922}"-:22,hostfwd=tcp::"${VM_WWW:-8080}"-:80 \
+		-net user,hostfwd=tcp::"${VM_SSH:-9922}"-:22,hostfwd=tcp::"${VM_WWW:-8080}"-:80,hostfwd=tcp::"${VM_SSL:-8443}"-:443 \
 		"$@"
 }
 
@@ -22,13 +22,14 @@ if [ -z "$1" ]; then
 	usage
 fi
 
-while getopts ":b:f:hm:p:w:" opt; do
+while getopts ":b:f:hm:p:s:w:" opt; do
 	case $opt in
 		b) VM_ISO="$OPTARG" ;;
 		f) VM_FMT="$OPTARG" ;;
 		h) usage ;;
 		m) VM_RAM="$OPTARG" ;;
 		p) VM_SSH="$OPTARG" ;;
+		s) VM_SSL="$OPTARG" ;;
 		w) VM_WWW="$OPTARG" ;;
 		*) usage ;;
 	esac
