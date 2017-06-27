@@ -14,7 +14,7 @@ p_err() {
 qemu_launch() {
 	qemu-system-x86_64 -m "${VM_RAM:-512M}" -enable-kvm -vga std \
 		-drive file="$VM_IMG",format="${VM_FMT:-raw}" -net nic \
-		-net user,hostfwd=tcp::"${VM_SSH:-9922}"-:22,hostfwd=tcp::"${VM_WWW:-8080}"-:8080 \
+		-net user,hostfwd=tcp::"${VM_SSH:-9922}"-:22,hostfwd=tcp::"${VM_WWW:-8080}"-:80 \
 		"$@"
 }
 
