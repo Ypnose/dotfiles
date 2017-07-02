@@ -69,6 +69,7 @@ ssh:
 	chmod 700 ${DESTDIR}/.ssh
 	test -f ${DESTDIR}/.ssh/config || cp ssh/config ${DESTDIR}/.ssh
 	chmod 600 ${DESTDIR}/.ssh/config
+	test -f ${DESTDIR}/.ssh/autorized_keys && chmod 600 ${DESTDIR}/.ssh/autorized_keys
 
 svn:
 	mkdir -p ${DESTDIR}/.subversion
