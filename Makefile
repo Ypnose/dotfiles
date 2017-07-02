@@ -26,18 +26,10 @@ base:
 		do test -f ${DESTDIR}/.$${o} || cp $${o} ${DESTDIR}/.$${o}; \
 	done
 
-bash:
-	cp bashrc ${DESTDIR}/.bashrc
-	cp bash_profile ${DESTDIR}/.bash_profile
-	ln -s ${DESTDIR}/.bash_profile ${DESTDIR}/.profile
-
 bin:
 	mkdir -p ${DESTDIR}/.yusr/bin
 	cp bin/scrup ${DESTDIR}/.yusr/bin
 	chmod +x ${DESTDIR}/.yusr/bin/scrup
-
-bsd:
-	cp kshrc ${DESTDIR}/.kshrc
 
 clean:
 	cd ${DESTDIR} && rm -f .bash_history .bash_logout .bash_profile \
@@ -77,4 +69,4 @@ svn:
 	cp misc/svn/servers ${DESTDIR}/.subversion
 	chmod 644 ${DESTDIR}/.subversion/servers
 
-.PHONY: all list diff newbox base bash bin bsd clean conf fonts rypp ssh svn
+.PHONY: all list diff newbox base bin clean conf fonts rypp ssh svn
