@@ -16,9 +16,6 @@ autogroup 4     Geany
 command lock    slock
 command term    uxterm
 
-# Ignore
-ignore          sxiv
-
 # Unbind
 # Disable move window (small amount)
 bind M-h        unmap
