@@ -52,6 +52,12 @@ fonts:
 	cp misc/fonts/*.pcf.gz ${DESTDIR}/.fonts/bitmaps
 	test -f ${DESTDIR}/.fonts/bitmaps/fonts.dir || cp misc/fonts/fonts.dir ${DESTDIR}/.fonts/bitmaps
 
+gpg:
+	mkdir -p ${DESTDIR}/.gnupg
+	chmod 700 ${DESTDIR}/.gnupg
+	test -f ${DESTDIR}/.gnupg/gpg.cong || cp gpg/gpg.conf ${DESTDIR}/.gnupg
+	chmod 600 ${DESTDIR}/.gnupg/*
+
 rypp:
 	curl -o ${DESTDIR}/rypp https://git.framasoft.org/Ypnose/rypp/raw/master/rypp
 	chmod +x ${DESTDIR}/rypp
@@ -69,4 +75,4 @@ svn:
 	cp misc/svn/servers ${DESTDIR}/.subversion
 	chmod 644 ${DESTDIR}/.subversion/servers
 
-.PHONY: all list diff newbox base bin clean conf fonts rypp ssh svn
+.PHONY: all list diff newbox base bin clean conf fonts gpg rypp ssh svn
