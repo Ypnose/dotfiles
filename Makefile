@@ -55,8 +55,8 @@ fonts:
 gpg:
 	mkdir -p ${DESTDIR}/.gnupg
 	chmod 700 ${DESTDIR}/.gnupg
-	test -f ${DESTDIR}/.gnupg/gpg.cong || cp gpg/gpg.conf ${DESTDIR}/.gnupg
-	chmod 600 ${DESTDIR}/.gnupg/*
+	test -f ${DESTDIR}/.gnupg/gpg.conf || cp gpg/gpg.conf ${DESTDIR}/.gnupg
+	find ${DESTDIR}/.gnupg -type f -exec chmod 600 {} +
 
 rypp:
 	curl -o ${DESTDIR}/rypp https://git.framasoft.org/Ypnose/rypp/raw/master/rypp
