@@ -16,7 +16,7 @@ list:
 diff:
 	@sh check-changes -v | yiff
 
-newbox: clean base ssh bin rypp fonts conf
+newbox: clean base ssh bin rypp gpg fonts conf
 
 ####################
 
