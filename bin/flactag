@@ -23,6 +23,26 @@ set_tag() {
 	fi
 }
 
+set_chapter() {
+	# local isn't specified by POSIX!
+	local FTAG_CHAPTNUM
+	local FTAG_TIME
+	local FTAG_NAME
+
+	while true; do
+		printf "CHAPTER? "
+		read FTAG_CHAPTNUM
+		if [ -n "$FTAG_CHAPTNUM" ]; then
+			FTAG_TIME="$(query_tag "CHAPTER${FTAG_CHAPTNUM}")"
+			FTAG_NAME="$(query_tag "CHAPTER${FTAG_CHAPTNUM}NAME")"
+			printf " TIME [%s]? " "$FTAG_TIME"
+			set_tag "CHAPTER${FTAG_CHAPTNUM}"
+			printf " NAME [%s]? " "$FTAG_NAME"
+			set_tag "CHAPTER${FTAG_CHAPTNUM}NAME"
+		fi
+	done
+}
+
 printf "%s\n" "Tagging '$FTAG_FILE'..."
 if [ "$2" = "-r" ]; then
 	metaflac --remove-all-tags "$FTAG_FILE"
@@ -32,3 +52,10 @@ for t in ARTIST ALBUM TITLE; do
 	printf "%s [%s]? " "$t" "$(query_tag "$t")"
 	set_tag "$t"
 done
+
+# Too lazy to use getopts...
+if [ "$2" = "-c" ]; then
+	set_chapter
+fi
+
+exit
