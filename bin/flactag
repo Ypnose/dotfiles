@@ -43,6 +43,11 @@ set_chapter() {
 	done
 }
 
+if [ -z "$1" ] || [ "$1" = "-h" ]; then
+	printf "usage: %s [FLAC FILE]\n" "${0##*/}"
+	exit
+fi
+
 printf "%s\n" "Tagging '$FTAG_FILE'..."
 if [ "$2" = "-r" ]; then
 	metaflac --remove-all-tags "$FTAG_FILE"
