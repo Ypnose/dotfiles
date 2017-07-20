@@ -29,7 +29,7 @@ xkb_symbols "basic" {
     key <AD02> { [             w,          W                           ] };  // w W
     key <AD03> { [             e,          E,     eacute, Eacute       ] };  // e E é É
     key <AD04> { [             r,          R, registered, copyright    ] };  // r R ® ©
-    key <AD05> { [             t,          T                           ] };  // t T
+    key <AD05> { [             t,          T,  trademark, NoSymbol     ] };  // t T ™
     key <AD06> { [             y,          Y                           ] };  // y Y
     key <AD07> { [             u,          U,     ugrave, Ugrave       ] };  // u U ù Ù
     key <AD08> { [             i,          I                           ] };  // i I
@@ -43,7 +43,7 @@ xkb_symbols "basic" {
     key <AC03> { [          d,          D                              ] };  // d D
     key <AC04> { [          f,          F                              ] };  // f F
     key <AC05> { [          g,          G                              ] };  // g G
-    key <AC06> { [          h,          H                              ] };  // h H
+    key <AC06> { [          h,          H,           heart, NoSymbol   ] };  // h H ♥
     key <AC07> { [          j,          J                              ] };  // j J
     key <AC08> { [          k,          K                              ] };  // k K
     key <AC09> { [          l,          L                              ] };  // l L
