@@ -46,7 +46,7 @@ if [ ! -f "$VM_IMG" ]; then
 	p_err "$VM_IMG not found. You need to create it with qemu-img"
 fi
 
-if ! grep -q 'kvm' /proc/modules; then
+if ! grep -q '^kvm' /proc/modules; then
 	p_err "kvm module is not loaded"
 fi
 
