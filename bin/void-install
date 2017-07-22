@@ -43,7 +43,7 @@ xbps-install -S -R "$VO_REPURL" -r "$VO_CHROOT" base-files ncurses \
 	runit-void
 
 # /etc/fstab
-VO_OSUUID="$(lsblk -no UUID /dev/${VO_OSDISK})"
+VO_OSUUID="$(lsblk -no UUID /dev/${VO_OSDISK}1)"
 cat >"${VO_CHROOT}/etc/fstab" <<-EOF
 	# /etc/fstab
 
