@@ -55,7 +55,7 @@ cat >"${DE_CHROOT}/etc/apt/apt.conf.d/99yp" <<-EOF
 EOF
 
 # /etc/fstab
-DE_OSUUID="$(lsblk -no UUID /dev/${DE_OSDISK})"
+DE_OSUUID="$(lsblk -no UUID /dev/${DE_OSDISK}1)"
 cat >"${DE_CHROOT}/etc/fstab" <<-EOF
 	# /etc/fstab
 
