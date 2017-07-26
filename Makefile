@@ -55,7 +55,7 @@ fonts:
 gpg:
 	mkdir -p ${DESTDIR}/.gnupg
 	chmod 700 ${DESTDIR}/.gnupg
-	test -f ${DESTDIR}/.gnupg/gpg.conf || cp gpg/gpg.conf ${DESTDIR}/.gnupg
+	cp gpg/gpg.conf ${DESTDIR}/.gnupg
 	find ${DESTDIR}/.gnupg -type f -exec chmod 600 {} +
 
 rypp:
