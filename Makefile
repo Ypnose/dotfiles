@@ -2,8 +2,8 @@
 # Ypnose - http://ywstd.fr
 
 DESTDIR ?= dest
-REQFILE = jupprc mkshrc profile terminfo.cdb tmux.conf
-OPTFILE = aliases cwmrc gitconfig xinitrc Xresources
+REQFILE = aliases cwmrc jupprc mkshrc profile terminfo.cdb tmux.conf
+OPTFILE = gitconfig xinitrc Xresources
 
 ####################
 
