@@ -53,7 +53,7 @@ if [ "$2" = "-r" ]; then
 	metaflac --remove-all-tags "$FTAG_FILE"
 fi
 # TRACKNUMBER, ARTIST, ALBUM, TITLE, GENRE, DATE
-for t in ARTIST ALBUM TITLE; do
+for t in ARTIST TITLE ALBUM; do
 	printf "%s [%s]? " "$t" "$(query_tag "$t")"
 	set_tag "$t"
 done
