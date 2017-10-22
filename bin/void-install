@@ -7,6 +7,7 @@ VO_HOSTNA="$2"
 VO_HOSTNA="${VO_HOSTNA:-ypnbox}"
 VO_CHROOT="syschroot"
 VO_REPURL="http://repo3.voidlinux.eu/current/"
+#VO_OSUEFI="1"
 
 ##############################
 
@@ -35,6 +36,12 @@ elif ! mount | grep -q "^/dev/${VO_OSDISK}"; then
 	exit 1
 fi
 
+# Verify we booted in EFI
+if [ "$VO_OSUEFI" = "1" ] && [ ! -d /sys/firmware/efi/ ]; then
+	printf "%s\n" "The system has not booted in EFI mode" >&2
+	exit 1
+fi
+
 # Launch the xbps sauce
 xbps-install -S -R "$VO_REPURL" -r "$VO_CHROOT" base-files ncurses \
 	coreutils findutils diffutils libgcc dash bash grep gzip file sed \
@@ -43,10 +50,17 @@ xbps-install -S -R "$VO_REPURL" -r "$VO_CHROOT" base-files ncurses \
 	runit-void
 
 # /etc/fstab
-VO_OSUUID="$(lsblk -no UUID /dev/${VO_OSDISK}1)"
-cat >"${VO_CHROOT}/etc/fstab" <<-EOF
-	# /etc/fstab
-
+printf "%s\n\n" "# /etc/fstab" >"${VO_CHROOT}/etc/fstab"
+# UEFI partition
+if [ "$VO_OSUEFI" = "1" ]; then
+	VO_OSPART="2"
+	printf "UUID=%s /boot/efi vfat umask=0077 0 1\n" \
+		"$(lsblk -no UUID /dev/${VO_OSDISK}1)" >>"${VO_CHROOT}/etc/fstab"
+	mkdir -p "${VO_CHROOT}/boot/efi"
+fi
+# Other partitions
+VO_OSUUID="$(lsblk -no UUID /dev/${VO_OSDISK}${VO_OSPART:-1})"
+cat >>"${VO_CHROOT}/etc/fstab" <<-EOF
 	UUID=${VO_OSUUID} / ext4 defaults,rw,errors=remount-ro 0 1
 	#UUID=SWAP        none swap defaults 0 0
 	tmpfs /tmp tmpfs nodev,nosuid 0 0
@@ -104,6 +118,9 @@ mount -t proc proc "${VO_CHROOT}/proc"
 mount -t sysfs sys "${VO_CHROOT}/sys"
 mount -o bind /dev "${VO_CHROOT}/dev"
 mount -o bind /dev/pts "${VO_CHROOT}/dev/pts"
+if [ "$VO_OSUEFI" = "1" ]; then
+	mount "/dev/${VO_OSDISK}1" "${VO_CHROOT}/boot/efi"
+fi
 
 # Run commands inside the chroot
 chroot "${VO_CHROOT}" /bin/sh -l <<-EOF
@@ -120,6 +137,9 @@ chroot "${VO_CHROOT}" /bin/sh -l
 
 ##############################
 
+if [ "$VO_OSUEFI" = "1" ]; then
+	umount "${VO_CHROOT}/boot/efi"
+fi
 umount "${VO_CHROOT}/dev/pts" "${VO_CHROOT}/dev" "${VO_CHROOT}/sys" "${VO_CHROOT}/proc"
 printf "%s\n" "DONE"
 
