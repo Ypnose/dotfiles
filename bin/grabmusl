@@ -2,7 +2,7 @@
 # Script by Ypnose - http://ywstd.fr
 set -e
 
-REQ_MUSL="1.1.16"
+REQ_MUSL="1.1.18"
 REQ_KERN="4.4.35"
 REQ_DEST="${PWD}/musl-cc"
 
