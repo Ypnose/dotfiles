@@ -53,7 +53,7 @@ xbps-install -S -R "$VO_REPURL" -r "$VO_CHROOT" base-files ncurses \
 printf "%s\n\n" "# /etc/fstab" >"${VO_CHROOT}/etc/fstab"
 # UEFI partition
 if [ "$VO_OSUEFI" = "1" ]; then
-	VO_OSPART="2"
+	VO_OSPART="3"
 	printf "UUID=%s /boot/efi vfat umask=0077 0 1\n" \
 		"$(lsblk -no UUID /dev/${VO_OSDISK}1)" >>"${VO_CHROOT}/etc/fstab"
 	mkdir -p "${VO_CHROOT}/boot/efi"
