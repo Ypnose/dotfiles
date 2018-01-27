@@ -60,7 +60,7 @@ fi
 
 # Check rsync(1) man page for pattern rules
 # With '--files-from', '-r' needs to be specified explicitly
-rsync -ahrvHX --delete --delete-delay --exclude="Desktop/" \
+rsync -ahrvHX --checksum --delete --delete-delay --exclude="Desktop/" \
 	--exclude="Downloads/" --exclude=".gnupg/random_seed" \
 	--exclude=".gnupg/S.*" --exclude="musl-cc/" --exclude="*.qcow2" \
 	--exclude=".yusr/bin/" \
