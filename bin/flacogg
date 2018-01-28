@@ -1,0 +1,27 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+
+OGG_FILE="${1##*/}"
+OGG_FILE="${OGG_FILE%%.flac}"
+OGG_BITRATE="320"
+
+if [ -z "$1" ] || [ "$1" = "-h" ]; then
+	printf "usage: %s [FLAC FILE]\n" "${0##*/}"
+	exit
+fi
+
+# Verify it is a valid FLAC file
+if [ "${1##*.}" != "flac" ] \
+	|| ! metaflac --list --block-type=VORBIS_COMMENT "$1" >/dev/null 2>&1; then
+		# The file does not appear to be a FLAC file
+		printf "%s\n" "Invalid FLAC file"
+		exit 1
+fi
+
+# FLAC comments are automatically preserved by oggenc
+if oggenc "$1" -b "$OGG_BITRATE" -o "${OGG_FILE}.ogg"; then
+	# Verify with ogginfo
+	ogginfo "${OGG_FILE}.ogg"
+fi
+
+exit
