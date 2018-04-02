@@ -62,7 +62,8 @@ fi
 # With '--files-from', '-r' needs to be specified explicitly
 rsync -ahrvHX --checksum --delete --delete-delay --exclude="Desktop/" \
 	--exclude="Downloads/" --exclude=".gnupg/random_seed" \
-	--exclude=".gnupg/S.*" --exclude="musl-cc/" --exclude="*.qcow2" \
+	--exclude=".gnupg/S.*" --exclude="musl-cc/" \
+	--exclude="*.dump" --exclude="*.qcow2" --exclude="*.raw" \
 	--exclude=".yusr/bin/" \
 	--files-from="$BACK_INCL" \
 	--log-file="${BACK_DEST}/rsync-${BACK_DATE}.log" \
