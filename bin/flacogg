@@ -3,10 +3,26 @@
 
 OGG_FILE="${1##*/}"
 OGG_FILE="${OGG_FILE%%.flac}"
-OGG_BITRATE="320"
+OGG_BITRATE="192"
+
+ogg_opus() {
+	# FLAC comments are automatically preserved by opusenc
+	if opusenc --bitrate "$OGG_BITRATE" "$1" "${OGG_FILE}.ogg"; then
+		# Verify with opusinfo
+		opusinfo "${OGG_FILE}.ogg"
+	fi
+}
+
+ogg_vorbis() {
+	# FLAC comments are automatically preserved by oggenc
+	if oggenc "$1" -b "$OGG_BITRATE" -o "${OGG_FILE}.ogg"; then
+		# Verify with ogginfo
+		ogginfo "${OGG_FILE}.ogg"
+	fi
+}
 
 if [ -z "$1" ] || [ "$1" = "-h" ]; then
-	printf "usage: %s [FLAC FILE]\n" "${0##*/}"
+	printf "usage: %s [FLAC FILE] [-v]\n" "${0##*/}"
 	exit
 fi
 
@@ -18,10 +34,10 @@ if [ "${1##*.}" != "flac" ] \
 		exit 1
 fi
 
-# FLAC comments are automatically preserved by oggenc
-if oggenc "$1" -b "$OGG_BITRATE" -o "${OGG_FILE}.ogg"; then
-	# Verify with ogginfo
-	ogginfo "${OGG_FILE}.ogg"
+if [ "$2" = "-v" ]; then
+	ogg_vorbis "$1"
+else
+	ogg_opus "$1"
 fi
 
 exit
