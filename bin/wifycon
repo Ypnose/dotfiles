@@ -36,13 +36,13 @@ function get_con {
 	ip link set dev "$W_INF" up
 	wpa_supplicant -i "$W_INF" -B -c "$W_CON"
 	if (( W_NIP != 1 )); then
-		dhcpcd "$W_INF"
+		dhcpcd -C wpa_supplicant "$W_INF"
 	fi
 }
 
 function end_con {
 	chk_inf
-	if pgrep -f "dhcpcd $W_INF" >/dev/null 2>&1; then
+	if pgrep -f "dhcpcd -C wpa_supplicant $W_INF" >/dev/null 2>&1; then
 		dhcpcd -x "$W_INF"
 	fi
 	# Make sure addresses are purged
