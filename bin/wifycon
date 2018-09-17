@@ -33,6 +33,7 @@ function get_con {
 	if [[ -x $(whence -p rfkill) ]]; then
 		rfkill unblock wlan
 	fi
+	ip link set dev "$W_INF" up
 	wpa_supplicant -i "$W_INF" -B -c "$W_CON"
 	if (( W_NIP != 1 )); then
 		dhcpcd "$W_INF"
