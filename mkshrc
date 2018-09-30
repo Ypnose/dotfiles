@@ -55,6 +55,16 @@ function pad {
 	if [[ $1 = "ls" ]]; then ls "$N_DIR"; return; fi
 	"$EDITOR" "${N_DIR}/${1:-DEFAULT}"
 }
+function shadate {
+	# GNU date(1)
+	if (( ${#1} == 5 )); then
+		date -d @"$(( $1 * 86400 ))"
+	elif (( ${#1} == 8 )); then
+		print -r -- "$(( $(date -d "$1" '+%s') / 86400 ))"
+	else
+		print -r -- "$(( $(date '+%s') / 86400 ))"
+	fi
+}
 function whatfile {
 	LC_ALL=C diff -rq "$@" | grep '^Only '
 }
