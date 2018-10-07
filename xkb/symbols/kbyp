@@ -56,15 +56,15 @@ xkb_symbols "basic" {
     key <LSGT> { [ backslash,      bar                                 ] };  // \ |
     key <AB01> { [         z,        Z                                 ] };  // z Z
     key <AB02> { [         x,        X                                 ] };  // x X
-    key <AB03> { [         c,        C, ccedilla, Ccedilla             ] };  // c C ç Ç
+    key <AB03> { [         c,        C,  ccedilla, Ccedilla            ] };  // c C ç Ç
     key <AB04> { [         v,        V                                 ] };  // v V
     key <AB05> { [         b,        B                                 ] };  // b B
     key <AB06> { [         n,        N                                 ] };  // n N
     key <AB07> { [         m,        M                                 ] };  // m M
     key <AB08> { [     comma,     less                                 ] };  // , <
-    key <AB09> { [    period,  greater, ellipsis, NoSymbol             ] };  // . > …
-    key <AB10> { [     slash, question                                 ] };  // / ?
-    key <TLDE> { [     grave,  notsign,      bar, NoSymbol             ] };  // ` ¬ |
+    key <AB09> { [    period,  greater,  ellipsis, NoSymbol            ] };  // . > …
+    key <AB10> { [     slash, question, backslash, NoSymbol            ] };  // / ? \
+    key <TLDE> { [     grave,  notsign,       bar, NoSymbol            ] };  // ` ¬ |
 
     // IGNORE KEY (XKBCOMP OUTPUT)
     key <AB11> { [  NoSymbol, NoSymbol                                 ] };
