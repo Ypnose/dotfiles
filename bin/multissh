@@ -1,7 +1,7 @@
 #!/bin/mksh
 # Script by Ypnose - http://ywstd.fr
 
-MSSH_FILE="${HOME}/Dev/clusters"
+MSSH_FILE="${HOME}/.clusters"
 
 function file_group {
 	typeset MSSH_LINE MSSH_READ
