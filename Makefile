@@ -2,7 +2,7 @@
 # Ypnose - http://ywstd.fr
 
 DESTDIR ?= dest
-REQFILE = aliases cwmrc jupprc mkshrc profile terminfo.cdb tmux.conf
+REQFILE = aliases cwmrc mkshrc profile terminfo.cdb tmux.conf
 OPTFILE = gitconfig xinitrc Xresources
 
 ####################
@@ -57,6 +57,7 @@ gpg:
 	chmod 700 ${DESTDIR}/.gnupg
 	cp gpg/gpg.conf ${DESTDIR}/.gnupg
 	find ${DESTDIR}/.gnupg -type f -exec chmod 600 {} +
+	chmod 400 ${DESTDIR}/.gnupg/gpg.conf
 
 rypp:
 	curl -o ${DESTDIR}/rypp https://git.framasoft.org/Ypnose/rypp/raw/master/rypp
