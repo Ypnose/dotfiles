@@ -37,7 +37,7 @@ bind-key M-4        group-only-4
 bind-key M-5        group-only-5
 bind-key M-6        group-only-6
 # Meta + *
-bind-key M-e        menu-exec
+bind-key M-e        "rofi -show run"
 bind-key M-h        window-fullscreen
 bind-key M-k        window-cycle
 bind-key M-Return   window-maximize
