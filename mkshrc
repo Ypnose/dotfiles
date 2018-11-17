@@ -73,3 +73,4 @@ function whatfile {
 
 # -- ALIASES -----------------------------------------------------------
 [[ -r ${HOME}/.aliases ]] && . "${HOME}/.aliases"
+[[ -r ${HOME}/.aliases.local ]] && . "${HOME}/.aliases.local"
