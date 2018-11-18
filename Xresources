@@ -7,16 +7,19 @@
 !URxvt*font:      -*-envypn-medium-*-*-*-15-*-*-*-*-*-*-*
 !URxvt*boldFont:  -*-envypn-medium-*-*-*-15-*-*-*-*-*-*-*
 
-URxvt*font:      -*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*
-URxvt*boldFont:  -*-terminus-bold-*-*-*-16-*-*-*-*-*-*-*
+!URxvt*font:      -*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*
+!URxvt*boldFont:  -*-terminus-bold-*-*-*-16-*-*-*-*-*-*-*
+
+URxvt*font:      xft:Ubuntu Mono:size=12:antialias=true
+URxvt*boldFont:  xft:Ubuntu Mono:bold:size=12:antialias=true
 
 xterm*font:      -*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*
 xterm*boldfont:  -*-terminus-bold-*-*-*-16-*-*-*-*-*-*-*
 
 ! -- URxvt -------------------------------------------------------------
 URxvt*cursorBlink:      true
-URxvt*geometry:         80x17
-URxvt*internalBorder:   24
+URxvt*geometry:         80x24
+URxvt*internalBorder:   10
 URxvt*perl-ext-common:  default,matcher
 URxvt*print-pipe:       cat >>"/tmp/urxvt.out"
 URxvt*saveLines:        200
@@ -25,7 +28,7 @@ URxvt*termName:         rxvt-unicode
 
 ! -- XTerm -------------------------------------------------------------
 xterm*cursorBlink:      true
-xterm*internalBorder:   24
+xterm*internalBorder:   10
 xterm*locale:           true
 xterm*scrollBar:        false
 xterm*utf8:             2
