@@ -7,7 +7,7 @@ VO_HOSTNA="$2"
 VO_HOSTNA="${VO_HOSTNA:-ypnbox}"
 VO_CHROOT="syschroot"
 VO_REPURL="http://repo.voidlinux.eu/current/"
-#VO_OSUEFI="1"
+VO_OSUEFI="1"
 
 ##############################
 
