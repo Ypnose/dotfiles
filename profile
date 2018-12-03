@@ -15,11 +15,7 @@ MANPATH=":${RYPP_DEST}/man"
 
 # -- ENVIRONMENT -------------------------------------------------------
 # EDITOR
-if [[ -x $(whence -p jupp) ]]; then
-	EDITOR=jupp
-else
-	EDITOR=vi
-fi
+EDITOR=vi
 VISUAL="$EDITOR"
 
 # {N,M}AILRC
