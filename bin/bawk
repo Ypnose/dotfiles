@@ -1,0 +1,92 @@
+#!/usr/bin/awk -f
+# Script by Ypnose - http://ywstd.fr
+
+# File format:
+# ="XXXXXXXXXXXXXXXX";DD/MM/YEAR;DD/MM/YEAR;NUMBER OF LINES;DD/MM/YEAR;MONEY EUR
+# DD/MM/YEAR;CARD XXXXX DD/MM ;CARD XXXX DD/MM SUPERMARKET    ;-XX,XX;EUR
+
+BEGIN {
+	FS = ";"
+	def   = "\033[0m"
+	red   = "\033[31m"
+	blue  = "\033[1;34m"
+	bred  = "\033[1;31m"
+	bgred = "\033[1;41;37m"
+	green = "\033[32m"
+}
+
+{
+	# Remove double spaces
+	gsub(/ +/," ")
+
+	# Print current amount in bank
+	if (NR == 1 && $0 ~/^=.* EUR/) {
+		# Replace comma by period for floating point arithmetic
+		gsub(/\,/,".")
+		current = $NF
+		printf("Current amount of money: %.2f€\n", current)
+		next
+	}
+
+	if ($0 ~ /^[0123][0-9]/) {
+		date = $1
+		# Extract year, month and day
+		split(date,d,"/")
+		year =  d[3]
+		month = d[2]
+		day =   d[1]
+		# Detect year and display it if it changed
+		if (year != prevyear)
+			printf("# %s%i%s #\n", blue, year, def)
+		prevyear = year
+
+		detail = $3
+
+		amount = $4
+		if (amount ~ /^-/) {
+			debit = 1
+			arrow = "<"
+			color = red
+		} else {
+			debit = 0
+			arrow = ">"
+			color = green
+		}
+		# Remove unnecessary minus sign
+		gsub(/^-/,"",amount)
+		# Replace comma by period for floating point arithmetic
+		gsub(/\,/,".",amount)
+		# Visual alerts if amount paid is more than usual
+		if (debit == 1 && int(amount) >= 35) {
+			color = bred
+			alert = " !!"
+		} else
+			alert = ""
+		# Format trade variable
+		trade = sprintf("%s%s%9.2f%s", arrow, color, amount, def)
+		# Print first status part
+		printf(" %s/%s: %-134s %s", month, day, detail, trade)
+		# Jump to next line if it's not a debit
+		if (debit == 0) {
+			printf("\n")
+			next
+		}
+
+		# Display money spent per day
+		if (day != prevday)
+			daypaid = 0
+		daypaid = daypaid + amount
+		if (int(daypaid) >= 50)
+			perday = sprintf("%s%8.2f%s", bgred, daypaid, def)
+		else
+			perday = sprintf("%8.2f", daypaid)
+		prevday = day
+		# Display money available in account
+		current = current + amount
+		money = sprintf("[%.2f]", current)
+
+		# Final status part
+		printf(" %s%11s%s\n", perday, money, alert)
+		next
+	}
+}
