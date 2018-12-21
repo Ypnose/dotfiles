@@ -13,6 +13,8 @@ BEGIN {
 	bred  = "\033[1;31m"
 	bgred = "\033[1;41;37m"
 	green = "\033[32m"
+	maxamount = 35
+	maxperday = 50
 }
 
 {
@@ -60,7 +62,7 @@ BEGIN {
 		# Replace comma by period for floating point arithmetic
 		gsub(/\,/,".",amount)
 		# Visual alerts if amount paid is more than usual
-		if (debit == 1 && int(amount) >= 35) {
+		if (debit == 1 && int(amount) >= maxamount) {
 			color = bred
 			alert = " !!"
 		} else
@@ -79,7 +81,7 @@ BEGIN {
 		if (day != prevday)
 			daypaid = 0
 		daypaid = daypaid + amount
-		if (int(daypaid) >= 50)
+		if (int(daypaid) >= maxperday)
 			perday = sprintf("%s%8.2f%s", bgred, daypaid, def)
 		else
 			perday = sprintf("%8.2f", daypaid)
