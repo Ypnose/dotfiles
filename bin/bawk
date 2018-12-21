@@ -13,6 +13,7 @@ BEGIN {
 	bred  = "\033[1;31m"
 	bgred = "\033[1;41;37m"
 	green = "\033[32m"
+	maxlength = 135
 	maxamount = 35
 	maxperday = 50
 }
@@ -46,6 +47,11 @@ BEGIN {
 			printf("-------\n")
 
 		detail = $3
+		# Remove useless space at the end
+		gsub(/ $/,"",detail)
+		# Limit string length
+		if (length(detail) >= maxlength)
+			detail = sprintf("%.*s", maxlength, detail)
 
 		amount = $4
 		if (amount ~ /^-/) {
@@ -70,7 +76,7 @@ BEGIN {
 		# Format trade variable
 		trade = sprintf("%s%s%9.2f%s", arrow, color, amount, def)
 		# Print first status part
-		printf(" %s/%s: %-134s %s", month, day, detail, trade)
+		printf(" %s/%s: %-*s %s", month, day, maxlength, detail, trade)
 		# Jump to next line if it's not a debit
 		if (debit == 0) {
 			printf("\n")
