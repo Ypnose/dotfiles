@@ -39,6 +39,9 @@ BEGIN {
 		if (year != prevyear)
 			printf("# %s%i%s #\n", blue, year, def)
 		prevyear = year
+		# Separate days visually
+		if (day != prevday)
+			printf("-------\n")
 
 		detail = $3
 
