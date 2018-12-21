@@ -35,9 +35,9 @@ BEGIN {
 		date = $1
 		# Extract year, month and day
 		split(date,d,"/")
-		year =  d[3]
+		year  = d[3]
 		month = d[2]
-		day =   d[1]
+		day   = d[1]
 		# Detect year and display it if it changed
 		if (year != prevyear)
 			printf("# %s%i%s #\n", blue, year, def)
