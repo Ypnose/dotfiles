@@ -16,6 +16,7 @@ BEGIN {
 	maxlength = 135
 	maxamount = 35
 	maxperday = 50
+	count = 0
 }
 
 {
@@ -92,12 +93,15 @@ BEGIN {
 		else
 			perday = sprintf("%8.2f", daypaid)
 		prevday = day
-		# Display money available in account
+		# Display available money
 		current = current + amount
 		money = sprintf("[%.2f]", current)
+		# Count money spent
+		count = count + amount
+		spent = sprintf("[%.2f]", count)
 
 		# Final status part
-		printf(" %s%11s%s\n", perday, money, alert)
+		printf(" %s%11s%11s%s\n", perday, spent, money, alert)
 		next
 	}
 }
