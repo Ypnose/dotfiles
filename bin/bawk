@@ -76,7 +76,7 @@ BEGIN {
 		# Format trade variable
 		trade = sprintf("%s%s%9.2f%s", arrow, color, amount, def)
 		# Print first status part
-		printf(" %s/%s: %-*s %s", month, day, maxlength, detail, trade)
+		printf(" %s/%s: %-*s %s", day, month, maxlength, detail, trade)
 		# Jump to next line if it's not a debit
 		if (debit == 0) {
 			printf("\n")
