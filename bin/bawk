@@ -93,12 +93,12 @@ BEGIN {
 		else
 			perday = sprintf("%8.2f", daypaid)
 		prevday = day
-		# Display available money
-		current = current + amount
-		money = sprintf("[%.2f]", current)
 		# Count money spent
 		count = count + amount
 		spent = sprintf("[%.2f]", count)
+		# Display available money
+		current = current + amount
+		money = sprintf("[%.2f]", current)
 
 		# Final status part
 		printf(" %s%11s%11s%s\n", perday, spent, money, alert)
