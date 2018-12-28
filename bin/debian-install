@@ -55,12 +55,12 @@ cat >"${DE_CHROOT}/etc/apt/apt.conf.d/99yp" <<-EOF
 EOF
 
 # /etc/fstab
-DE_OSUUID="$(lsblk -no UUID /dev/${DE_OSDISK}1)"
+DE_OSUUID="$(lsblk -no UUID /dev/${DE_OSDISK}2)"
 cat >"${DE_CHROOT}/etc/fstab" <<-EOF
 	# /etc/fstab
 
-	UUID=${DE_OSUUID} / ext4 defaults,rw,errors=remount-ro 0 1
 	#UUID=SWAP        none swap defaults 0 0
+	UUID=${DE_OSUUID} / ext4 defaults,rw,errors=remount-ro 0 1
 	tmpfs /tmp tmpfs nodev,nosuid 0 0
 EOF
 
