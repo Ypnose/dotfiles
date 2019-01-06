@@ -47,8 +47,11 @@ conf:
 fonts:
 	mkdir -p ${DESTDIR}/.config/fontconfig
 	cp misc/fonts/fonts.conf ${DESTDIR}/.config/fontconfig
+	mkdir -p ${DESTDIR}/.config/gtk-3.0
+	cp misc/fonts/settings.ini ${DESTDIR}/.config/gtk-3.0
+	cp misc/fonts/gtkrc-2.0 ${DESTDIR}/.gtkrc-2.0
 	mkdir -p ${DESTDIR}/.fonts/bitmaps
-	cp misc/fonts/*.ttf ${DESTDIR}/.fonts
+	cp misc/fonts/*.*tf ${DESTDIR}/.fonts
 	cp misc/fonts/*.pcf.gz ${DESTDIR}/.fonts/bitmaps
 	test -f ${DESTDIR}/.fonts/bitmaps/fonts.dir || cp misc/fonts/fonts.dir ${DESTDIR}/.fonts/bitmaps
 
