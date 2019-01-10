@@ -3,9 +3,6 @@
 # author:   Ypnose - http://ywstd.fr                                   +
 # ---------------------------------------------------------------------+
 
-app     Navigator
-vdesk   1
-
 bw      3
 fn      -*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*
 mask1   shift+alt
