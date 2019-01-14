@@ -71,8 +71,8 @@ printf "%s\n" "$VO_HOSTNA" >"${VO_CHROOT}/etc/hostname"
 cat >"${VO_CHROOT}/etc/hosts" <<-EOF
 	# /etc/hosts
 
-	127.0.0.1    localhost
-	127.0.1.1    $VO_HOSTNA
+	127.0.0.1     localhost
+	127.0.1.1     $VO_HOSTNA
 
 	# IPv6
 	#::1          ip6-localhost ip6-loopback
