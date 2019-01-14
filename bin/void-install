@@ -3,43 +3,47 @@
 set -e
 
 VO_OSDISK="$1"
-VO_HOSTNA="$2"
-VO_HOSTNA="${VO_HOSTNA:-ypnbox}"
+VO_OSPART="$2"
+VO_HOSTNA="$3"
 VO_CHROOT="syschroot"
 VO_REPURL="http://alpha.de.repo.voidlinux.org/current"
 VO_OSUEFI="1"
+VO_OSLUKS="1"
+# With UEFI, we assume ESP is the first partition
+VO_SYSESP="${VO_OSDISK}1"
+# With UEFI and LUKS, we assume /boot is the second partition
+VO_OSBOOT="${VO_OSDISK}2"
 
 ##############################
 
-# 1 = / | 2 = swap | 3 = other
-if [ -z "$1" ] || [ "$1" = "-h" ]; then
-	printf "%s\n" "usage: ${0##*/} [DISK] [HOSTNAME]"
+p_err() {
+	printf "%s\n" "$1" >&2
+	exit 1
+}
+
+if [ "$#" -ne 3 ] || [ "$1" = "-h" ]; then
+	printf "usage: %s [DISK] [OS] [HOSTNAME]\n" "${0##*/}"
 	exit
 fi
 
 if [ ! -x "$(command -v xbps-install)" ]; then
-	printf "%s\n" "xbps-install not found" >&2
-	exit 1
+	p_err "xbps-install not found"
 fi
 
 # Verify destination filesystem is mounted
 if [ ! -d "$VO_CHROOT" ]; then
-	printf "%s\n" "$VO_CHROOT directory is missing" >&2
-	exit 1
-elif ! mount | grep -q "^/dev/${VO_OSDISK}"; then
-	printf "%s\n" "/dev/${VO_OSDISK} is not mounted inside $VO_CHROOT" >&2
-	exit 1
+	p_err "$VO_CHROOT directory is missing"
+elif ! mount | grep -q "^${VO_OSPART}"; then
+	p_err "$VO_OSPART is not mounted inside $VO_CHROOT"
 fi
 
 # Verify we booted in EFI
 if [ "$VO_OSUEFI" = "1" ] && [ ! -d /sys/firmware/efi/ ]; then
-	printf "%s\n" "The system has not booted in EFI mode" >&2
-	exit 1
+	p_err "The system has not booted in EFI mode"
 fi
 
 if [ "$(id -u)" -ne 0 ]; then
-	printf "%s\n" "${0##*/} needs to be called as root" >&2
-	exit 1
+	p_err "${0##*/} needs to be called as root"
 fi
 
 # Launch the xbps sauce
@@ -53,15 +57,18 @@ xbps-install -S -R "$VO_REPURL" -r "$VO_CHROOT" base-files ncurses \
 printf "%s\n\n%s\n" \
 	"# /etc/fstab" \
 	"tmpfs /tmp tmpfs nodev,nosuid 0 0" >"${VO_CHROOT}/etc/fstab"
-# UEFI partition
+# Boot partitions
 if [ "$VO_OSUEFI" = "1" ]; then
-	VO_OSPART="3"
-	printf "UUID=%s /boot/efi vfat umask=0077 0 1\n" \
-		"$(lsblk -no UUID /dev/${VO_OSDISK}1)" >>"${VO_CHROOT}/etc/fstab"
+	printf "UUID=%s /boot/efi vfat umask=0077 0 2\n" \
+		"$(lsblk -no UUID "$VO_SYSESP")" >>"${VO_CHROOT}/etc/fstab"
 	mkdir -p "${VO_CHROOT}/boot/efi"
+	if [ "$VO_OSLUKS" = "1" ]; then
+		printf "UUID=%s /boot ext4 defaults,rw,errors=remount-ro 0 2\n" \
+		"$(lsblk -no UUID "$VO_OSBOOT")" >>"${VO_CHROOT}/etc/fstab"
+	fi
 fi
 # Other partitions
-VO_OSUUID="$(lsblk -no UUID /dev/${VO_OSDISK}${VO_OSPART:-1})"
+VO_OSUUID="$(lsblk -no UUID "$VO_OSPART")"
 cat >>"${VO_CHROOT}/etc/fstab" <<-EOF
 	#UUID=SWAP        none swap defaults 0 0
 	UUID=${VO_OSUUID} / ext4 defaults,rw,errors=remount-ro 0 1
@@ -120,7 +127,10 @@ mount -t sysfs sys "${VO_CHROOT}/sys"
 mount -o bind /dev "${VO_CHROOT}/dev"
 mount -o bind /dev/pts "${VO_CHROOT}/dev/pts"
 if [ "$VO_OSUEFI" = "1" ]; then
-	mount "/dev/${VO_OSDISK}1" "${VO_CHROOT}/boot/efi"
+	if [ "$VO_OSLUKS" = "1" ]; then
+		mount "$VO_OSBOOT" "${VO_CHROOT}/boot"
+	fi
+	mount "$VO_SYSESP" "${VO_CHROOT}/boot/efi"
 fi
 
 # Run commands inside the chroot
@@ -138,8 +148,12 @@ chroot "${VO_CHROOT}" /bin/sh -l
 
 ##############################
 
+sync
 if [ "$VO_OSUEFI" = "1" ]; then
 	umount "${VO_CHROOT}/boot/efi"
+	if [ "$VO_OSLUKS" = "1" ]; then
+		umount "${VO_CHROOT}/boot"
+	fi
 fi
 umount "${VO_CHROOT}/dev/pts" "${VO_CHROOT}/dev" "${VO_CHROOT}/sys" "${VO_CHROOT}/proc"
 printf "%s\n" "DONE"
