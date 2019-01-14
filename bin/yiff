@@ -4,7 +4,8 @@
 BEGIN { FS="\n" }
 symb = substr($0,1,1) {
 	# Highlight end line space(s)/tab(s)
-	gsub(/[\t ]+$/,"\033[0;41m \033[0m")
+	if ($0 !~ /^ $/)
+		gsub(/[\t ]+$/,"\033[0;41m \033[0m")
 	if ($0 ~ /^Only in /) {
 		printf("\033[1;34m%s\033[0m\n", $0)
 		next
