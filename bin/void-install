@@ -63,8 +63,8 @@ fi
 # Other partitions
 VO_OSUUID="$(lsblk -no UUID /dev/${VO_OSDISK}${VO_OSPART:-1})"
 cat >>"${VO_CHROOT}/etc/fstab" <<-EOF
-	UUID=${VO_OSUUID} / ext4 defaults,rw,errors=remount-ro 0 1
 	#UUID=SWAP        none swap defaults 0 0
+	UUID=${VO_OSUUID} / ext4 defaults,rw,errors=remount-ro 0 1
 EOF
 
 # hostname + /etc/hosts
