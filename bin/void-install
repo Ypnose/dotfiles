@@ -50,7 +50,9 @@ xbps-install -S -R "$VO_REPURL" -r "$VO_CHROOT" base-files ncurses \
 	runit-void
 
 # /etc/fstab
-printf "%s\n\n" "# /etc/fstab" >"${VO_CHROOT}/etc/fstab"
+printf "%s\n\n%s\n" \
+	"# /etc/fstab" \
+	"tmpfs /tmp tmpfs nodev,nosuid 0 0" >"${VO_CHROOT}/etc/fstab"
 # UEFI partition
 if [ "$VO_OSUEFI" = "1" ]; then
 	VO_OSPART="3"
@@ -63,7 +65,6 @@ VO_OSUUID="$(lsblk -no UUID /dev/${VO_OSDISK}${VO_OSPART:-1})"
 cat >>"${VO_CHROOT}/etc/fstab" <<-EOF
 	UUID=${VO_OSUUID} / ext4 defaults,rw,errors=remount-ro 0 1
 	#UUID=SWAP        none swap defaults 0 0
-	tmpfs /tmp tmpfs nodev,nosuid 0 0
 EOF
 
 # hostname + /etc/hosts
