@@ -157,7 +157,8 @@ if [ "$VO_OSUEFI" = "1" ]; then
 		umount "${VO_CHROOT}/boot"
 	fi
 fi
-umount "${VO_CHROOT}/dev/pts" "${VO_CHROOT}/dev" "${VO_CHROOT}/sys" "${VO_CHROOT}/proc"
+umount "${VO_CHROOT}/run/udev" "${VO_CHROOT}/dev/pts" \
+	"${VO_CHROOT}/dev" "${VO_CHROOT}/sys" "${VO_CHROOT}/proc"
 printf "%s\n" "DONE"
 
 exit
