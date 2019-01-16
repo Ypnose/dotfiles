@@ -16,7 +16,7 @@ list:
 diff:
 	@sh check-changes -v | yiff
 
-newbox: clean base ssh bin rypp gpg fonts conf
+newbox: clean base ssh bin scripts gpg fonts conf
 
 ####################
 
@@ -62,9 +62,10 @@ gpg:
 	find ${DESTDIR}/.gnupg -type f -exec chmod 600 {} +
 	chmod 400 ${DESTDIR}/.gnupg/gpg.conf
 
-rypp:
-	curl -o ${DESTDIR}/rypp https://git.framasoft.org/Ypnose/rypp/raw/master/rypp
-	chmod +x ${DESTDIR}/rypp
+scripts:
+	curl -o ${DESTDIR}/pyss https://framagit.org/Ypnose/pyss/raw/master/pyss
+	curl -o ${DESTDIR}/rypp https://framagit.org/Ypnose/rypp/raw/master/rypp
+	chmod +x ${DESTDIR}/pyss ${DESTDIR}/rypp
 
 ssh:
 	mkdir -p ${DESTDIR}/.ssh
@@ -79,4 +80,4 @@ svn:
 	cp misc/svn/servers ${DESTDIR}/.subversion
 	chmod 644 ${DESTDIR}/.subversion/servers
 
-.PHONY: all list diff newbox base bin clean conf fonts gpg rypp ssh svn
+.PHONY: all list diff newbox base bin clean conf fonts gpg scripts ssh svn
