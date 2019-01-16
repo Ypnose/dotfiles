@@ -60,14 +60,25 @@ fi
 
 # Check rsync(1) man page for pattern rules
 # With '--files-from', '-r' needs to be specified explicitly
-rsync -ahrvHX --checksum --delete --delete-delay --exclude="Desktop/" \
-	--exclude="Downloads/" --exclude=".gnupg/random_seed" \
-	--exclude=".gnupg/S.*" --exclude="*.dump" \
-	--exclude="*.qcow2" --exclude="*.raw" \
+rsync \
+	-ahrvHX \
+	--checksum \
+	--delete \
+	--delete-delay \
+	--exclude=".gnupg/random_seed" \
+	--exclude=".gnupg/S.*" \
 	--exclude=".yusr/bin/" \
+	--exclude="*.dump" \
+	--exclude="*.qcow2" \
+	--exclude="*.raw" \
+	--exclude="Desktop/" \
+	--exclude="Downloads/" \
 	--files-from="$BACK_INCL" \
 	--log-file="${BACK_DEST}/rsync-${BACK_DATE}.log" \
-	--numeric-ids --stats "${BACK_OPTS[@]}" "$1" "$BACK_DEST"
+	--numeric-ids \
+	--stats \
+	"${BACK_OPTS[@]}" \
+	"$1" "$BACK_DEST"
 
 # Archive final DEST!!
 # Create an archive only if it's not dry run
