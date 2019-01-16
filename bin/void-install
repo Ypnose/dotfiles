@@ -121,10 +121,12 @@ if [ -f "/etc/resolv.conf" ]; then
 	cp "/etc/resolv.conf" "${VO_CHROOT}/etc"
 fi
 
+mkdir -p "${VO_CHROOT}/run/udev"
 mount -t proc proc "${VO_CHROOT}/proc"
 mount -t sysfs sys "${VO_CHROOT}/sys"
 mount -o bind /dev "${VO_CHROOT}/dev"
 mount -o bind /dev/pts "${VO_CHROOT}/dev/pts"
+mount -o bind /run/udev "${VO_CHROOT}/run/udev"
 if [ "$VO_OSUEFI" = "1" ]; then
 	if [ "$VO_OSLUKS" = "1" ]; then
 		mount "$VO_OSBOOT" "${VO_CHROOT}/boot"
