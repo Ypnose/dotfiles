@@ -9,65 +9,64 @@ xkb_symbols "basic" {
 
     name[group1]="KByp (UK + FR)";
 
-    key <AE01> { [          1,      exclam                             ] };  // 1 !
-    key <AE02> { [          2,    quotedbl, twosuperior, threesuperior ] };  // 2 " ² ³
-    key <AE03> { [          3,    sterling,      egrave, Egrave        ] };  // 3 £ è È
-    key <AE04> { [          4,      dollar,    EuroSign, NoSymbol      ] };  // 4 $ €
-    key <AE05> { [          5,     percent                             ] };  // 5 %
-    key <AE06> { [          6, asciicircum                             ] };  // 6 ^
-    key <AE07> { [          7,   ampersand                             ] };  // 7 &
-    key <AE08> { [          8,    asterisk                             ] };  // 8 *
-    key <AE09> { [          9,   parenleft                             ] };  // 9 (
-    key <AE10> { [          0,  parenright                             ] };  // 0 )
-    key <AE11> { [      minus,  underscore,   backslash, NoSymbol      ] };  // - _ \
-    key <AE12> { [      equal,        plus,    notequal, plusminus     ] };  // = + ≠ ±
+    key <AE01> { [               1,          exclam                                  ] };  // 1 !
+    key <AE02> { [               2,        quotedbl,     twosuperior,  threesuperior ] };  // 2 " ² ³
+    key <AE03> { [               3,        sterling,          egrave,         Egrave ] };  // 3 £ è È
+    key <AE04> { [               4,          dollar,        EuroSign,       NoSymbol ] };  // 4 $ €
+    key <AE05> { [               5,         percent                                  ] };  // 5 %
+    key <AE06> { [               6,     asciicircum                                  ] };  // 6 ^
+    key <AE07> { [               7,       ampersand                                  ] };  // 7 &
+    key <AE08> { [               8,        asterisk                                  ] };  // 8 *
+    key <AE09> { [               9,       parenleft                                  ] };  // 9 (
+    key <AE10> { [               0,      parenright                                  ] };  // 0 )
+    key <AE11> { [           minus,      underscore,       backslash,       NoSymbol ] };  // - _ \
+    key <AE12> { [           equal,            plus,        notequal,      plusminus ] };  // = + ≠ ±
+    // IGNORE KEY (XKBCOMP OUTPUT)
+    key <AE13> { [        NoSymbol,        NoSymbol                                  ] };
+
+    key <AD01> { [               q,               Q,              ae,             AE ] };  // q Q æ Æ
+    key <AD02> { [               w,               W                                  ] };  // w W
+    key <AD03> { [               e,               E,          eacute,         Eacute ] };  // e E é É
+    key <AD04> { [               r,               R,      registered,      copyright ] };  // r R ® ©
+    key <AD05> { [               t,               T,       trademark,       NoSymbol ] };  // t T ™
+    key <AD06> { [               y,               Y                                  ] };  // y Y
+    key <AD07> { [               u,               U,          ugrave,         Ugrave ] };  // u U ù Ù
+    key <AD08> { [               i,               I                                  ] };  // i I
+    key <AD09> { [               o,               O,              oe,             OE ] };  // o O œ Œ
+    key <AD10> { [               p,               P                                  ] };  // p P
+    key <AD11> { [     bracketleft,       braceleft,       leftarrow,       NoSymbol ] };  // [ { ←
+    key <AD12> { [    bracketright,      braceright,      rightarrow,       NoSymbol ] };  // ] } →
+
+    key <AC01> { [               a,               A,          agrave,         Agrave ] };  // a A à À
+    key <AC02> { [               s,               S                                  ] };  // s S
+    key <AC03> { [               d,               D                                  ] };  // d D
+    key <AC04> { [               f,               F                                  ] };  // f F
+    key <AC05> { [               g,               G                                  ] };  // g G
+    key <AC06> { [               h,               H,           heart,       NoSymbol ] };  // h H ♥
+    key <AC07> { [               j,               J                                  ] };  // j J
+    key <AC08> { [               k,               K                                  ] };  // k K
+    key <AC09> { [               l,               L                                  ] };  // l L
+    key <AC10> { [       semicolon,           colon,  dead_diaeresis,       NoSymbol ] };  // ; : ¨
+    key <AC11> { [      apostrophe,              at, dead_circumflex,       NoSymbol ] };  // ' @ ^
+    // ISO UK LAYOUT
+    key <BKSL> { [      numbersign,      asciitilde,           grave,       NoSymbol ] };  // # ~ `
+
+    // ISO UK LAYOUT
+    key <LSGT> { [       backslash,             bar                                  ] };  // \ |
+    key <AB01> { [               z,               Z                                  ] };  // z Z
+    key <AB02> { [               x,               X                                  ] };  // x X
+    key <AB03> { [               c,               C,        ccedilla,       Ccedilla ] };  // c C ç Ç
+    key <AB04> { [               v,               V                                  ] };  // v V
+    key <AB05> { [               b,               B                                  ] };  // b B
+    key <AB06> { [               n,               N                                  ] };  // n N
+    key <AB07> { [               m,               M                                  ] };  // m M
+    key <AB08> { [           comma,            less                                  ] };  // , <
+    key <AB09> { [          period,         greater,        ellipsis,       NoSymbol ] };  // . > …
+    key <AB10> { [           slash,        question,       backslash,       NoSymbol ] };  // / ? \
+    key <TLDE> { [           grave,         notsign,             bar,       NoSymbol ] };  // ` ¬ |
 
     // IGNORE KEY (XKBCOMP OUTPUT)
-    key <AE13> { [      NoSymbol,   NoSymbol                           ] };
-
-    key <AD01> { [             q,          Q,         ae, AE           ] };  // q Q æ Æ
-    key <AD02> { [             w,          W                           ] };  // w W
-    key <AD03> { [             e,          E,     eacute, Eacute       ] };  // e E é É
-    key <AD04> { [             r,          R, registered, copyright    ] };  // r R ® ©
-    key <AD05> { [             t,          T,  trademark, NoSymbol     ] };  // t T ™
-    key <AD06> { [             y,          Y                           ] };  // y Y
-    key <AD07> { [             u,          U,     ugrave, Ugrave       ] };  // u U ù Ù
-    key <AD08> { [             i,          I                           ] };  // i I
-    key <AD09> { [             o,          O,         oe, OE           ] };  // o O œ Œ
-    key <AD10> { [             p,          P                           ] };  // p P
-    key <AD11> { [   bracketleft,  braceleft,  leftarrow, NoSymbol     ] };  // [ { ←
-    key <AD12> { [  bracketright, braceright, rightarrow, NoSymbol     ] };  // ] } →
-
-    key <AC01> { [          a,          A,          agrave, Agrave     ] };  // a A à À
-    key <AC02> { [          s,          S                              ] };  // s S
-    key <AC03> { [          d,          D                              ] };  // d D
-    key <AC04> { [          f,          F                              ] };  // f F
-    key <AC05> { [          g,          G                              ] };  // g G
-    key <AC06> { [          h,          H,           heart, NoSymbol   ] };  // h H ♥
-    key <AC07> { [          j,          J                              ] };  // j J
-    key <AC08> { [          k,          K                              ] };  // k K
-    key <AC09> { [          l,          L                              ] };  // l L
-    key <AC10> { [  semicolon,      colon,  dead_diaeresis, NoSymbol   ] };  // ; : ¨
-    key <AC11> { [ apostrophe,         at, dead_circumflex, NoSymbol   ] };  // ' @ ^
-    // ISO UK LAYOUT
-    key <BKSL> { [ numbersign, asciitilde,           grave, NoSymbol   ] };  // # ~ `
-
-    // ISO UK LAYOUT
-    key <LSGT> { [ backslash,      bar                                 ] };  // \ |
-    key <AB01> { [         z,        Z                                 ] };  // z Z
-    key <AB02> { [         x,        X                                 ] };  // x X
-    key <AB03> { [         c,        C,  ccedilla, Ccedilla            ] };  // c C ç Ç
-    key <AB04> { [         v,        V                                 ] };  // v V
-    key <AB05> { [         b,        B                                 ] };  // b B
-    key <AB06> { [         n,        N                                 ] };  // n N
-    key <AB07> { [         m,        M                                 ] };  // m M
-    key <AB08> { [     comma,     less                                 ] };  // , <
-    key <AB09> { [    period,  greater,  ellipsis, NoSymbol            ] };  // . > …
-    key <AB10> { [     slash, question, backslash, NoSymbol            ] };  // / ? \
-    key <TLDE> { [     grave,  notsign,       bar, NoSymbol            ] };  // ` ¬ |
-
-    // IGNORE KEY (XKBCOMP OUTPUT)
-    key <AB11> { [  NoSymbol, NoSymbol                                 ] };
+    key <AB11> { [        NoSymbol,        NoSymbol                                  ] };
 
     include "level3(ralt_switch_multikey)"
 
