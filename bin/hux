@@ -17,6 +17,7 @@ BEGIN { FS = " " }
 				url = substr(field[i],RSTART+6,RLENGTH-7)
 			else if (field[i] ~ /^src=/)
 				url = substr(field[i],RSTART+5,RLENGTH-6)
+			gsub(/\".*$/,"",url)
 			# Clear a few unnecessary lines
 			if (url !~ /^(\/|#)?$/ && url != oldurl)
 				printf("%s\n", url)
