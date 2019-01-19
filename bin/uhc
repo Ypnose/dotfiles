@@ -1,0 +1,16 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+# url http code
+
+url_code() {
+	curl \
+		-Ls \
+		-m 10 \
+		-w "%{http_code}" \
+		-o /dev/null \
+		"$1"
+}
+
+while IFS=$'\n' read -r UHC_URL; do 
+	printf "%s %s\n" "$(url_code "$UHC_URL") $UHC_URL"
+done
