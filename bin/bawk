@@ -41,7 +41,7 @@ BEGIN {
 		day   = d[1]
 		# Detect year and display it if it changed
 		if (year != prevyear)
-			printf("# %s%i%s #\n", blue, year, def)
+			printf("-------\n# %s%i%s #\n", blue, year, def)
 		prevyear = year
 		# Separate days visually
 		if (day != prevday)
