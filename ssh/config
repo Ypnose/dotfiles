@@ -13,3 +13,8 @@ ServerAliveInterval 60
 UseRoaming no
 
 # -- HOSTS -------------------------------------------------------------
+Host local
+	HostName 127.0.0.1
+	Port 9922
+	StrictHostKeyChecking no
+	UserKnownHostsFile /dev/null
