@@ -40,11 +40,11 @@ BEGIN {
 		month = d[2]
 		day   = d[1]
 		# Detect year and display it if it changed
-		if (year != prevyear)
+		if (year != prevyear && silent != 1)
 			printf("-------\n# %s%i%s #\n", blue, year, def)
 		prevyear = year
 		# Separate days visually
-		if (day != prevday)
+		if (day != prevday && silent != 1)
 			printf("-------\n")
 
 		detail = $3
