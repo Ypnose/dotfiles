@@ -24,7 +24,7 @@ BEGIN {
 	gsub(/ +/," ")
 
 	# Print current amount in bank
-	if (NR == 1 && $0 ~/^=.* EUR/) {
+	if (NR == 1 && $0 ~ /^=.* EUR/) {
 		# Replace comma by period for floating point arithmetic
 		gsub(/\,/,".")
 		current = $NF
