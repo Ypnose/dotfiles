@@ -1,0 +1,16 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+
+if [ -z "$1" ]; then
+	printf "usage: %s [PATTERN]\n" "${0##*/}" >&2
+	exit 1
+fi
+
+awk -v p="$1" '
+	{
+		if ($0 ~ p)
+			printf("\033[7m%s\033[0m\n", $0)
+		else
+			printf("%s\n", $0)
+	}
+'
