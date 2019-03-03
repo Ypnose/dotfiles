@@ -1,0 +1,19 @@
+#!/bin/mksh
+# Script by Ypnose - http://ywstd.fr
+set -e
+
+function sig_mes {
+	print "SIG${1} triggered"
+}
+
+trap 'sig_mes ERR' ERR
+trap 'sig_mes EXIT' EXIT
+trap 'sig_mes HUP' HUP
+trap 'sig_mes INT' INT
+trap 'sig_mes TERM' TERM
+trap 'sig_mes WINCH' WINCH
+
+[[ $1 = "-e" ]] && false
+
+print "$$"
+sleep "${1:-3600}"
