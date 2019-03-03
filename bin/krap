@@ -17,3 +17,5 @@ trap 'sig_mes WINCH' WINCH
 
 print "$$"
 sleep "${1:-3600}"
+
+exit

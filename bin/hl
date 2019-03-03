@@ -14,3 +14,5 @@ awk -v p="$1" '
 			printf("%s\n", $0)
 	}
 '
+
+exit
