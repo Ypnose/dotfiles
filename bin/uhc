@@ -7,6 +7,7 @@ url_code() {
 		-Ls \
 		-m 10 \
 		-w "%{http_code}" \
+		-A "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" \
 		-o /dev/null \
 		"$1"
 }
