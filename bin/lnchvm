@@ -2,7 +2,7 @@
 # Script by Ypnose - http://ywstd.fr
 
 usage() {
-	printf "%s\n" "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-m RAM] [-p SSH PORT] [-w HTTP PORT] [-s HTTPS PORT] [IMG]"
+	printf "%s\n" "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-m RAM] [-p SSH PORT] [IMG]"
 	exit
 }
 
@@ -17,7 +17,7 @@ qemu_launch() {
 		-enable-kvm \
 		-drive file="$VM_IMG",format="${VM_FMT:-qcow2}" \
 		-net nic \
-		-net user,hostfwd=tcp::"${VM_SSH:-9922}"-:22,hostfwd=tcp::"${VM_WWW:-8080}"-:80,hostfwd=tcp::"${VM_SSL:-8443}"-:443 \
+		-net user,hostfwd=tcp::"${VM_SSH:-9922}"-:22,hostfwd=tcp::8080-:80,hostfwd=tcp::8443-:443 \
 		-vga std \
 		"$@"
 }
@@ -33,8 +33,6 @@ while getopts ":b:f:hm:p:s:w:" opt; do
 		h) usage ;;
 		m) VM_RAM="$OPTARG" ;;
 		p) VM_SSH="$OPTARG" ;;
-		s) VM_SSL="$OPTARG" ;;
-		w) VM_WWW="$OPTARG" ;;
 		*) usage ;;
 	esac
 done
