@@ -1,4 +1,4 @@
-#!/bin/mksh
+#!/usr/bin/mksh
 # Script by Ypnose - http://ywstd.fr
 # $ ( cd /mnt && backup -f FILELIST -t $HOME BACKUP )
 
