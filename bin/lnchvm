@@ -2,7 +2,7 @@
 # Script by Ypnose - http://ywstd.fr
 
 usage() {
-	printf "%s\n" "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-m RAM] [-p SSH PORT] [IMG]"
+	printf "%s\n" "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-m RAM] [-p SSH PORT] [-s] [IMG]"
 	exit
 }
 
@@ -26,13 +26,14 @@ if [ -z "$1" ]; then
 	usage
 fi
 
-while getopts ":b:f:hm:p:s:w:" opt; do
+while getopts ":b:f:hm:p:s" opt; do
 	case $opt in
 		b) VM_ISO="$OPTARG" ;;
 		f) VM_FMT="$OPTARG" ;;
 		h) usage ;;
 		m) VM_RAM="$OPTARG" ;;
 		p) VM_SSH="$OPTARG" ;;
+		s) VM_TMP=1 ;;
 		*) usage ;;
 	esac
 done
@@ -59,7 +60,11 @@ if [ -n "$VM_ISO" ]; then
 		qemu_launch -cdrom "$VM_ISO" -boot order=d
 	fi
 else
-	qemu_launch
+	if [ "$VM_TMP" = 1 ]; then
+		qemu_launch -snapshot
+	else
+		qemu_launch
+	fi
 fi
 
 exit
