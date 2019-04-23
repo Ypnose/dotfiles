@@ -52,6 +52,8 @@ function end_con {
 	fi
 }
 
+trap 'end_con' INT
+
 if [[ $1 = "-h" ]]; then
 	usage
 fi
