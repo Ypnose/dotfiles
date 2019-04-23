@@ -15,7 +15,7 @@ function usage {
 }
 
 function chk_inf {
-	if ! ip link show "$W_INF" >/dev/null 2>&1; then
+	if ! ip -br link show "$W_INF" >/dev/null 2>&1; then
 		p_err "$W_INF does not exist"
 	fi
 }
