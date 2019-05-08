@@ -16,7 +16,7 @@ set_tag() {
 	# local isn't specified by POSIX!
 	local FTAG_INPUT
 
-	read FTAG_INPUT
+	read -r FTAG_INPUT
 	if [ -n "$FTAG_INPUT" ]; then
 		metaflac --remove-tag="$1" "$FTAG_FILE"
 		metaflac --set-tag="${1}=${FTAG_INPUT}" "$FTAG_FILE"
@@ -31,7 +31,7 @@ set_chapter() {
 
 	while true; do
 		printf "CHAPTER? "
-		read FTAG_CHAPTNUM
+		read -r FTAG_CHAPTNUM
 		if [ -n "$FTAG_CHAPTNUM" ]; then
 			FTAG_TIME="$(query_tag "CHAPTER${FTAG_CHAPTNUM}")"
 			FTAG_NAME="$(query_tag "CHAPTER${FTAG_CHAPTNUM}NAME")"

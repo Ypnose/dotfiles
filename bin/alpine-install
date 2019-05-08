@@ -72,7 +72,7 @@ cat >"${AL_CHROOT}/etc/network/interfaces" <<-EOF
 EOF
 
 # /etc/fstab
-AL_DEUUID="$(lsblk -no UUID /dev/${AL_DEDISK}1)"
+AL_DEUUID="$(lsblk -no UUID "/dev/${AL_DEDISK}1")"
 printf "%s\n" "UUID=${AL_DEUUID} / ext4 defaults,rw 0 1" >"${AL_CHROOT}/etc/fstab"
 
 # HISTFILE

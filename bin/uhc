@@ -13,7 +13,7 @@ url_code() {
 }
 
 while IFS=$'\n' read -r UHC_URL; do 
-	printf "%s %s\n" "$(url_code "$UHC_URL") $UHC_URL"
+	printf "%s %s\n" "$(url_code "$UHC_URL")" "$UHC_URL"
 	sleep 0.5
 done
 
