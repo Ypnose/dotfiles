@@ -48,13 +48,6 @@ function massdiff {
 function nd {
 	mkdir -p "$1" && cd "$1"
 }
-function pad {
-	typeset N_DIR
-	N_DIR="${HOME}/Dev/${0}"
-	mkdir -p "$N_DIR"
-	if [[ $1 = "ls" ]]; then ls "$N_DIR"; return; fi
-	"$EDITOR" "${N_DIR}/${1:-DEFAULT}"
-}
 function shadate {
 	# GNU date(1)
 	if (( ${#1} == 5 )); then
