@@ -7,7 +7,7 @@ DE_OSDISK="$1"
 DE_HOSTNA="$2"
 DE_HOSTNA="${DE_HOSTNA:-ypnbox}"
 DE_CHROOT="syschroot"
-DE_RELEAS="stretch"
+DE_RELEAS="buster"
 #DE_REPURL="http://packages.devuan.org/merged"
 # Set PATH because the same value will be used by debootstrap. If not
 # set, it may fail on distro like Archlinux
@@ -16,7 +16,7 @@ export PATH
 
 ##############################
 
-# 1 = / | 2 = swap | 3 = other
+# 1 = swap | 2 = / | 3 = other
 if [ -z "$1" ] || [ "$1" = "-h" ]; then
 	printf "%s\n" "usage: ${0##*/} [DISK] [HOSTNAME]"
 	exit
@@ -38,8 +38,8 @@ fi
 if [ ! -d "$DE_CHROOT" ]; then
 	printf "%s\n" "$DE_CHROOT directory is missing" >&2
 	exit 1
-elif ! mount | grep -q "^/dev/${DE_OSDISK}"; then
-	printf "%s\n" "/dev/${DE_OSDISK} is not mounted inside $DE_CHROOT" >&2
+elif ! mount | grep -q "^/dev/${DE_OSDISK}2"; then
+	printf "%s\n" "/dev/${DE_OSDISK}2 is not mounted inside $DE_CHROOT" >&2
 	exit 1
 fi
 
@@ -125,7 +125,7 @@ chroot "${DE_CHROOT}" /bin/sh -l <<-EOF
 
 	rm -r /var/cache/apt/archives/
 	apt-get update
-	apt-get install -y dialog iproute2 netbase
+	apt-get install -y dialog netbase
 	dpkg-reconfigure tzdata
 EOF
 
