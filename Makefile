@@ -59,8 +59,9 @@ gpg:
 	mkdir -p ${DESTDIR}/.gnupg
 	chmod 700 ${DESTDIR}/.gnupg
 	test -f ${DESTDIR}/.gnupg/gpg.conf || cp gpg/gpg.conf ${DESTDIR}/.gnupg
+	test -f ${DESTDIR}/.gnupg/gpg-agent.conf || cp gpg/gpg-agent.conf ${DESTDIR}/.gnupg
 	find ${DESTDIR}/.gnupg -type f -exec chmod 600 {} +
-	chmod 400 ${DESTDIR}/.gnupg/gpg.conf
+	chmod 400 ${DESTDIR}/.gnupg/gpg.conf ${DESTDIR}/.gnupg/gpg-agent.conf
 
 scripts:
 	curl -o ${DESTDIR}/pyss https://framagit.org/Ypnose/pyss/raw/master/pyss
