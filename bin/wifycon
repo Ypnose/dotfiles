@@ -36,7 +36,7 @@ function get_con {
 	ip link set dev "$W_INF" up
 	wpa_supplicant -i "$W_INF" -B -c "$W_CON"
 	if (( W_NIP != 1 )); then
-		dhcpcd -C resolv.conf -C wpa_supplicant "$W_INF"
+		dhcpcd -C resolv.conf -C wpa_supplicant -w "$W_INF"
 	fi
 }
 
