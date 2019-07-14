@@ -12,11 +12,7 @@ unset HISTFILE
 
 # -- PROMPT ------------------------------------------------------------
 # SSH_CONNECTION works with dropbear unlike SSH_CLIENT
-if [[ -n $SSH_CONNECTION ]]; then
-	PS1='[\[\033[1;31m\]REMOTE\[\033[0m\]] [\u@\h \[\033[0;32m\]\w\[\033[0m\]]\$ '
-else
-	PS1='[\u@\h \[\033[0;32m\]\w\[\033[0m\]]\$ '
-fi
+PS1='${SSH_CONNECTION:+[\[\033[1;31m\]REMOTE\[\033[0m\]]}[\u@\h:\[\033[0;34m\]\w\[\033[0m\]]\$ '
 
 # -- ALIASES -----------------------------------------------------------
 alias ls='ls -Fh --color=auto'
