@@ -4,12 +4,6 @@
 ! ---------------------------------------------------------------------+
 
 ! -- Fonts -------------------------------------------------------------
-!URxvt*font:      -*-envypn-medium-*-*-*-15-*-*-*-*-*-*-*
-!URxvt*boldFont:  -*-envypn-medium-*-*-*-15-*-*-*-*-*-*-*
-
-!URxvt*font:      -*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*
-!URxvt*boldFont:  -*-terminus-bold-*-*-*-16-*-*-*-*-*-*-*
-
 URxvt*font:      xft:Ubuntu Mono:size=12:antialias=true
 URxvt*boldFont:  xft:Ubuntu Mono:bold:size=12:antialias=true
 
