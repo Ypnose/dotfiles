@@ -13,7 +13,7 @@ p_err() {
 
 qemu_launch() {
 	qemu-system-x86_64 \
-		-m "${VM_RAM:-512M}" \
+		-m "${VM_RAM:-2G}" \
 		-enable-kvm \
 		-drive file="$VM_IMG",format="${VM_FMT:-qcow2}" \
 		-net nic \
