@@ -13,16 +13,16 @@ esac
 
 # -- PS1 ---------------------------------------------------------------
 #PS1=$'\1\r\1\033[0;35m\1${PWD}\1\033[0m\1 >> '
-PS1=$'\001\r\001\033[1;34m\001 > \001\033[1;31m\001${
-	typeset e=$?
-	[[ -n $SSH_CONNECTION ]] && print -nr -- "[REMOTE] "
-	return $e
+PS1=$'\001\r \001\033[1;31m\001${SSH_CONNECTION:+[REMOTE] }\001\033[1;33m\001${
+	\\builtin typeset e=$?
+	(( e )) && \\builtin print -nr -- "$e "
+	\\builtin return $e
 	}\001\033[1;32m\001${
-	typeset e=$? d=${PWD:-?} p=~
+	\\builtin typeset e=$? d=${PWD:-?} p=~
 	[[ $p = ?(*/) ]] || d=${d/#$p/\\~}
-	print -nr -- "$d"
-	return $e
-	}\001\033[1;34m\001 >>\001\033[0m\001 '
+	\\builtin print -nr -- "$d"
+	\\builtin return $e
+	}\001\033[1;34m\001 \$\001\033[0m\001 '
 
 # -- OPTIONS -----------------------------------------------------------
 set -o emacs
