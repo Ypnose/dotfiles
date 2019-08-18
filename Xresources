@@ -28,3 +28,29 @@ xterm*scrollBar:        false
 xterm*utf8:             2
 
 ! -- Colors ------------------------------------------------------------
+*background: #FAF0D6
+*foreground: #040404
+! -- Black --
+*color0:  #141414
+*color8:  #404040
+! -- Red --
+*color1:  #802E3B
+*color9:  #951D45
+! -- Green --
+*color2:  #5B7A52
+*color10: #5B7523
+! -- Yellow --
+*color3:  #945D2D
+*color11: #873411
+! -- Blue --
+*color4:  #38566C
+*color12: #324461
+! -- Magenta --
+*color5:  #523D5D
+*color13: #4C3366
+! -- Cyan --
+*color6:  #387A71
+*color14: #006658
+! -- White --
+*color7:  #E6CD99
+*color15: #FFE8BC
