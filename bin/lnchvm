@@ -12,6 +12,7 @@ p_err() {
 }
 
 qemu_launch() {
+	set -x
 	qemu-system-x86_64 \
 		-m "${VM_RAM:-2G}" \
 		-enable-kvm \
