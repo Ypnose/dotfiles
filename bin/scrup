@@ -22,7 +22,6 @@ while IFS=$'\n' read -r SCR_REQ; do
 	fi
 	# Test if the new file isn't empty before cat(1)
 	if [[ -s $SCR_TPF ]]; then
-		diff -ru "$SCR_REQ" "$SCR_TPF"
 		cat "$SCR_TPF" >"$SCR_REQ"
 		chmod +x "$SCR_REQ"
 		print "Updated $SCR_REQ"
