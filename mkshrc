@@ -46,7 +46,7 @@ function massdiff {
 	LC_ALL=C diff -rq "$@" | grep '^Files '
 }
 function nd {
-	mkdir -p "$1" && cd "$1"
+	mkdir -p "$1" && cd "$1" && ls
 }
 function shadate {
 	# GNU date(1)
