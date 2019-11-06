@@ -18,8 +18,8 @@ PS1=$'\001\r \001\033[1;31m\001${SSH_CONNECTION:+[REMOTE] }\001\033[1;33m\001${
 	(( e )) && \\builtin print -nr -- "$e "
 	\\builtin return $e
 	}\001\033[1;32m\001${
-	\\builtin typeset e=$? d=${PWD:-?} p=~
-	[[ $p = ?(*/) ]] || d=${d/#$p/\\~}
+	\\builtin typeset e=$? d="${PWD:-?}" p=~
+	[[ $p = ?(*/) ]] || d="${d/#$p/\\~}"
 	\\builtin print -nr -- "$d"
 	\\builtin return $e
 	}\001\033[1;34m\001 \$\001\033[0m\001 '
