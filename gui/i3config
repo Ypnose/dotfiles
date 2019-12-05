@@ -173,7 +173,7 @@ bindsym $mod+r mode "resize"
 ### Bar ###
 #
 bar {
-	# Put the on bar on the top and hide it
+	# Put the bar on the top and hide it
 	position top
 	mode hide
 	hidden_state hide
