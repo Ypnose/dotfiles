@@ -52,7 +52,7 @@
 ### Layouts ###
 #
 	# Toggle between all available layouts
-	bindsym $mod+c layout toggle splith splitv tabbed stacked
+	bindsym $mod+c layout toggle splith splitv tabbed stacking
 
 	# Toggle fullscreen
 	bindsym $mod+f fullscreen toggle
@@ -114,13 +114,13 @@ mode "resize" {
 	bindsym k resize grow height 10 px or 5 ppt
 	bindsym l resize shrink height 10 px or 5 ppt
 	bindsym semicolon resize shrink width 10 px or 5 ppt
-	
+
 	# Same bindings for the arrow keys
 	bindsym Left resize grow width 10 px or 5 ppt
 	bindsym Down resize shrink height 10 px or 5 ppt
 	bindsym Up resize grow height 10 px or 5 ppt
 	bindsym Right resize shrink width 10 px or 5 ppt
-	
+
 	# Back to normal: Enter or Escape or $mod+r
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
