@@ -9,5 +9,5 @@ xrdb -merge "${HOME}/.Xresources"
 xset s off dpms 300 300 0
 xsetroot -solid "#6D7F6F"
 xautolock -secure -time 5 -locker i3lock &
-kymap
+setxkbmap kbyp
 exec i3
