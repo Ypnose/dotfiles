@@ -40,7 +40,6 @@ conf:
 	mkdir -p ${DESTDIR}/.config
 	cp misc/xdg/user-dirs.dirs ${DESTDIR}/.config
 	mkdir -p ${DESTDIR}/.yusr/conf
-	cp -r xkb/ ${DESTDIR}/.yusr
 	cp misc/firefox/prefs.js ${DESTDIR}/.yusr/conf
 	cp misc/wpa_supplicant/wpa-example.conf ${DESTDIR}/.yusr/conf
 
