@@ -9,10 +9,13 @@
 	# Alt modifier
 	set $mod Mod1
 
-	# Set colors
+	# Font
+	set $font Ubuntu Mono Bold
+	set $fontsize 11
+
+	# Colors
 	set $colbg #535F53
 	set $colborder #3B443B
-
 	# class           border     bg      text    indicator child_border
 	client.focused    $colborder $colbg  #FFFFFF #2E9EF4   #225C54
 	client.unfocused  #333333    #222222 #888888 #292D2E   #222222
@@ -21,7 +24,7 @@
 ### Global ###
 #
 	# Font for window titles (use pango-list)
-	font pango:Ubuntu Mono Bold 11
+	font pango:$font $fontsize
 
 	# Default orientation
 	default_orientation horizontal
@@ -42,8 +45,9 @@
 	bindsym $mod+Shift+c kill
 
 	# Quit i3
-	bindsym $mod+Shift+q exec "i3-nagbar -t error \
-		-m 'Do you really want to exit i3 ?' -B 'Yes' 'i3-msg exit'"
+	bindsym $mod+Shift+q exec "i3-nagbar -f 'pango:$font $fontsize' \
+		-t error -m 'Do you really want to exit i3 ?' \
+		-B 'Yes' 'i3-msg exit'"
 
 	# Restart i3
 	bindsym $mod+Shift+r restart
