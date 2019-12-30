@@ -3,7 +3,7 @@
 
 DESTDIR ?= dest
 REQFILE = aliases cwmrc exrc mkshrc profile tmux.conf
-OPTFILE = gitconfig xinitrc Xresources
+OPTFILE = Xresources gitconfig
 
 ####################
 
@@ -81,4 +81,9 @@ svn:
 	cp misc/svn/servers ${DESTDIR}/.subversion
 	chmod 644 ${DESTDIR}/.subversion/servers
 
-.PHONY: all list diff newbox base bin clean conf fonts gpg scripts ssh svn
+xorg:
+	mkdir -p ${DESTDIR}/.config/i3
+	cp gui/i3config ${DESTDIR}/.config/i3
+	test -f ${DESTDIR}/.xinitrc || cp xinitrc ${DESTDIR}/.xinitrc
+
+.PHONY: all list diff newbox base bin clean conf fonts gpg scripts ssh svn xorg
