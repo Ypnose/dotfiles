@@ -2,7 +2,7 @@
 # Ypnose - http://ywstd.fr
 
 DESTDIR ?= dest
-REQFILE = aliases cwmrc exrc mkshrc profile tmux.conf
+REQFILE = aliases exrc mkshrc profile tmux.conf
 OPTFILE = Xresources gitconfig
 
 ####################
