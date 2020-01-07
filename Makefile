@@ -82,7 +82,7 @@ svn:
 
 xorg:
 	mkdir -p ${DESTDIR}/.config/i3
-	cp gui/i3config ${DESTDIR}/.config/i3
+	cp gui/i3config ${DESTDIR}/.config/i3/config
 	test -f ${DESTDIR}/.xinitrc || cp xinitrc ${DESTDIR}/.xinitrc
 
 .PHONY: all list diff newbox base bin clean conf fonts gpg scripts ssh svn xorg
