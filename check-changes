@@ -1,16 +1,16 @@
 #!/bin/sh
 # Script by Ypnose - http://ywstd.fr
 
-if [ "$1" = "-v" ]; then
-	ARG_DIFF="u"
-fi
+diff_found() {
+	if [ -f "$1" ]; then diff -u "$1" "$2"; fi
+}
 
 find . -maxdepth 1 -type f | sort | while IFS=$'\n' read -r FILE; do
-	if [ -f "${HOME}/.${FILE##*/}" ]; then
-		diff -"${ARG_DIFF:-q}" "$FILE" "${HOME}/.${FILE##*/}"
-	fi
+	diff_found "${HOME}/.${FILE##*/}" "$FILE"
 done
-
-#diff -"${ARG_DIFF:-q}" ssh/config "${HOME}/.ssh/config"
+diff_found "${HOME}/.gnupg/gpg.conf" gpg/gpg.conf
+diff_found "${HOME}/.gnupg/gpg-agent.conf" gpg/gpg-agent.conf
+diff_found "${HOME}/.gtkrc-2.0" misc/fonts/gtkrc-2.0
+diff_found "${HOME}/.config/gtk-3.0/settings.ini" misc/fonts/settings.ini
 
 exit
