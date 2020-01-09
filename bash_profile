@@ -18,4 +18,5 @@ fi
 # -- EXPORT ------------------------------------------------------------
 
 # -- FUFILES -----------------------------------------------------------
-[[ -f ${HOME}/.viminfo ]] && rm "${HOME}/.viminfo"
+unalias rm
+rm -f "${HOME}/.bash_history" "${HOME}/.viminfo"
