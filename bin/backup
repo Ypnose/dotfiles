@@ -69,7 +69,7 @@ rsync \
 	--exclude=".gnupg/S.*" \
 	--exclude=".yusr/bin/" \
 	--exclude="*.dump" \
-	--exclude="*.qcow2" \
+	--exclude="*.qcow2*" \
 	--exclude="*.raw" \
 	--exclude="Desktop/" \
 	--exclude="Downloads/" \
