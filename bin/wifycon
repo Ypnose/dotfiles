@@ -52,7 +52,7 @@ function end_con {
 	fi
 }
 
-trap 'end_con' INT
+trap 'end_con' INT TERM
 
 if [[ $1 = "-h" ]]; then
 	usage
