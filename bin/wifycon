@@ -3,6 +3,7 @@
 
 W_SCR="${0##*/}"
 W_INF="wlo1"
+W_NNS="1"
 
 function p_err {
 	print -u2 -- "$1"
@@ -10,7 +11,7 @@ function p_err {
 }
 
 function usage {
-	print "usage: $W_SCR [-d] [-f WPA_FILE] [-h] [-i INTERFACE] [-n] [-r]"
+	print "usage: $W_SCR [-d] [-f WPA_FILE] [-h] [-i INTERFACE] [-n] [-r] [-s]"
 	exit
 }
 
@@ -36,7 +37,7 @@ function get_con {
 	ip link set dev "$W_INF" up
 	wpa_supplicant -i "$W_INF" -B -c "$W_CON"
 	if (( W_NIP != 1 )); then
-		dhcpcd -C resolv.conf -C wpa_supplicant -w "$W_INF"
+		dhcpcd "${W_NNS:+-C resolv.conf}" -C wpa_supplicant -w "$W_INF"
 	fi
 }
 
@@ -62,13 +63,14 @@ if (( USER_ID != 0 )); then
 	p_err "${0##*/} must be run as root"
 fi
 
-while getopts "df:i:nr" arg; do
+while getopts "df:i:nrs" arg; do
 	case "$arg" in
 		d) W_DIS="1"       ;;
 		f) W_CON="$OPTARG" ;;
 		i) W_INF="$OPTARG" ;;
 		n) W_NIP="1"       ;;
 		r) W_RES="1"       ;;
+		s) unset W_NNS     ;;
 		*) usage           ;;
 	esac
 done
