@@ -14,11 +14,17 @@
 	set $fontsize 11
 
 	# Colors
+	set $colbd #3E463E
 	set $colbg #535F53
-	set $colborder #3B443B
-	# class           border     bg      text    indicator child_border
-	client.focused    $colborder $colbg  #FFFFFF #2E9EF4   #225C54
-	client.unfocused  #333333    #222222 #888888 #292D2E   #222222
+	set $colfg #FFFFFF
+	set $colid #26665D
+	set $colbu #333333
+	set $colfu #DDDDDD
+	set $colun #283428
+
+	# class                 border  bg      text    indicator child_border
+	client.focused          $colbd  $colbg  $colfg  $colid    $colid
+	client.unfocused        $colbu  $colbu  $colfu  $colbu    $colbu
 
 #
 ### Global ###
@@ -191,8 +197,8 @@ bar {
 	colors {
 		background $colbg
 		# class            border  bg      text
-		focused_workspace  #333333 #26665D #EEEEEE
-		inactive_workspace #283428 #3D4D3D #DDDDDD
-		urgent_workspace   #2F343A #930F0F #FFFFFF
+		focused_workspace  $colbu  $colid  $colfg
+		inactive_workspace $colbu  #3D4D3D $colfu
+		urgent_workspace   $colbu  #930F0F $colfg
 	}
 }
