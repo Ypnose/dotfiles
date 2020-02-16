@@ -42,7 +42,7 @@
 	bindsym $mod+e exec rofi -show run
 
 	# Locker
-	bindsym $mod+s exec i3lock -c 505050 -e
+	bindsym $mod+s exec i3lock -c 505050 -ef
 
 	# Launch a terminal
 	bindsym $mod+Return exec uxterm

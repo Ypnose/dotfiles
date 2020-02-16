@@ -8,6 +8,6 @@ xset fp rehash
 xrdb -merge "${HOME}/.Xresources"
 xset s off dpms 300 300 0
 xsetroot -solid "#6D7F6F"
-xautolock -secure -time 5 -locker i3lock &
+xautolock -secure -time 5 -locker 'i3lock -f' &
 setxkbmap kbyp
 exec i3
