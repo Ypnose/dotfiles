@@ -80,9 +80,13 @@ svn:
 	cp misc/svn/servers ${DESTDIR}/.subversion
 	chmod 644 ${DESTDIR}/.subversion/servers
 
+wayland:
+	mkdir -p ${DESTDIR}/.config/sway
+	cp gui/swayconfig ${DESTDIR}/.config/sway/config
+
 xorg:
 	mkdir -p ${DESTDIR}/.config/i3
 	cp gui/i3config ${DESTDIR}/.config/i3/config
 	test -f ${DESTDIR}/.xinitrc || cp xinitrc ${DESTDIR}/.xinitrc
 
-.PHONY: all list diff newbox base bin clean conf fonts gpg scripts ssh svn xorg
+.PHONY: all list diff newbox base bin clean conf fonts gpg scripts ssh svn wayland xorg
