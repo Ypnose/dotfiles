@@ -139,12 +139,6 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
-### Windows ###
-#
-	for_window [class="mpv"] floating enable
-	for_window [class="Sxiv"] floating enable
-
-#
 ### Workspaces ###
 #
 	# Switch to workspace
@@ -168,6 +162,12 @@ bindsym $mod+r mode "resize"
 	bindsym $mod+Shift+7 move container to workspace 7
 	bindsym $mod+Shift+8 move container to workspace 8
 	#bindsym $mod+Shift+9 move container to workspace 9
+
+#
+### Windows ###
+#
+	for_window [app_id="mpv"] floating enable
+	for_window [class="Sxiv"] floating enable
 
 #
 ### Borders ###
