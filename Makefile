@@ -39,9 +39,9 @@ clean:
 conf:
 	mkdir -p ${DESTDIR}/.config
 	cp misc/xdg/user-dirs.dirs ${DESTDIR}/.config
-	mkdir -p ${DESTDIR}/.yusr/conf
-	cp misc/firefox/prefs.js ${DESTDIR}/.yusr/conf
-	cp misc/wpa_supplicant/wpa-example.conf ${DESTDIR}/.yusr/conf
+	mkdir -p ${DESTDIR}/.yusr/etc
+	cp misc/firefox/prefs.js ${DESTDIR}/.yusr/etc
+	cp misc/wpa_supplicant/wpa-example.conf ${DESTDIR}/.yusr/etc
 
 fonts:
 	mkdir -p ${DESTDIR}/.config/fontconfig
