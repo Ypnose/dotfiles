@@ -19,10 +19,10 @@ EDITOR=vi
 VISUAL="$EDITOR"
 
 # {N,M}AILRC
-if [[ -r ${HOME}/.yusr/conf/nailrc ]]; then
-	MAILRC="${HOME}/.yusr/conf/nailrc"
-elif [[ -r ${HOME}/.yusr/conf/mailrc ]]; then
-	MAILRC="${HOME}/.yusr/conf/mailrc"
+if [[ -r ${HOME}/.yusr/etc/nailrc ]]; then
+	MAILRC="${HOME}/.yusr/etc/nailrc"
+elif [[ -r ${HOME}/.yusr/etc/mailrc ]]; then
+	MAILRC="${HOME}/.yusr/etc/mailrc"
 fi
 
 # LESS
