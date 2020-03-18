@@ -16,6 +16,6 @@ trap 'sig_mes WINCH' WINCH
 [[ $1 = "-e" ]] && false
 
 print "$$"
-sleep "${1:-3600}"
+sleep "${1:-120}"
 
 exit
