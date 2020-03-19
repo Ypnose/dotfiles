@@ -1,0 +1,22 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+set -ex
+
+if [ "$#" -lt 2 ] || [ "$1" = "-h" ]; then
+	printf "usage: %s [INTERFACE] [IP] [ROUTE]\n" "${0##*/}"
+	exit
+fi
+
+if [ "$2" = "-d" ]; then
+	ip link set dev "$1" down
+	ip addr flush dev "$1"
+	exit
+fi
+
+ip addr add "$2" dev "$1"
+ip link set dev "$1" up
+if [ ! -z "$3" ]; then
+	ip route add default via "$3"
+fi
+
+exit
