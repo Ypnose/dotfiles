@@ -1,14 +1,13 @@
 #!/bin/sh
 # Script by Ypnose - http://ywstd.fr
 
-usage() {
-	printf "%s\n" "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-m RAM] [-p SSH PORT] [-s] [IMG]"
-	exit
-}
-
 p_err() {
 	printf "%s\n" "$1" >&2
 	exit 1
+}
+
+usage() {
+	p_err "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-m RAM] [-p SSH PORT] [-s] [IMG]"
 }
 
 qemu_launch() {
@@ -22,10 +21,6 @@ qemu_launch() {
 		-vga std \
 		"$@"
 }
-
-if [ -z "$1" ]; then
-	usage
-fi
 
 while getopts ":b:f:hm:p:s" opt; do
 	case $opt in
