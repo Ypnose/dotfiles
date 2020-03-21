@@ -1,13 +1,15 @@
 #!/bin/sh
 # Script by Ypnose - http://ywstd.fr
 
+VM_GTK=1
+
 p_err() {
 	printf "%s\n" "$1" >&2
 	exit 1
 }
 
 usage() {
-	p_err "usage: ${0##*/} [-b ISO] [-f FMT] [-h] [-m RAM] [-p SSH PORT] [-s] [IMG]"
+	p_err "usage: ${0##*/} [-b ISO] [-c] [-f FMT] [-h] [-m RAM] [-p SSH PORT] [-s] [IMG]"
 }
 
 qemu_launch() {
@@ -18,13 +20,13 @@ qemu_launch() {
 		-drive file="$VM_IMG",format="${VM_FMT:-qcow2}" \
 		-net nic \
 		-net user,hostfwd=tcp::"${VM_SSH:-9922}"-:22,hostfwd=tcp::8080-:80,hostfwd=tcp::8443-:443 \
-		-vga std \
 		"$@"
 }
 
-while getopts ":b:f:hm:p:s" opt; do
+while getopts ":b:cf:hm:p:s" opt; do
 	case $opt in
 		b) VM_ISO="$OPTARG" ;;
+		c) VM_GTK=0 ;;
 		f) VM_FMT="$OPTARG" ;;
 		h) usage ;;
 		m) VM_RAM="$OPTARG" ;;
@@ -53,14 +55,19 @@ if [ -n "$VM_ISO" ]; then
 	if [ ! -f "$VM_ISO" ]; then
 		p_err "$VM_ISO not found"
 	else
-		qemu_launch -cdrom "$VM_ISO" -boot order=d
+		VM_OPTS="-cdrom $VM_ISO -boot order=d"
 	fi
 else
-	if [ "$VM_TMP" = 1 ]; then
-		qemu_launch -snapshot
-	else
-		qemu_launch
-	fi
+	# CD-ROM image disables temporary file
+	[ "$VM_TMP" = 1 ] && VM_OPTS="-snapshot"
 fi
+
+if [ "$VM_GTK" = 0 ]; then
+	VM_OPTS="$VM_OPTS -nographic"
+else
+	VM_OPTS="$VM_OPTS -display gtk -vga std"
+fi
+
+qemu_launch $VM_OPTS
 
 exit
