@@ -1,0 +1,31 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+
+PLAY_FILE="/tmp/${0##*/}-$(id -u)"
+
+play_file() {
+	find "$(readlink -f "$1")" \
+		-type f \
+		-iname "*.flac" \
+		-o -iname "*.mp3" \
+		-o -iname "*.opus"
+}
+
+play_read() {
+	mpv \
+		--geometry="300x300-30+20" \
+		--playlist="$PLAY_FILE" \
+		$PLAY_ARG
+}
+
+if [ -z "$1" ] || [ ! -d "$1" ]; then
+	printf "usage: %s [DIR] [-s]\n" "${0##*/}" >&2
+	exit 1
+fi
+
+play_file "$1" | sort >"$PLAY_FILE"
+[ ! -s "$PLAY_FILE" ] && exit 1
+[ "$2" = "-s" ] && PLAY_ARG="--shuffle"
+play_read
+
+exit
