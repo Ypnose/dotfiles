@@ -63,9 +63,9 @@ gpg:
 	chmod 400 ${DESTDIR}/.gnupg/gpg.conf ${DESTDIR}/.gnupg/gpg-agent.conf
 
 scripts:
-	curl -o ${DESTDIR}/pyss https://framagit.org/Ypnose/pyss/raw/master/pyss
 	curl -o ${DESTDIR}/rypp https://framagit.org/Ypnose/rypp/raw/master/rypp
-	chmod +x ${DESTDIR}/pyss ${DESTDIR}/rypp
+	curl -o ${DESTDIR}/yss https://framagit.org/Ypnose/yss/raw/master/yss
+	chmod +x ${DESTDIR}/rypp ${DESTDIR}/yss
 
 ssh:
 	mkdir -p ${DESTDIR}/.ssh
