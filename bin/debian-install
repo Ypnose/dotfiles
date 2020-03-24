@@ -28,18 +28,19 @@ if [ "$(id -u)" -ne 0 ]; then
 	exit 1
 fi
 
-# https://salsa.debian.org/installer-team/debootstrap.git/
-if [ ! -x "${PWD}/debootstrap/debootstrap" ]; then
-	printf "%s\n" "debootstrap executable not found in ${PWD}/debootstrap" >&2
-	exit 1
-fi
-
 # Verify destination filesystem is mounted
 if [ ! -d "$DE_CHROOT" ]; then
 	printf "%s\n" "$DE_CHROOT directory is missing" >&2
 	exit 1
 elif ! mount | grep -q "^/dev/${DE_OSDISK}2"; then
 	printf "%s\n" "/dev/${DE_OSDISK}2 is not mounted inside $DE_CHROOT" >&2
+	exit 1
+fi
+
+# https://salsa.debian.org/installer-team/debootstrap.git/
+git clone https://salsa.debian.org/installer-team/debootstrap.git/
+if [ ! -x "${PWD}/debootstrap/debootstrap" ]; then
+	printf "%s\n" "debootstrap executable not found in ${PWD}/debootstrap" >&2
 	exit 1
 fi
 
@@ -117,8 +118,9 @@ chroot "${DE_CHROOT}" /bin/sh -l <<-EOF
 
 	rm -r /var/cache/apt/archives/
 	apt-get update
-	apt-get install -y whiptail netbase tzdata locales
-	dpkg-reconfigure tzdata
+	apt-get install -y netbase whiptail tzdata locales
+	dpkg-reconfigure -f tzdata
+	dpkg-reconfigure -f locales
 EOF
 
 printf "%s\n" "Do not forget to change root password!"
@@ -128,7 +130,8 @@ chroot "${DE_CHROOT}" /bin/sh -l
 
 ##############################
 
-umount "${DE_CHROOT}/dev/pts" "${DE_CHROOT}/dev" "${DE_CHROOT}/sys" "${DE_CHROOT}/proc"
+umount "${DE_CHROOT}/dev/pts" "${DE_CHROOT}/dev" "${DE_CHROOT}/sys" \
+	"${DE_CHROOT}/proc"
 printf "%s\n" "DONE"
 
 exit
