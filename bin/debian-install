@@ -8,7 +8,6 @@ DE_HOSTNA="$2"
 DE_HOSTNA="${DE_HOSTNA:-ypnbox}"
 DE_CHROOT="syschroot"
 DE_RELEAS="buster"
-#DE_REPURL="http://packages.devuan.org/merged"
 # Set PATH because the same value will be used by debootstrap. If not
 # set, it may fail on distro like Archlinux
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
@@ -28,7 +27,6 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 # https://anonscm.debian.org/git/d-i/debootstrap.git
-# https://git.devuan.org/devuan-packages/debootstrap
 if [ ! -x "${PWD}/debootstrap/debootstrap" ]; then
 	printf "%s\n" "debootstrap executable not found in ${PWD}/debootstrap" >&2
 	exit 1
@@ -46,10 +44,10 @@ fi
 # Launch the sauce
 DEBOOTSTRAP_DIR="${PWD}/debootstrap/"
 export DEBOOTSTRAP_DIR
-./debootstrap/debootstrap --arch=amd64 --variant=minbase "$DE_RELEAS" "$DE_CHROOT" "$DE_REPURL"
+./debootstrap/debootstrap --arch=amd64 --variant=minbase "$DE_RELEAS" "$DE_CHROOT"
 
 # No cruft
-cat >"${DE_CHROOT}/etc/apt/apt.conf.d/99yp" <<-EOF
+cat >"${DE_CHROOT}/etc/apt/apt.conf.d/02norecommends" <<-EOF
 	APT::Install-Recommends "false";
 	APT::Install-Suggests "false";
 EOF
@@ -76,14 +74,6 @@ cat >"${DE_CHROOT}/etc/hosts" <<-EOF
 	#fe00::0      ip6-localnet
 	#ff00::0      ip6-mcastprefix
 EOF
-
-# Loopback interface (only used by ifup(8))
-#mkdir -p "${DE_CHROOT}/etc/network"
-#cat >"${DE_CHROOT}/etc/network/interfaces" <<-EOF
-#	# The loopback network interface
-#	auto lo
-#	iface lo inet loopback
-#EOF
 
 # HISTFILE
 printf "\n%s\n" "unset HISTFILE" >>"${DE_CHROOT}/etc/profile"
