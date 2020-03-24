@@ -8,6 +8,8 @@ DE_HOSTNA="$2"
 DE_HOSTNA="${DE_HOSTNA:-ypnbox}"
 DE_CHROOT="syschroot"
 DE_RELEAS="buster"
+# Uncomment to use Ubuntu repository
+#DE_REPURL="https://fr.archive.ubuntu.com/ubuntu/"
 # Set PATH because the same value will be used by debootstrap. If not
 # set, it may fail on distro like Archlinux
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
@@ -26,7 +28,7 @@ if [ "$(id -u)" -ne 0 ]; then
 	exit 1
 fi
 
-# https://anonscm.debian.org/git/d-i/debootstrap.git
+# https://salsa.debian.org/installer-team/debootstrap.git/
 if [ ! -x "${PWD}/debootstrap/debootstrap" ]; then
 	printf "%s\n" "debootstrap executable not found in ${PWD}/debootstrap" >&2
 	exit 1
@@ -44,7 +46,7 @@ fi
 # Launch the sauce
 DEBOOTSTRAP_DIR="${PWD}/debootstrap/"
 export DEBOOTSTRAP_DIR
-./debootstrap/debootstrap --arch=amd64 --variant=minbase "$DE_RELEAS" "$DE_CHROOT"
+./debootstrap/debootstrap --arch=amd64 --variant=minbase "$DE_RELEAS" "$DE_CHROOT" "$DE_REPURL"
 
 # No cruft
 cat >"${DE_CHROOT}/etc/apt/apt.conf.d/02norecommends" <<-EOF
@@ -115,7 +117,7 @@ chroot "${DE_CHROOT}" /bin/sh -l <<-EOF
 
 	rm -r /var/cache/apt/archives/
 	apt-get update
-	apt-get install -y dialog netbase
+	apt-get install -y whiptail netbase tzdata locales
 	dpkg-reconfigure tzdata
 EOF
 
