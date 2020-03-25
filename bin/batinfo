@@ -14,7 +14,7 @@ if [ "$BAT_CAPA" -eq 100 ]; then
 fi
 
 # Status (ignoring Full or Unknown)
-IFS=$'\n' read -r BAT_STAT <"${BAT_PATH}/status"
+IFS= read -r BAT_STAT <"${BAT_PATH}/status"
 if [ "$BAT_STAT" = "Charging" ]; then
 	BAT_DISP="AC"
 elif [ "$BAT_STAT" = "Discharging" ]; then
