@@ -119,11 +119,11 @@ chroot "${DE_CHROOT}" /bin/sh -l <<-EOF
 	rm -r /var/cache/apt/archives/
 	apt-get update
 	apt-get install -y netbase whiptail tzdata locales
-	dpkg-reconfigure -f tzdata
-	dpkg-reconfigure -f locales
+	dpkg-reconfigure tzdata
+	dpkg-reconfigure locales
 EOF
 
-printf "%s\n" "Do not forget to change root password!"
+printf "%s\n" "###### ENTERING IN CHROOT ######"
 
 # Go inside and do your business...
 chroot "${DE_CHROOT}" /bin/sh -l
