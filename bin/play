@@ -25,6 +25,7 @@ fi
 
 play_file "$1" | sort >"$PLAY_FILE"
 [ ! -s "$PLAY_FILE" ] && exit 1
+printf "[%s] %s file(s) in playlist\n" "${0##*/}" "$(grep -c '^/' "$PLAY_FILE")"
 [ "$2" = "-s" ] && PLAY_ARG="--shuffle"
 play_read
 
