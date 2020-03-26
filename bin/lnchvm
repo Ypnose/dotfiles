@@ -1,15 +1,13 @@
 #!/bin/sh
 # Script by Ypnose - http://ywstd.fr
 
-VM_GTK=1
-
 p_err() {
 	printf "%s\n" "$1" >&2
 	exit 1
 }
 
 usage() {
-	p_err "usage: ${0##*/} [-b ISO] [-c] [-f FMT] [-h] [-m RAM] [-p SSH PORT] [-s] [IMG]"
+	p_err "usage: ${0##*/} [-b ISO] [-c] [-f FMT] [-h] [-m RAM] [-n] [-p SSH PORT] [-s] [IMG]"
 }
 
 qemu_launch() {
@@ -23,13 +21,14 @@ qemu_launch() {
 		"$@"
 }
 
-while getopts ":b:cf:hm:p:s" opt; do
+while getopts ":b:cf:hm:np:s" opt; do
 	case $opt in
 		b) VM_ISO="$OPTARG" ;;
-		c) VM_GTK=0 ;;
+		c) VM_UI="curses" ;;
 		f) VM_FMT="$OPTARG" ;;
 		h) usage ;;
 		m) VM_RAM="$OPTARG" ;;
+		n) VM_UI="serial" ;;
 		p) VM_SSH="$OPTARG" ;;
 		s) VM_TMP=1 ;;
 		*) usage ;;
@@ -62,11 +61,11 @@ else
 	[ "$VM_TMP" = 1 ] && VM_OPTS="-snapshot"
 fi
 
-if [ "$VM_GTK" = 0 ]; then
-	VM_OPTS="$VM_OPTS -nographic"
-else
-	VM_OPTS="$VM_OPTS -display gtk -vga std"
-fi
+case "$VM_UI" in
+	curses) VM_OPTS="$VM_OPTS -curses" ;;
+	serial) VM_OPTS="$VM_OPTS -nographic" ;;
+	*) VM_OPTS="$VM_OPTS -display gtk -vga std" ;;
+esac
 
 qemu_launch $VM_OPTS
 
