@@ -7,11 +7,13 @@ VO_OSPART="$2"
 VO_HOSTNA="$3"
 VO_CHROOT="syschroot"
 VO_REPURL="http://alpha.de.repo.voidlinux.org/current"
+
+###### Following variables only used with UEFI ######
 VO_OSUEFI="1"
-VO_OSLUKS="1"
 # With UEFI, we assume ESP is the first partition
 VO_SYSESP="${VO_OSDISK}1"
 # With UEFI and LUKS, we assume /boot is the second partition
+VO_OSLUKS="1"
 VO_OSBOOT="${VO_OSDISK}2"
 
 ##############################
