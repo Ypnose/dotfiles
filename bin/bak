@@ -11,13 +11,10 @@ function p_err {
 }
 
 if (( $# != 1 )) || [[ $1 = "-h" ]]; then
-	print "usage: ${0##*/} [FILE]"
-	exit
+	p_err "usage: ${0##*/} [FILE]"
 fi
 
-if [[ ! -f $1 ]]; then
-	p_err "$1 is missing!"
-fi
+[[ ! -f $1 ]] && exit 1
 
 while true; do
 	if (( N > BAK_LIM )); then
