@@ -1,0 +1,50 @@
+#!/bin/sh
+# Script by Ypnose - http://ywstd.fr
+
+C_DIR1="$1"
+C_DIR2="$2"
+
+rec_list() {
+	( cd "$1" >/dev/null && find * -type f )
+}
+
+# sha512sum is MUCH faster than sha256sum, it's quite obvious with
+# huge directories including many files to check
+# https://crypto.stackexchange.com/questions/26336/sha512-faster-than-sha256
+strip_sums() {
+	SUM="$(sha512sum "$1")" && printf "%s\n" "${SUM%% *}"
+}
+
+check_file() {
+	# Verify files from first directory
+	rec_list "$C_DIR1" | while IFS= read -r C_FILE; do
+		C_CUR="${C_DIR1}/${C_FILE}"
+		C_DES="${C_DIR2}/${C_FILE}"
+		if [ -f "$C_DES" ]; then
+			if [ "$(strip_sums "$C_CUR")" = "$(strip_sums "$C_DES")" ]; then
+				C_STATUS="OK"
+			else
+				C_STATUS="MISMATCH"
+			fi
+		else
+			C_STATUS="MISSING in $C_DIR2"
+		fi
+		printf "%s: %s\n" "$C_FILE" "$C_STATUS"
+	done
+
+	# List files from second directory missing in the first directory
+	rec_list "$C_DIR2" | while IFS= read -r C_FILE; do
+		if [ ! -f "${C_DIR1}/${C_FILE}" ]; then
+			printf "%s: MISSING in %s\n" "$C_FILE" "$C_DIR1"
+		fi
+	done
+}
+
+if [ "$#" -ne 2 ] || [ ! -d "$C_DIR1" ] || [ ! -d "$C_DIR2" ]; then
+	printf "usage: %s [DIR1] [DIR2]\n" "${0##*/}" >&2
+	exit 1
+fi
+
+check_file | sort -df
+
+exit
