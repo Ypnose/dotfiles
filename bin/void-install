@@ -171,6 +171,9 @@ chroot "${VO_CHROOT}" /bin/sh -l <<-EOF
 	export LC_ALL
 
 	xbps-alternatives -g sh -s dash
+	mkdir -p /run/runit/runsvdir/
+	cd /run/runit/runsvdir/ && ln -sf /etc/runit/runsvdir/current
+	ls -Al /var/service/
 EOF
 
 printf "%s\n" "###### ENTERING IN CHROOT ######"
