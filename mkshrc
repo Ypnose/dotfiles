@@ -45,9 +45,6 @@ function lf {
 		| while IFS=$'\n' read -r F_FIL; do \
 			print -r -- "${F_FIL##*/}"; done
 }
-function massdiff {
-	LC_ALL=C diff -rq "$@" | grep '^Files '
-}
 function nd {
 	mkdir -p "$1" && cd "$1" && ls
 }
@@ -65,9 +62,6 @@ function shadate {
 }
 function tva {
 	print -r -- "scale=2;${1//,/.}*0.2;${1//,/.}+." | bc
-}
-function whatfile {
-	LC_ALL=C diff -rq "$@" | grep '^Only '
 }
 
 # -- ALIASES -----------------------------------------------------------
