@@ -39,6 +39,10 @@ clean:
 conf:
 	mkdir -p ${DESTDIR}/.config
 	cp misc/xdg/user-dirs.dirs ${DESTDIR}/.config
+	mkdir -p ${DESTDIR}/.config/xkb/rules
+	cp xkb/evdev ${DESTDIR}/.config/xkb/rules
+	mkdir -p ${DESTDIR}/.config/xkb/symbols
+	cp xkb/kbyp ${DESTDIR}/.config/xkb/symbols
 	mkdir -p ${DESTDIR}/.yusr/etc
 	cp misc/firefox/prefs.js ${DESTDIR}/.yusr/etc
 	cp misc/wpa_supplicant/wpa-example.conf ${DESTDIR}/.yusr/etc
