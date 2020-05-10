@@ -192,7 +192,7 @@ bar {
 	modifier Mod4
 
 	# Status
-	status_command while date +'%Y-%m-%d %a %H:%M '; do sleep 30; done
+	status_command while ib; do sleep 30; done
 
 	colors {
 		background $colbg
