@@ -45,7 +45,7 @@
 	bindsym $mod+s exec swaylock -f -c 505050 -eF
 
 	# Launch a terminal
-	bindsym $mod+Return exec uxterm
+	bindsym $mod+Return exec alacritty
 
 	# Kill focused window
 	bindsym $mod+Shift+c kill

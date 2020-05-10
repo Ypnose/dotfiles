@@ -87,6 +87,8 @@ svn:
 wayland:
 	mkdir -p ${DESTDIR}/.config/sway
 	cp gui/swayconfig ${DESTDIR}/.config/sway/config
+	mkdir -p ${DESTDIR}/.config/alacritty
+	cp gui/alacritty.yml ${DESTDIR}/.config/alacritty
 
 xorg:
 	mkdir -p ${DESTDIR}/.config/i3
