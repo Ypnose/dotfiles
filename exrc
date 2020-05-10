@@ -1,3 +1,4 @@
+set ignorecase
 set ruler
 set secure
 set showmode
