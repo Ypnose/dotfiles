@@ -173,7 +173,7 @@ bindsym $mod+r mode "resize"
 ### Borders ###
 #
 	# Disable borders with only one window visible
-	hide_edge_borders both
+	hide_edge_borders --i3 both
 
 	# Pixel size
 	default_border pixel 4
