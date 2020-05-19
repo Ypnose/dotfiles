@@ -14,8 +14,7 @@ play_file() {
 play_read() {
 	mpv \
 		--geometry="300x300-30+20" \
-		--playlist="$PLAY_FILE" \
-		$PLAY_ARG
+		--playlist="$PLAY_FILE"
 }
 
 if [ -z "$1" ] || [ ! -d "$1" ]; then
@@ -23,10 +22,10 @@ if [ -z "$1" ] || [ ! -d "$1" ]; then
 	exit 1
 fi
 
-play_file "$1" | sort >"$PLAY_FILE"
+[ "$2" = "-s" ] && SORT_OPT="-R"
+play_file "$1" | sort $SORT_OPT >"$PLAY_FILE"
 [ ! -s "$PLAY_FILE" ] && exit 1
 printf "[%s] %s file(s) in playlist\n" "${0##*/}" "$(grep -c '^/' "$PLAY_FILE")"
-[ "$2" = "-s" ] && PLAY_ARG="--shuffle"
 play_read
 
 exit
