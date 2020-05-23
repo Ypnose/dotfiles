@@ -14,7 +14,7 @@ list:
 	@awk -F':' '!/(all|list)/&&/^[a-z]+:/{printf(" * %s\n", $$1);next}' Makefile
 
 diff:
-	@sh check-changes | yiff
+	@sh diff-files | yiff
 
 newbox: clean base ssh bin scripts gpg fonts conf
 
