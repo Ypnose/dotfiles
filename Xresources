@@ -28,17 +28,17 @@ xterm*scrollBar:        false
 xterm*utf8:             2
 
 ! -- Colors ------------------------------------------------------------
-*background: #FAF0D6
+*background: #EDE4CB
 *foreground: #040404
 ! -- Black --
-*color0:  #141414
+*color0:  #080808
 *color8:  #404040
 ! -- Red --
 *color1:  #802E3B
 *color9:  #951D45
 ! -- Green --
 *color2:  #5B7A52
-*color10: #5B7523
+*color10: #577022
 ! -- Yellow --
 *color3:  #945D2D
 *color11: #873411

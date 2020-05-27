@@ -179,7 +179,7 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: '#FAF0D6'
+    background: '#EDE4CB'
     foreground: '#040404'
 
     # Bright and dim foreground colors
@@ -209,7 +209,7 @@ colors:
 
   # Normal colors
   normal:
-    black:   '#141414'
+    black:   '#080808'
     red:     '#802E3B'
     green:   '#5B7A52'
     yellow:  '#945D2D'
@@ -222,7 +222,7 @@ colors:
   bright:
     black:   '#404040'
     red:     '#951D45'
-    green:   '#5B7523'
+    green:   '#577022'
     yellow:  '#873411'
     blue:    '#324461'
     magenta: '#4C3366'
