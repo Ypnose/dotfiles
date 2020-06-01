@@ -166,7 +166,6 @@ bindsym $mod+r mode "resize"
 #
 ### Windows ###
 #
-	for_window [class="mpv"] floating enable
 	for_window [class="Sxiv"] floating enable
 
 #
