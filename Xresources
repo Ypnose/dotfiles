@@ -4,8 +4,8 @@
 ! ---------------------------------------------------------------------+
 
 ! -- Fonts -------------------------------------------------------------
-URxvt*font:      xft:Ubuntu Mono:size=12:antialias=true
-URxvt*boldFont:  xft:Ubuntu Mono:bold:size=12:antialias=true
+URxvt*font:      xft:Iosevka Term Custom:style=Medium Extended:size=10.5:antialias=true
+URxvt*boldFont:  xft:Iosevka Term Custom:style=Extrabold Extended:size=10.5:antialias=true
 
 xterm*font:      -*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*
 xterm*boldFont:  -*-terminus-bold-*-*-*-16-*-*-*-*-*-*-*
