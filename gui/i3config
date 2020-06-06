@@ -164,11 +164,6 @@ bindsym $mod+r mode "resize"
 	#bindsym $mod+Shift+9 move container to workspace 9
 
 #
-### Windows ###
-#
-	for_window [class="Sxiv"] floating enable
-
-#
 ### Borders ###
 #
 	# Disable borders with only one window visible
