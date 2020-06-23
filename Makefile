@@ -18,6 +18,8 @@ diff:
 
 newbox: clean base ssh bin scripts gpg fonts conf
 
+rescue: clean base ssh gpg
+
 ####################
 
 base:
@@ -95,4 +97,4 @@ xorg:
 	cp gui/i3config ${DESTDIR}/.config/i3/config
 	test -f ${DESTDIR}/.xinitrc || cp xinitrc ${DESTDIR}/.xinitrc
 
-.PHONY: all list diff newbox base bin clean conf fonts gpg scripts ssh svn wayland xorg
+.PHONY: all list diff newbox rescue base bin clean conf fonts gpg scripts ssh svn wayland xorg
