@@ -37,7 +37,7 @@ user_pref("browser.search.suggest.enabled", false);
 user_pref("browser.sessionstore.warnOnQuit", true);
 user_pref("browser.slowStartup.notificationDisabled", true);
 user_pref("browser.startup.homepage", "about:blank");
-user_pref("browser.startup.page", 3);
+user_pref("browser.startup.page", 0);
 user_pref("browser.urlbar.autocomplete.enabled", false);
 user_pref("browser.urlbar.suggest.bookmark", false);
 user_pref("browser.urlbar.suggest.history", false);
