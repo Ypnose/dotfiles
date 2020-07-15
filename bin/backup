@@ -67,7 +67,6 @@ rsync \
 	--delete-delay \
 	--exclude=".gnupg/random_seed" \
 	--exclude=".gnupg/S.*" \
-	--exclude=".yusr/bin/" \
 	--exclude="*.dump" \
 	--exclude="*.qcow2*" \
 	--exclude="*.raw" \
