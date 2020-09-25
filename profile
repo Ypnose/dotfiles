@@ -27,7 +27,7 @@ fi
 
 # LESS
 PAGER=less
-LESS="-KR"
+LESS="-KRx4"
 LESSHISTFILE="-"
 
 # XDG
