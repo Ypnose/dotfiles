@@ -7,6 +7,8 @@
 [[ -f ${HOME}/.bashrc ]] && . "${HOME}/.bashrc"
 
 # -- ENVIRONMENT -------------------------------------------------------
+umask 077
+
 # LESS
 if [[ -x $(command -v less) ]]; then
 	PAGER=less
