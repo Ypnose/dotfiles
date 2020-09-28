@@ -14,6 +14,8 @@ CDPATH=".:${HOME}"
 MANPATH=":${RYPP_DEST}/man"
 
 # -- ENVIRONMENT -------------------------------------------------------
+umask 077
+
 # EDITOR
 EDITOR=vi
 VISUAL="$EDITOR"
