@@ -20,13 +20,6 @@ umask 077
 EDITOR=vi
 VISUAL="$EDITOR"
 
-# {N,M}AILRC
-if [[ -r ${HOME}/.yusr/etc/nailrc ]]; then
-	MAILRC="${HOME}/.yusr/etc/nailrc"
-elif [[ -r ${HOME}/.yusr/etc/mailrc ]]; then
-	MAILRC="${HOME}/.yusr/etc/mailrc"
-fi
-
 # LESS
 PAGER=less
 LESS="-KRx4"
@@ -37,7 +30,7 @@ XDG_CACHE_HOME="/tmp"
 
 # -- EXPORT ------------------------------------------------------------
 export RYPP_DEST RYPP_REPO PATH CDPATH MANPATH \
-	EDITOR VISUAL MAILRC PAGER LESS LESSHISTFILE XDG_CACHE_HOME
+	EDITOR VISUAL PAGER LESS LESSHISTFILE XDG_CACHE_HOME
 
 # -- VARIOUS -----------------------------------------------------------
 unset HISTFILE
