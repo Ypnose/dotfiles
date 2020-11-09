@@ -32,7 +32,7 @@ while getopts ":df:t" opt; do
 			BACK_INCL="$OPTARG"
 			;;
 		t)
-			BACK_TARB="1"
+			BACK_SQSH="1"
 			;;
 		*)
 			usage
@@ -79,11 +79,16 @@ rsync \
 	"${BACK_OPTS[@]}" \
 	"$1" "$BACK_DEST"
 
-# Archive final DEST!!
-# Create an archive only if it's not dry run
-if (( BACK_TARB == 1 && BACK_DRYR != 1 )); then
+# Create a Squashfs filesystem only if it's not dry run
+if (( BACK_SQSH == 1 && BACK_DRYR != 1 )); then
 	sleep 5
-	tar -cvzf "BACKUP-$(hostname)-${BACK_DATE}.tar.gz" "$BACK_DEST"
+	mksquashfs \
+		"$BACK_DEST" \
+		"BACKUP-$(hostname)-${BACK_DATE}.sqsh" \
+		-comp gzip \
+		-keep-as-directory \
+		-reproducible \
+		-xattrs
 fi
 
 exit
