@@ -15,7 +15,7 @@
 
 	# Colors
 	set $colbd #3E463E
-	set $colbg #535F53
+	set $colbg #6E806E
 	set $colfg #FFFFFF
 	set $colid #26665D
 	set $colbu #333333
@@ -207,7 +207,7 @@ bar {
 	titlebar_border_thickness 2
 
 	# Background color for all screens
-	output * background #6D7F6F solid_color
+	output * background #8AA08A solid_color
 
 	# Keyboard layout
 	input type:keyboard {

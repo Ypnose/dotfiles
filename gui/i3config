@@ -15,7 +15,7 @@
 
 	# Colors
 	set $colbd #3E463E
-	set $colbg #535F53
+	set $colbg #6E806E
 	set $colfg #FFFFFF
 	set $colid #26665D
 	set $colbu #333333
