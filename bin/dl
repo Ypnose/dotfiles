@@ -1,6 +1,8 @@
 #!/usr/bin/mksh
 # Script by Ypnose - http://ywstd.fr
 
+DL_UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36"
+
 if [[ -z $1 || $1 = "-h" ]]; then
 	print "usage: ${0##*/} [URL]"
 	exit
@@ -8,10 +10,10 @@ fi
 
 if [[ -x $(whence -p curl) ]]; then
 	for f in "$@"; do
-		curl -fOL --ipv4 -- "$f"
+		curl -A "$DL_UA" -fOL --ipv4 -- "$f"
 	done
 elif [[ -x $(whence -p wget) ]]; then
-	wget -- "$@"
+	wget -U "$DL_UA" -- "$@"
 else
 	print -u2 "Unable to find curl or wget"
 	exit 1
