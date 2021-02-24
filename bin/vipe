@@ -5,6 +5,7 @@ set -eu
 TMP_F="$(mktemp "/tmp/${0##*/}.XXXXXXXXXX")"
 trap 'shred -u "$TMP_F"' INT EXIT TERM
 
+chmod 600 "$TMP_F"
 chown "$USER" "$TMP_F"
 cat >"$TMP_F"
 "$EDITOR" "$TMP_F" </dev/tty >/dev/tty
