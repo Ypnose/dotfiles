@@ -16,16 +16,16 @@ RYPP_REPO="http://ywstd.fr/repo"
 CDPATH=".:${HOME}"
 MANPATH=":${RYPP_DEST}/man"
 
-# EDITOR
+# -- EDITOR ------------------------------------------------------------
 EDITOR=vi
 VISUAL="$EDITOR"
 
-# LESS
+# -- LESS --------------------------------------------------------------
 PAGER=less
 LESS="-KRx4"
 LESSHISTFILE="-"
 
-# XDG
+# -- XDG ---------------------------------------------------------------
 XDG_CACHE_HOME="/tmp"
 
 # -- EXPORT ------------------------------------------------------------
