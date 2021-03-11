@@ -21,6 +21,6 @@ elif [ "$BAT_STAT" = "Discharging" ]; then
 	BAT_DISP="DIS"
 fi
 
-printf "%s %s\n" "$BAT_CAPA" "${BAT_DISP:--}"
+printf "%s %s\n" "${BAT_DISP:--}" "$BAT_CAPA"
 
 exit
