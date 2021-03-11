@@ -5,7 +5,7 @@ diff_found() {
 	if [ -f "$1" ]; then diff -u "$1" "$2"; fi
 }
 
-find . -maxdepth 1 -type f | sort | while IFS=$'\n' read -r FILE; do
+find . -maxdepth 1 -type f | sort | while IFS= read -r FILE; do
 	diff_found "${HOME}/.${FILE##*/}" "$FILE"
 done
 diff_found "${HOME}/.gnupg/gpg.conf" gpg/gpg.conf
