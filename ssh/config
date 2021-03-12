@@ -4,7 +4,6 @@
 # ---------------------------------------------------------------------+
 
 # -- OPTIONS -----------------------------------------------------------
-CheckHostIP yes
 ForwardAgent no
 HashKnownHosts yes
 ServerAliveInterval 60
