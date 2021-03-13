@@ -8,6 +8,12 @@ diff_found() {
 find . -maxdepth 1 -type f | sort | while IFS= read -r FILE; do
 	diff_found "${HOME}/.${FILE##*/}" "$FILE"
 done
+if [ -f "${HOME}/.ssh/config" ]; then
+	(
+		CONFIG_LINES="$(awk 'END{print NR}' ssh/config)"
+		head -n"$CONFIG_LINES" "${HOME}/.ssh/config" | diff -u - ssh/config
+	)
+fi
 diff_found "${HOME}/.gnupg/gpg.conf" gpg/gpg.conf
 diff_found "${HOME}/.gnupg/gpg-agent.conf" gpg/gpg-agent.conf
 diff_found "${HOME}/.gtkrc-2.0" misc/fonts/gtkrc-2.0
