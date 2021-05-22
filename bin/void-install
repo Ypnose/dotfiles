@@ -103,7 +103,7 @@ cat >>"${VO_CHROOT}/etc/fstab" <<-EOF
 	UUID=${VO_OSUUID} / ext4 defaults,rw,errors=remount-ro 0 1
 EOF
 
-# hostname + /etc/hosts
+# /etc/hostname + /etc/hosts
 printf "%s\n" "$VO_HOSTNA" >"${VO_CHROOT}/etc/hostname"
 cat >"${VO_CHROOT}/etc/hosts" <<-EOF
 	# /etc/hosts
@@ -117,10 +117,10 @@ cat >"${VO_CHROOT}/etc/hosts" <<-EOF
 	#ff00::0      ip6-mcastprefix
 EOF
 
-# HISTFILE
+# /etc/profile
 printf "\n%s\n" "unset HISTFILE" >>"${VO_CHROOT}/etc/profile"
 
-# rc.conf
+# /etc/rc.conf
 sed -i -e '/HARDWARECLOCK/s/^#//g' \
 	-e 's|^#\?TIMEZONE=.*|TIMEZONE="Europe/Paris"|g' \
 	-e 's|^#\?KEYMAP=.*|KEYMAP="uk"|g' \
@@ -128,8 +128,8 @@ sed -i -e '/HARDWARECLOCK/s/^#//g' \
 
 # IPv6
 mkdir -p "${VO_CHROOT}/etc/sysctl.d"
-cat >"${VO_CHROOT}/etc/sysctl.d/yp.conf" <<-EOF
-	# /etc/sysctl.d/yp.conf
+cat >"${VO_CHROOT}/etc/sysctl.d/no-ipv6.conf" <<-EOF
+	# /etc/sysctl.d/no-ipv6.conf
 
 	# Disable IPv6
 	net.ipv6.conf.all.disable_ipv6 = 1
@@ -154,9 +154,9 @@ fi
 mkdir -p "${VO_CHROOT}/run/udev"
 mount -t proc proc "${VO_CHROOT}/proc"
 mount -t sysfs sys "${VO_CHROOT}/sys"
-mount -o bind /dev "${VO_CHROOT}/dev"
-mount -o bind /dev/pts "${VO_CHROOT}/dev/pts"
-mount -o bind /run/udev "${VO_CHROOT}/run/udev"
+mount --bind /dev "${VO_CHROOT}/dev"
+mount --bind /dev/pts "${VO_CHROOT}/dev/pts"
+mount --bind /run/udev "${VO_CHROOT}/run/udev"
 if [ "$VO_OSUEFI" = "1" ]; then
 	if [ "$VO_OSLUKS" = "1" ]; then
 		mount "$VO_OSBOOT" "${VO_CHROOT}/boot"
@@ -190,8 +190,12 @@ if [ "$VO_OSUEFI" = "1" ]; then
 		umount "${VO_CHROOT}/boot"
 	fi
 fi
-umount "${VO_CHROOT}/run/udev" "${VO_CHROOT}/dev/pts" \
-	"${VO_CHROOT}/dev" "${VO_CHROOT}/sys" "${VO_CHROOT}/proc"
+umount \
+	"${VO_CHROOT}/run/udev" \
+	"${VO_CHROOT}/dev/pts" \
+	"${VO_CHROOT}/dev" \
+	"${VO_CHROOT}/sys" \
+	"${VO_CHROOT}/proc"
 printf "%s\n" "DONE"
 
 exit
