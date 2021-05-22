@@ -1,6 +1,6 @@
 #!/bin/sh
 # Script by Ypnose - http://ywstd.fr
-# Read metaflac(1) if your brain explodes
+# Read metaflac(1) if your brain collapses
 
 FTAG_FILE="$1"
 
