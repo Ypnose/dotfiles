@@ -3,7 +3,7 @@
 set -ex
 
 if [ "$#" -lt 2 ] || [ "$1" = "-h" ]; then
-	printf "usage: %s [INTERFACE] [IP] [ROUTE]\n" "${0##*/}"
+	printf "usage: %s [INTERFACE] [-d] [IP] [ROUTE]\n" "${0##*/}"
 	exit
 fi
 
