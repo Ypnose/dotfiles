@@ -5,7 +5,6 @@ set -e
 
 DE_OSDISK="$1"
 DE_HOSTNA="$2"
-DE_HOSTNA="${DE_HOSTNA:-ypnbox}"
 DE_CHROOT="syschroot"
 DE_RELEAS="buster"
 # Uncomment to use Ubuntu repository
@@ -18,7 +17,7 @@ export PATH
 ##############################
 
 # 1 = swap | 2 = / | 3 = other
-if [ -z "$1" ] || [ "$1" = "-h" ]; then
+if [ "$#" -ne 2 ] || [ "$1" = "-h" ]; then
 	printf "%s\n" "usage: ${0##*/} [DISK] [HOSTNAME]"
 	exit
 fi
@@ -47,7 +46,10 @@ fi
 # Launch the sauce
 DEBOOTSTRAP_DIR="${PWD}/debootstrap/"
 export DEBOOTSTRAP_DIR
-./debootstrap/debootstrap --arch=amd64 --variant=minbase "$DE_RELEAS" "$DE_CHROOT" "$DE_REPURL"
+./debootstrap/debootstrap --arch=amd64 --variant=minbase \
+	"$DE_RELEAS" \
+	"$DE_CHROOT" \
+	"$DE_REPURL"
 
 # No cruft
 cat >"${DE_CHROOT}/etc/apt/apt.conf.d/02norecommends" <<-EOF
@@ -65,26 +67,26 @@ cat >"${DE_CHROOT}/etc/fstab" <<-EOF
 	tmpfs /tmp tmpfs nodev,nosuid 0 0
 EOF
 
-# hostname + /etc/hosts
-printf "%s\n" "$DE_HOSTNA" >"${DE_CHROOT}/etc/hostname"
+# /etc/hostname + /etc/hosts
+printf "%s\n" "${DE_HOSTNA%%.*}" >"${DE_CHROOT}/etc/hostname"
 cat >"${DE_CHROOT}/etc/hosts" <<-EOF
 	# /etc/hosts
 
 	127.0.0.1    localhost
-	127.0.1.1    $DE_HOSTNA
+	127.0.1.1    $DE_HOSTNA    ${DE_HOSTNA%%.*}
 	# IPv6
 	#::1          ip6-localhost ip6-loopback
 	#fe00::0      ip6-localnet
 	#ff00::0      ip6-mcastprefix
 EOF
 
-# HISTFILE
+# /etc/profile
 printf "\n%s\n" "unset HISTFILE" >>"${DE_CHROOT}/etc/profile"
 
 # IPv6
 mkdir -p "${DE_CHROOT}/etc/sysctl.d"
-cat >"${DE_CHROOT}/etc/sysctl.d/yp.conf" <<-EOF
-	# /etc/sysctl.d/yp.conf
+cat >"${DE_CHROOT}/etc/sysctl.d/no-ipv6.conf" <<-EOF
+	# /etc/sysctl.d/no-ipv6.conf
 
 	# Disable IPv6
 	net.ipv6.conf.all.disable_ipv6 = 1
@@ -108,8 +110,8 @@ fi
 
 mount -t proc proc "${DE_CHROOT}/proc"
 mount -t sysfs sys "${DE_CHROOT}/sys"
-mount -o bind /dev "${DE_CHROOT}/dev"
-mount -o bind /dev/pts "${DE_CHROOT}/dev/pts"
+mount --bind /dev "${DE_CHROOT}/dev"
+mount --bind /dev/pts "${DE_CHROOT}/dev/pts"
 
 # Run commands inside the chroot
 chroot "${DE_CHROOT}" /bin/sh -l <<-EOF
@@ -130,7 +132,11 @@ chroot "${DE_CHROOT}" /bin/sh -l
 
 ##############################
 
-umount "${DE_CHROOT}/dev/pts" "${DE_CHROOT}/dev" "${DE_CHROOT}/sys" \
+sync
+umount \
+	"${DE_CHROOT}/dev/pts" \
+	"${DE_CHROOT}/dev" \
+	"${DE_CHROOT}/sys" \
 	"${DE_CHROOT}/proc"
 printf "%s\n" "DONE"
 
