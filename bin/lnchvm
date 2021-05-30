@@ -7,7 +7,7 @@ p_err() {
 }
 
 usage() {
-	p_err "usage: ${0##*/} [-b ISO] [-c] [-f FMT] [-h] [-m RAM] [-n] [-p SSH PORT] [-s] [IMG]"
+	p_err "usage: ${0##*/} [-b ISO] [-c] [-f FMT] [-h] [-m RAM] [-n] [-p SSH PORT] [-s] [-u OVMF DIR] [IMG]"
 }
 
 qemu_launch() {
@@ -20,7 +20,7 @@ qemu_launch() {
 		"$@"
 }
 
-while getopts ":b:cf:hm:np:s" opt; do
+while getopts ":b:cf:hm:np:su:" opt; do
 	case $opt in
 		b) VM_ISO="$OPTARG" ;;
 		c) VM_UI="curses" ;;
@@ -30,6 +30,7 @@ while getopts ":b:cf:hm:np:s" opt; do
 		n) VM_UI="serial" ;;
 		p) VM_SSH="$OPTARG" ;;
 		s) VM_TMP=1 ;;
+		u) VM_OVMF="$OPTARG" ;;
 		*) usage ;;
 	esac
 done
@@ -58,6 +59,14 @@ if [ -n "$VM_ISO" ]; then
 else
 	# CD-ROM image disables temporary file
 	[ "$VM_TMP" = 1 ] && VM_OPTS="-snapshot"
+fi
+
+# UEFI boot mode
+if [ -n "$VM_OVMF" ]; then
+	if [ ! -r "${VM_OVMF}/OVMF_CODE.fd" ] || [ ! -r "${VM_OVMF}/OVMF_VARS.fd" ]; then
+		p_err "${VM_OVMF}/OVMF_CODE.fd or ${VM_OVMF}/OVMF_VARS.fd missing or unreadable"
+	fi
+	VM_OPTS="$VM_OPTS -drive if=pflash,file=${VM_OVMF}/OVMF_CODE.fd,format=raw,readonly=on -drive if=pflash,file=${VM_OVMF}/OVMF_VARS.fd,format=raw"
 fi
 
 case "$VM_UI" in
