@@ -21,5 +21,6 @@ diff_found "${HOME}/.config/gtk-3.0/settings.ini" misc/fonts/settings.ini
 diff_found "${HOME}/.config/i3/config" gui/i3config
 diff_found "${HOME}/.config/sway/config" gui/swayconfig
 diff_found "${HOME}/.config/alacritty/alacritty.yml" gui/alacritty.yml
+diff_found "${HOME}/.config/foot/foot.ini" gui/foot.ini
 
 exit
