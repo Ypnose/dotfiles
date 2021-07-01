@@ -40,7 +40,12 @@
 	floating_modifier $mod
 
 	# Launcher
-	bindsym $mod+e exec rofi -show run
+	bindsym $mod+e exec bemenu-run --list 4 --prompt 'run: ' \
+		--fn '$font $fontsize' \
+		--tb '$colbe' --tf '$colfg' \
+		--fb '$colbe' --ff '$colfg' \
+		--nb '$colbe' --nf '$colfu' \
+		--hb '$colid' --hf '$colfg'
 
 	# Locker
 	bindsym $mod+s exec swaylock -f -c 505050 -eF
