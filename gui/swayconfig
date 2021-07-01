@@ -31,7 +31,7 @@
 ### Global ###
 #
 	# Font for window titles (use pango-list)
-	font pango:$font $fontsize
+	font $font $fontsize
 
 	# Default orientation
 	default_orientation horizontal
@@ -52,9 +52,9 @@
 	bindsym $mod+Shift+c kill
 
 	# Quit sway
-	bindsym $mod+Shift+q exec "swaynag -f '$font $fontsize' \
+	bindsym $mod+Shift+q exec swaynag -f '$font $fontsize' \
 		-t error -m 'Do you really want to exit sway ?' \
-		-b 'Yes' 'swaymsg exit'"
+		-b 'Yes' 'swaymsg exit'
 
 	# Restart sway
 	bindsym $mod+Shift+r reload
