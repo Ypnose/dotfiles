@@ -180,6 +180,13 @@ bindsym $mod+r mode "resize"
 	default_floating_border pixel 4
 
 #
+### Windows ###
+#
+	# Get layout tree of windows: swaymsg -t get_tree
+	for_window [title=".* - Choose User Profile"] floating enable
+	for_window [title=".* - Sharing Indicator"] floating enable
+
+#
 ### Bar ###
 #
 bar {
@@ -206,8 +213,8 @@ bar {
 #
 ### Sway ###
 #
-	# Enable Xwayland support
-	xwayland enable
+	# Disable Xwayland support
+	xwayland false
 
 	# Titlebar border
 	titlebar_border_thickness 2
