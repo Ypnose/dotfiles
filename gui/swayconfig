@@ -21,6 +21,7 @@
 	set $colbu #333333
 	set $colfu #DDDDDD
 	set $colun #283428
+	set $colbe #3D4D3D
 
 	# class               border  bg      text    indicator child_border
 	client.focused        $colbd  $colbg  $colfg  $colid    $colid
@@ -192,7 +193,7 @@ bar {
 		background $colbg
 		# class            border  bg      text
 		focused_workspace  $colbu  $colid  $colfg
-		inactive_workspace $colbu  #3D4D3D $colfu
+		inactive_workspace $colbu  $colbe $colfu
 		urgent_workspace   $colbu  #930F0F $colfg
 	}
 }
