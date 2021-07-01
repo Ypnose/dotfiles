@@ -22,9 +22,9 @@
 	set $colfu #DDDDDD
 	set $colun #283428
 
-	# class                 border  bg      text    indicator child_border
-	client.focused          $colbd  $colbg  $colfg  $colid    $colid
-	client.unfocused        $colbu  $colbu  $colfu  $colbu    $colbu
+	# class               border  bg      text    indicator child_border
+	client.focused        $colbd  $colbg  $colfg  $colid    $colid
+	client.unfocused      $colbu  $colbu  $colfu  $colbu    $colbu
 
 #
 ### Global ###
