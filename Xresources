@@ -4,8 +4,8 @@
 ! ---------------------------------------------------------------------+
 
 ! -- Fonts -------------------------------------------------------------
-URxvt*font:      xft:Iosevka Term Custom:style=Medium Extended:size=10.5:antialias=true
-URxvt*boldFont:  xft:Iosevka Term Custom:style=Extrabold Extended:size=10.5:antialias=true
+URxvt*font:      xft:Iosevka Term Custom:style=Medium:size=10.5:antialias=true
+URxvt*boldFont:  xft:Iosevka Term Custom:style=Extrabold:size=10.5:antialias=true
 
 xterm*font:      -*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*
 xterm*boldFont:  -*-terminus-bold-*-*-*-16-*-*-*-*-*-*-*
