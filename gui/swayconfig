@@ -214,7 +214,7 @@ bar {
 ### Sway ###
 #
 	# Disable Xwayland support
-	xwayland false
+	xwayland disable
 
 	# Titlebar border
 	titlebar_border_thickness 2
