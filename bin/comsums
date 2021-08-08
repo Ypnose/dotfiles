@@ -8,11 +8,8 @@ rec_list() {
 	( cd "$1" >/dev/null && find * -type f )
 }
 
-# sha512sum is MUCH faster than sha256sum, it's quite obvious with
-# huge directories including many files to check
-# https://crypto.stackexchange.com/questions/26336/sha512-faster-than-sha256
 strip_sums() {
-	SUM="$(sha512sum "$1")" && printf "%s\n" "${SUM%% *}"
+	SUM="$(b3sum "$1")" && printf "%s\n" "${SUM%% *}"
 }
 
 check_file() {
