@@ -51,13 +51,13 @@ function nd {
 function shadate {
 	# GNU date(1)
 	if (( ${#1} == 5 )); then
-		date -d @"$(( $1 * 86400 ))"
+		date -d @"$(( #$1 * 86400 ))"
 	elif (( ${#1} == 8 )); then
-		print -r -- "$(( $(date -d "$1" '+%s') / 86400 ))"
+		print -r -- "$(( #$(date -d "$1" '+%s') / 86400 ))"
 	elif (( ${#1} == 10 )); then
 		date -d @"$1"
 	else
-		print -r -- "$(( $(date '+%s') / 86400 ))"
+		print -r -- "$(( #$(date '+%s') / 86400 ))"
 	fi
 }
 function tva {
