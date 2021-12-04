@@ -22,8 +22,7 @@ rescue: clean base ssh gpg
 
 ####################
 
-base:
-	for f in ${REQFILE}; do cp "$${f}" "${DESTDIR}/.$${f}"; done
+base: mini
 	for o in ${OPTFILE}; \
 		do test -f ${DESTDIR}/.$${o} || cp $${o} ${DESTDIR}/.$${o}; \
 	done
@@ -68,6 +67,9 @@ gpg:
 	find ${DESTDIR}/.gnupg -type f -exec chmod 600 {} +
 	chmod 400 ${DESTDIR}/.gnupg/gpg.conf ${DESTDIR}/.gnupg/gpg-agent.conf
 
+mini:
+	for f in ${REQFILE}; do cp "$${f}" "${DESTDIR}/.$${f}"; done
+
 scripts:
 	curl -o ${DESTDIR}/rypp https://framagit.org/Ypnose/rypp/raw/master/rypp
 	curl -o ${DESTDIR}/yss https://framagit.org/Ypnose/yss/raw/master/yss
@@ -97,4 +99,4 @@ xorg:
 	cp gui/i3config ${DESTDIR}/.config/i3/config
 	test -f ${DESTDIR}/.xinitrc || cp xinitrc ${DESTDIR}/.xinitrc
 
-.PHONY: all list diff newbox rescue base bin clean conf fonts gpg scripts ssh svn wayland xorg
+.PHONY: all list diff newbox rescue base bin clean conf fonts gpg mini scripts ssh svn wayland xorg
