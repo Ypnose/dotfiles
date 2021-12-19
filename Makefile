@@ -93,6 +93,8 @@ wayland:
 	cp gui/swayconfig ${DESTDIR}/.config/sway/config
 	mkdir -p ${DESTDIR}/.config/foot
 	cp gui/foot.ini ${DESTDIR}/.config/foot
+	mkdir -p ${DESTDIR}/.config/imv
+	cp gui/imvconfig ${DESTDIR}/.config/imv/config
 
 xorg:
 	mkdir -p ${DESTDIR}/.config/i3

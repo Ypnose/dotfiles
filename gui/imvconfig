@@ -1,0 +1,18 @@
+# ---------------------------------------------------------------------+
+# file:     .config/imv/config                                         +
+# author:   Ypnose - http://ywstd.fr                                   +
+# ---------------------------------------------------------------------+
+
+# Try to emulate key bindings from the best viewer called sxiv
+[binds]
+<Down> = pan 0 -100
+<Left> = pan 100 0
+<Right> = pan -100 0
+<Up> = pan 0 100
+<Shift+greater> = rotate by 90
+<Shift+less> = rotate by -90
+<equal> = zoom actual
+<space> = next
+n = next
+p = prev
+w = reset
