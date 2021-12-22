@@ -14,6 +14,7 @@ xterm*boldFont:  -*-terminus-bold-*-*-*-16-*-*-*-*-*-*-*
 URxvt*cursorBlink:      true
 URxvt*geometry:         80x24
 URxvt*internalBorder:   10
+URxvt.perl-ext:         -confirm-paste
 URxvt*perl-ext-common:  default,matcher
 URxvt*print-pipe:       cat >>"/tmp/urxvt.out"
 URxvt*saveLines:        200
