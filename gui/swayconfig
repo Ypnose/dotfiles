@@ -201,6 +201,9 @@ bar {
 	# Show the bar using the Windows key
 	modifier Mod4
 
+	# Status line vertical padding
+	status_padding 4
+
 	# Status
 	status_command while ib; do sleep 30; done
 
