@@ -40,7 +40,10 @@
 	floating_modifier $mod
 
 	# Launcher
-	bindsym $mod+e exec bemenu-run --list 4 --prompt 'run: ' \
+	bindsym $mod+e exec bemenu-run \
+		--list 4 \
+		--prompt 'run: ' \
+		--line-height 22 \
 		--fn '$font $fontsize' \
 		--tb '$colbe' --tf '$colfg' \
 		--fb '$colbe' --ff '$colfg' \
