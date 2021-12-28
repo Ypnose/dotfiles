@@ -10,8 +10,8 @@
 	set $mod Mod1
 
 	# Font
-	set $font Ubuntu Mono Bold
-	set $fontsize 11
+	set $font Cantarell Bold
+	set $fontsize 10.5
 
 	# Colors
 	set $colbd #3E463E
