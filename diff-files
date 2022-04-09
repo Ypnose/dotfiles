@@ -23,5 +23,7 @@ diff_found "${HOME}/.config/sway/config" gui/swayconfig
 diff_found "${HOME}/.config/alacritty/alacritty.yml" gui/alacritty.yml
 diff_found "${HOME}/.config/foot/foot.ini" gui/foot.ini
 diff_found "${HOME}/.config/imv/config" gui/imvconfig
+diff_found "${HOME}/.config/mpv/mpv.conf" gui/mpv.conf
+diff_found "${HOME}/.config/mpv/input.conf" gui/mpvinput.conf
 
 exit

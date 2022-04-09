@@ -95,6 +95,9 @@ wayland:
 	cp gui/foot.ini ${DESTDIR}/.config/foot
 	mkdir -p ${DESTDIR}/.config/imv
 	cp gui/imvconfig ${DESTDIR}/.config/imv/config
+	mkdir -p ${DESTDIR}/.config/mpv
+	cp gui/mpv.conf ${DESTDIR}/.config/mpv
+	cp gui/mpvinput.conf ${DESTDIR}/.config/mpv/input.conf
 
 xorg:
 	mkdir -p ${DESTDIR}/.config/i3
