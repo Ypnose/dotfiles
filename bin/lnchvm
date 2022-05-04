@@ -70,7 +70,7 @@ if [ -n "$VM_OVMF" ]; then
 fi
 
 case "$VM_UI" in
-	curses) VM_OPTS="$VM_OPTS -curses" ;;
+	curses) VM_OPTS="$VM_OPTS -display curses" ;;
 	serial) VM_OPTS="$VM_OPTS -nographic" ;;
 	*) VM_OPTS="$VM_OPTS -display gtk -vga std" ;;
 esac
