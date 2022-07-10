@@ -45,7 +45,7 @@ conf:
 	mkdir -p ${DESTDIR}/.config/xkb/symbols
 	cp xkb/kbyp ${DESTDIR}/.config/xkb/symbols
 	mkdir -p ${DESTDIR}/.yusr/etc
-	cp misc/firefox/prefs.js ${DESTDIR}/.yusr/etc
+	cp misc/mozilla/firefox_prefs.js ${DESTDIR}/.yusr/etc
 	cp misc/wpa_supplicant/wpa-example.conf ${DESTDIR}/.yusr/etc
 
 fonts:
