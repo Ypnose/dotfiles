@@ -19,7 +19,7 @@ URxvt*perl-ext-common:  default,matcher
 URxvt*print-pipe:       cat >>"/tmp/urxvt.out"
 URxvt*saveLines:        200
 URxvt*scrollBar:        false
-URxvt*termName:         rxvt-unicode
+URxvt*termName:         rxvt-unicode-256color
 
 ! -- XTerm -------------------------------------------------------------
 xterm*cursorBlink:      true
