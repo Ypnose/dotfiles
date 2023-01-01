@@ -18,6 +18,7 @@ diff_found "${HOME}/.gnupg/gpg.conf" gpg/gpg.conf
 diff_found "${HOME}/.gnupg/gpg-agent.conf" gpg/gpg-agent.conf
 diff_found "${HOME}/.gtkrc-2.0" misc/fonts/gtkrc-2.0
 diff_found "${HOME}/.config/gtk-3.0/settings.ini" misc/fonts/settings.ini
+diff_found "${HOME}/.config/fontconfig/fonts.conf" misc/fonts/fonts.conf
 diff_found "${HOME}/.config/i3/config" gui/i3config
 diff_found "${HOME}/.config/sway/config" gui/swayconfig
 diff_found "${HOME}/.config/alacritty/alacritty.yml" gui/alacritty.yml
