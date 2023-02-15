@@ -29,7 +29,7 @@ xterm*scrollBar:        false
 xterm*utf8:             2
 
 ! -- Colors ------------------------------------------------------------
-*background: #EDE4CB
+*background: #EBE4D2
 *foreground: #040404
 ! -- Black --
 *color0:  #080808
