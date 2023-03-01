@@ -17,8 +17,8 @@ xkb_symbols "basic" {
     key <AE06> { [               6,     asciicircum                                  ] };  // 6 ^
     key <AE07> { [               7,       ampersand                                  ] };  // 7 &
     key <AE08> { [               8,        asterisk                                  ] };  // 8 *
-    key <AE09> { [               9,       parenleft                                  ] };  // 9 (
-    key <AE10> { [               0,      parenright                                  ] };  // 0 )
+    key <AE09> { [               9,       parenleft,   guillemotleft,       NoSymbol ] };  // 9 ( «
+    key <AE10> { [               0,      parenright,  guillemotright,       NoSymbol ] };  // 0 ) »
     key <AE11> { [           minus,      underscore,       backslash,       NoSymbol ] };  // - _ \
     key <AE12> { [           equal,            plus,        notequal,      plusminus ] };  // = + ≠ ±
     // IGNORE KEY (XKBCOMP OUTPUT)
