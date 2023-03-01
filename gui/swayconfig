@@ -11,7 +11,7 @@
 
 	# Font
 	set $font Cantarell Bold
-	set $fontsize 10.5
+	set $fontsize 11
 
 	# Colors
 	set $colbd #3E463E
