@@ -48,6 +48,9 @@ function lf {
 function nd {
 	mkdir -p "$1" && cd "$1" && ls
 }
+function reduc {
+	print -r -- "scale=2;(${1//,/.}*${2//,/.})/100;(${1//,/.}-.)/1" | bc
+}
 function shadate {
 	# GNU date(1)
 	if (( ${#1} == 5 )); then
