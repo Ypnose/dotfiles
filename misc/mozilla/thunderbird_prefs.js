@@ -17,6 +17,8 @@ user_pref("mail.spam.manualMark", true);
 user_pref("mail.spellcheck.inline", false);
 // S/MIME encryption base64 encoding
 user_pref("mail.strictly_mime", true);
+user_pref("mailnews.headers.sendUserAgent", false);
+user_pref("mailnews.headers.useMinimalUserAgent", false);
 user_pref("mailnews.start_page.enabled", false);
 user_pref("messenger.startup.action", 0);
 user_pref("messenger.status.awayWhenIdle", false);
