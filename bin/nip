@@ -15,7 +15,7 @@ fi
 
 ip addr add "$2" dev "$1"
 ip link set dev "$1" up
-if [ ! -z "$3" ]; then
+if [ -n "$3" ]; then
 	ip route add default via "$3"
 fi
 
