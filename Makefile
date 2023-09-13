@@ -81,12 +81,6 @@ ssh:
 	chmod 600 ${DESTDIR}/.ssh/config
 	! test -f ${DESTDIR}/.ssh/authorized_keys || chmod 600 ${DESTDIR}/.ssh/authorized_keys
 
-svn:
-	mkdir -p ${DESTDIR}/.subversion
-	chmod 700 ${DESTDIR}/.subversion
-	cp misc/svn/servers ${DESTDIR}/.subversion
-	chmod 644 ${DESTDIR}/.subversion/servers
-
 wayland:
 	mkdir -p ${DESTDIR}/.config/sway
 	cp gui/swayconfig ${DESTDIR}/.config/sway/config
