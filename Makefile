@@ -100,6 +100,8 @@ wayland:
 xorg:
 	mkdir -p ${DESTDIR}/.config/i3/
 	install -m 0600 -p gui/i3config ${DESTDIR}/.config/i3/config
+	mkdir -p ${DESTDIR}/.config/xkb/
+	install -m 0600 -p xkb/yp.xkb ${DESTDIR}/.config/xkb/
 	find ${DESTDIR}/.config/ -type d -exec chmod 0700 {} +
 	test -f ${DESTDIR}/.xinitrc || cp xinitrc ${DESTDIR}/.xinitrc
 

@@ -9,5 +9,5 @@ xrdb -merge "${HOME}/.Xresources"
 xset s off dpms 300 300 0
 xsetroot -solid "#8AA08A"
 xautolock -secure -time 5 -locker 'i3lock -f' &
-setxkbmap kbyp
+xkbcomp -I"${HOME}/.config/xkb" "${HOME}/.config/xkb/yp.xkb" "$DISPLAY"
 exec i3
