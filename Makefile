@@ -103,7 +103,7 @@ xorg:
 	mkdir -p ${DESTDIR}/.config/xkb/
 	install -m 0600 -p xkb/yp.xkb ${DESTDIR}/.config/xkb/
 	find ${DESTDIR}/.config/ -type d -exec chmod 0700 {} +
-	test -f ${DESTDIR}/.xinitrc || cp xinitrc ${DESTDIR}/.xinitrc
+	install -m 0600 -p xinitrc ${DESTDIR}/.xinitrc
 
 .PHONY: all list diff newbox base bin clean conf fonts gpg ssh wayland \
 	xorg
