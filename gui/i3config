@@ -54,7 +54,7 @@
 	bindsym $mod+s exec i3lock -c 505050 -ef
 
 	# Launch a terminal
-	bindsym $mod+Return exec uxterm
+	bindsym $mod+Return exec urxvt
 
 	# Kill focused window
 	bindsym $mod+Shift+c kill
