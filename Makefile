@@ -16,7 +16,7 @@ list:
 diff:
 	@sh diff-files | yiff
 
-newbox: clean base gpg ssh conf fonts bin
+newbox: clean base gpg ssh conf fonts
 
 ####################
 
