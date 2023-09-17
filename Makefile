@@ -41,7 +41,7 @@ clean:
 
 conf:
 	mkdir -p ${DESTDIR}/.config/
-	install -m 0600 -p misc/xdg/user-dirs.dirs ${DESTDIR}/.config/
+	install -m 0600 -p misc/user-dirs.dirs ${DESTDIR}/.config/
 	mkdir -p ${DESTDIR}/.config/xkb/rules/
 	install -m 0600 -p xkb/evdev ${DESTDIR}/.config/xkb/rules/
 	mkdir -p ${DESTDIR}/.config/xkb/symbols/
