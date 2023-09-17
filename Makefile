@@ -30,8 +30,7 @@ base:
 	done
 
 bin:
-	mkdir -p ${DESTDIR}/.yusr/bin/
-	install -m 0700 -p bin/scrup ${DESTDIR}/.yusr/bin/
+	install -D -m 0700 -p bin/scrup ${DESTDIR}/.yusr/bin/scrup
 	find ${DESTDIR}/.yusr/ -type d -exec chmod 0700 {} +
 
 clean:
@@ -40,22 +39,20 @@ clean:
 		.xsession-errors
 
 conf:
-	mkdir -p ${DESTDIR}/.config/
-	install -m 0600 -p misc/user-dirs.dirs ${DESTDIR}/.config/
-	mkdir -p ${DESTDIR}/.config/xkb/rules/
-	install -m 0600 -p xkb/evdev ${DESTDIR}/.config/xkb/rules/
-	mkdir -p ${DESTDIR}/.config/xkb/symbols/
-	install -m 0600 -p xkb/kbyp ${DESTDIR}/.config/xkb/symbols/
+	install -D -m 0600 -p misc/user-dirs.dirs \
+		${DESTDIR}/.config/user-dirs.dirs
+	install -D -m 0600 -p xkb/evdev ${DESTDIR}/.config/xkb/rules/evdev
+	install -D -m 0600 -p xkb/kbyp ${DESTDIR}/.config/xkb/symbols/kbyp
 	mkdir -p ${DESTDIR}/.yusr/etc/
 	find ${DESTDIR}/.config/ ${DESTDIR}/.yusr/ -type d \
 		-exec chmod 0700 {} +
 
 fonts:
-	mkdir -p ${DESTDIR}/.config/fontconfig/
-	install -m 0600 -p misc/fonts/fonts.conf ${DESTDIR}/.config/fontconfig/
-	mkdir -p ${DESTDIR}/.config/gtk-3.0/
+	install -D -m 0600 -p misc/fonts/fonts.conf \
+		${DESTDIR}/.config/fontconfig/fonts.conf
 	test -f ${DESTDIR}/.config/gtk-3.0/settings.ini \
-		|| install -m 0600 -p misc/fonts/settings.ini ${DESTDIR}/.config/gtk-3.0/
+		|| install -D -m 0600 -p misc/fonts/settings.ini \
+			${DESTDIR}/.config/gtk-3.0/settings.ini
 	test -f ${DESTDIR}/.gtkrc-2.0 \
 		|| install -m 0600 -p misc/fonts/gtkrc-2.0 ${DESTDIR}/.gtkrc-2.0
 	mkdir -p ${DESTDIR}/.local/share/fonts/bitmaps/
@@ -86,22 +83,16 @@ ssh:
 		|| chmod 0600 ${DESTDIR}/.ssh/authorized_keys
 
 wayland:
-	mkdir -p ${DESTDIR}/.config/sway/
-	install -m 0600 -p gui/swayconfig ${DESTDIR}/.config/sway/config
-	mkdir -p ${DESTDIR}/.config/foot/
-	install -m 0600 -p gui/foot.ini ${DESTDIR}/.config/foot/
-	mkdir -p ${DESTDIR}/.config/imv/
-	install -m 0600 -p gui/imvconfig ${DESTDIR}/.config/imv/config
-	mkdir -p ${DESTDIR}/.config/mpv/
-	install -m 0600 -p gui/mpv.conf ${DESTDIR}/.config/mpv/
+	install -D -m 0600 -p gui/swayconfig ${DESTDIR}/.config/sway/config
+	install -D -m 0600 -p gui/foot.ini ${DESTDIR}/.config/foot/foot.ini
+	install -D -m 0600 -p gui/imvconfig ${DESTDIR}/.config/imv/config
+	install -D -m 0600 -p gui/mpv.conf ${DESTDIR}/.config/mpv/mpv.conf
 	install -m 0600 -p gui/mpvinput.conf ${DESTDIR}/.config/mpv/input.conf
 	find ${DESTDIR}/.config/ -type d -exec chmod 0700 {} +
 
 xorg:
-	mkdir -p ${DESTDIR}/.config/i3/
-	install -m 0600 -p gui/i3config ${DESTDIR}/.config/i3/config
-	mkdir -p ${DESTDIR}/.config/xkb/
-	install -m 0600 -p xkb/yp.xkb ${DESTDIR}/.config/xkb/
+	install -D -m 0600 -p gui/i3config ${DESTDIR}/.config/i3/config
+	install -D -m 0600 -p xkb/yp.xkb ${DESTDIR}/.config/xkb/yp.xkb
 	find ${DESTDIR}/.config/ -type d -exec chmod 0700 {} +
 	install -m 0600 -p xinitrc ${DESTDIR}/.xinitrc
 
