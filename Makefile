@@ -80,7 +80,7 @@ gpg:
 ssh:
 	install -m 0700 -d ${DESTDIR}/.ssh/
 	test -f ${DESTDIR}/.ssh/config \
-		|| install -p ssh/config ${DESTDIR}/.ssh/
+		|| install -p misc/sshconfig ${DESTDIR}/.ssh/config
 	chmod 0600 ${DESTDIR}/.ssh/config
 	! test -f ${DESTDIR}/.ssh/authorized_keys \
 		|| chmod 0600 ${DESTDIR}/.ssh/authorized_keys
