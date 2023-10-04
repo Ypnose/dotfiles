@@ -28,6 +28,7 @@ base:
 		do test -f ${DESTDIR}/.$${o} \
 			|| install -m 0600 -p $${o} ${DESTDIR}/.$${o}; \
 	done
+	find ${DESTDIR} -type d -exec chmod 0700 {} +
 
 bin:
 	install -D -m 0700 -p bin/scrup ${DESTDIR}/.yusr/bin/scrup
