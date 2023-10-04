@@ -4,6 +4,8 @@
 /* -----------------------------------------------------------------+ */
 
 user_pref("app.update.auto", false);
+user_pref("calendar.timezone.local", "Europe/Paris");
+user_pref("calendar.timezone.useSystemTimezone", false);
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("general.useragent.override", "");
 user_pref("mail.biff.play_sound", false);
