@@ -54,8 +54,6 @@ fonts:
 	test -f ${DESTDIR}/.config/gtk-3.0/settings.ini \
 		|| install -D -m 0600 -p misc/fonts/settings.ini \
 			${DESTDIR}/.config/gtk-3.0/settings.ini
-	test -f ${DESTDIR}/.gtkrc-2.0 \
-		|| install -m 0600 -p misc/fonts/gtkrc-2.0 ${DESTDIR}/.gtkrc-2.0
 	mkdir -p ${DESTDIR}/.local/share/fonts/bitmaps/
 	install -m 0600 -p misc/fonts/*.*tf ${DESTDIR}/.local/share/fonts/
 	install -m 0600 -p misc/fonts/*.pcf.gz ${DESTDIR}/.local/share/fonts/bitmaps/
@@ -95,6 +93,8 @@ xorg:
 	install -D -m 0600 -p gui/i3config ${DESTDIR}/.config/i3/config
 	install -D -m 0600 -p xkb/yp.xkb ${DESTDIR}/.config/xkb/yp.xkb
 	find ${DESTDIR}/.config/ -type d -exec chmod 0700 {} +
+	test -f ${DESTDIR}/.gtkrc-2.0 \
+		|| install -m 0600 -p misc/fonts/gtkrc-2.0 ${DESTDIR}/.gtkrc-2.0
 	install -m 0600 -p xinitrc ${DESTDIR}/.xinitrc
 
 .PHONY: all list diff newbox base bin clean conf fonts gpg ssh wayland \
