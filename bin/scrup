@@ -16,7 +16,7 @@ while IFS=$'\n' read -r SCR_REQ; do
 	[[ -z SCR_REQ || ${SCR_REQ:0:1} = "#" ]] && continue
 	# Replace shebang
 	curl -Ss -f -L "${SCR_GIT}/${SCR_REQ}" \
-		| sed "1 s|/usr/bin/mksh$|${1:-/usr/bin/env mksh}|" >"$SCR_TPF"
+		| sed "1 s|/usr/bin/mksh$|/usr/bin/env mksh|" >"$SCR_TPF"
 	# Test changes on an existing file
 	if [[ -r $SCR_REQ ]] && diff -q "$SCR_REQ" "$SCR_TPF" >/dev/null 2>&1; then
 		continue
