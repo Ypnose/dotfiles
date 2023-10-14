@@ -15,6 +15,9 @@
 	ls = ls-files
 	pm = push origin master
 
+[include]
+	path = .gitconfig.local
+
 #[user]
 #	email = 
 #	name = 
