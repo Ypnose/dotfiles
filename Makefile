@@ -3,7 +3,7 @@
 
 DESTDIR ?= dest
 REQFILE = aliases nexrc mkshrc profile tmux.conf
-OPTFILE = Xresources gitconfig
+OPTFILE = Xresources
 
 ####################
 
@@ -42,6 +42,7 @@ clean:
 conf:
 	install -D -m 0600 -p misc/user-dirs.dirs \
 		${DESTDIR}/.config/user-dirs.dirs
+	install -D -m 0600 -p misc/gitconfig ${DESTDIR}/.config/git/config
 	install -D -m 0600 -p xkb/evdev ${DESTDIR}/.config/xkb/rules/evdev
 	install -D -m 0600 -p xkb/kbyp ${DESTDIR}/.config/xkb/symbols/kbyp
 	mkdir -p ${DESTDIR}/.yusr/etc/

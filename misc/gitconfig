@@ -16,7 +16,7 @@
 	pm = push origin master
 
 [include]
-	path = .gitconfig.local
+	path = config.local
 
 #[user]
 #	email = 
