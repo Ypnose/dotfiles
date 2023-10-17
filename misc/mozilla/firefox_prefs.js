@@ -174,3 +174,8 @@ user_pref("toolkit.telemetry.updatePing.enabled", false);
 user_pref("webgl.disabled", true);
 user_pref("webgl.renderer-string-override", " ");
 user_pref("webgl.vendor-string-override", " ");
+user_pref("widget.use-xdg-desktop-portal.file-picker", 0);
+user_pref("widget.use-xdg-desktop-portal.location", 0);
+user_pref("widget.use-xdg-desktop-portal.mime-handler", 0);
+user_pref("widget.use-xdg-desktop-portal.open-uri", 0);
+user_pref("widget.use-xdg-desktop-portal.settings", 0);

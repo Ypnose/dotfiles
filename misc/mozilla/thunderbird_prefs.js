@@ -42,3 +42,8 @@ user_pref("purple.conversations.im.send_typing", false);
 // https://bugzilla.mozilla.org/show_bug.cgi?id=1777336
 user_pref("security.intermediate_preloading_healer.enabled", false);
 user_pref("spellchecker.dictionary", "");
+user_pref("widget.use-xdg-desktop-portal.file-picker", 0);
+user_pref("widget.use-xdg-desktop-portal.location", 0);
+user_pref("widget.use-xdg-desktop-portal.mime-handler", 0);
+user_pref("widget.use-xdg-desktop-portal.open-uri", 0);
+user_pref("widget.use-xdg-desktop-portal.settings", 0);
