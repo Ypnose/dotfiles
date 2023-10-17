@@ -38,4 +38,3 @@ unset HISTFILE
 
 # -- NOFUDIRS ----------------------------------------------------------
 [[ -d ${HOME}/Desktop ]] && rm -r "${HOME}/Desktop"
-[[ -d ${HOME}/.config/git ]] && rm -r "${HOME}/.config/git"
