@@ -241,11 +241,11 @@ bar {
 		xkb_numlock enabled
 	}
 
-	# Autolock screen and DPMS
+	# Autolock screen and power management
 	exec swayidle \
 		timeout 300 'swaylock -f -c FFFFFF -eF' \
-		timeout 420 'swaymsg "output * dpms off"' \
-			resume 'swaymsg "output * dpms on"' \
+		timeout 420 'swaymsg "output * power off"' \
+			resume 'swaymsg "output * power on"' \
 		before-sleep 'swaylock -f -c FFFFFF -eF'
 
 	# Launch external command(s)
