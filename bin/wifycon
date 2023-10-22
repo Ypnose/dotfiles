@@ -31,9 +31,6 @@ function get_con {
 	if pgrep -f "wpa_supplicant -i $W_INF" >/dev/null 2>&1; then
 		p_err "wpa_supplicant already running for $W_INF"
 	fi
-	if [[ -x $(whence -p rfkill) ]]; then
-		rfkill unblock wlan
-	fi
 	ip link set dev "$W_INF" up
 	wpa_supplicant -i "$W_INF" -B -c "$W_CON"
 	if (( W_NIP != 1 )); then
@@ -48,9 +45,6 @@ function end_con {
 	ip addr flush dev "$W_INF"
 	pkill -f "wpa_supplicant -i $W_INF"
 	ip link set dev "$W_INF" down
-	if [[ -x $(whence -p rfkill) ]]; then
-		rfkill block wlan
-	fi
 }
 
 trap 'end_con' INT TERM
