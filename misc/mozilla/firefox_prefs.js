@@ -83,6 +83,7 @@ user_pref("device.sensors.enabled", false);
 user_pref("device.sensors.motion.enabled", false);
 user_pref("device.sensors.orientation.enabled", false);
 user_pref("device.sensors.proximity.enabled", false);
+user_pref("devtools.command-button-screenshot.enabled", true);
 user_pref("dom.battery.enabled", false);
 user_pref("dom.disable_window_move_resize", true);
 user_pref("dom.event.clipboardevents.enabled", false);
