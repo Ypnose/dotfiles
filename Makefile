@@ -46,9 +46,9 @@ conf:
 	install -D -m 0600 -p misc/gitconfig ${DESTDIR}/.config/git/config
 	install -D -m 0600 -p xkb/evdev ${DESTDIR}/.config/xkb/rules/evdev
 	install -D -m 0600 -p xkb/kbyp ${DESTDIR}/.config/xkb/symbols/kbyp
-	mkdir -p ${DESTDIR}/.yusr/etc/
-	find ${DESTDIR}/.config/ ${DESTDIR}/.yusr/ -type d \
-		-exec chmod 0700 {} +
+	mkdir -p ${DESTDIR}/.local/share/tig/ ${DESTDIR}/.yusr/etc/
+	find ${DESTDIR}/.config/ ${DESTDIR}/.local/ ${DESTDIR}/.yusr/ \
+		-type d -exec chmod 0700 {} +
 
 fonts:
 	install -D -m 0600 -p misc/fonts/fonts.conf \
