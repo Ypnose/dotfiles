@@ -2,7 +2,7 @@
 # Ypnose - http://ywstd.fr
 
 DESTDIR ?= dest
-REQFILE = aliases nexrc mkshrc profile tmux.conf
+REQFILE = aliases nexrc mkshrc profile
 OPTFILE = Xresources
 
 ####################
@@ -24,6 +24,7 @@ base:
 	for f in ${REQFILE}; \
 		do install -m 0600 -p "$${f}" "${DESTDIR}/.$${f}"; \
 	done
+	install -D -m 0600 -p misc/tmuxconf ${DESTDIR}/.config/tmux/tmux.conf
 	for o in ${OPTFILE}; \
 		do test -f ${DESTDIR}/.$${o} \
 			|| install -m 0600 -p $${o} ${DESTDIR}/.$${o}; \
