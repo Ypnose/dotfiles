@@ -17,7 +17,7 @@ bind-key d split-window -c '#{pane_current_path}'
 bind-key e command-prompt -p '[tmux] pane ?' "select-pane -t '%%'"
 bind-key g select-layout tiled
 bind-key h select-layout even-horizontal
-bind-key R source-file ~/.tmux.conf \; display-message '[tmux] config reloaded'
+bind-key R source-file ~/.config/tmux/tmux.conf \; display-message '[tmux] config reloaded'
 unbind-key s
 bind-key s split-window
 bind-key v select-layout even-vertical
