@@ -28,6 +28,5 @@ diff_found "${HOME}/.config/mpv/mpv.conf" gui/mpv.conf
 diff_found "${HOME}/.config/mpv/input.conf" gui/mpvinput.conf
 diff_found "${HOME}/.config/sway/config" gui/swayconfig
 diff_found "${HOME}/.config/tmux/tmux.conf" misc/tmuxconf
-diff_found "${HOME}/.gtkrc-2.0" misc/fonts/gtkrc-2.0
 
 exit
