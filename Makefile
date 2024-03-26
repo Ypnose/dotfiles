@@ -37,8 +37,8 @@ bin:
 
 clean:
 	cd ${DESTDIR} && rm -f .bash_history .bash_logout .bash_profile \
-		.bashrc .inputrc .lesshst .login .logout .rnd .xsession \
-		.xsession-errors
+		.bashrc .gtkrc-2.0 .inputrc .lesshst .login .logout .rnd \
+		.tig_history .xsession .xsession-errors
 
 conf:
 	install -D -m 0600 -p misc/user-dirs.dirs \
