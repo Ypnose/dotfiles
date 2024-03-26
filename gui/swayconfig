@@ -43,7 +43,7 @@
 	bindsym $mod+e exec bemenu-run \
 		--list 4 \
 		--prompt 'run: ' \
-		--line-height 22 \
+		--line-height 24 \
 		--fn '$font $fontsize' \
 		--tb '$colbe' --tf '$colfg' \
 		--fb '$colbe' --ff '$colfg' \
