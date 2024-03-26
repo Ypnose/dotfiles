@@ -42,3 +42,6 @@ save_to_clipboard = false
 [window.padding]
 x = 10
 y = 10
+
+[env]
+WINIT_X11_SCALE_FACTOR = "1.0"
