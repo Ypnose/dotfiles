@@ -41,8 +41,6 @@ clean:
 		.tig_history .xsession .xsession-errors
 
 conf:
-	install -D -m 0600 -p misc/user-dirs.dirs \
-		${DESTDIR}/.config/user-dirs.dirs
 	install -D -m 0600 -p misc/gitconfig ${DESTDIR}/.config/git/config
 	install -D -m 0600 -p xkb/evdev ${DESTDIR}/.config/xkb/rules/evdev
 	install -D -m 0600 -p xkb/kbyp ${DESTDIR}/.config/xkb/symbols/kbyp
