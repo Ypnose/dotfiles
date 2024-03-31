@@ -68,5 +68,5 @@ function tva {
 }
 
 # -- ALIASES -----------------------------------------------------------
-[[ -r ${HOME}/.aliases.local ]] && . "${HOME}/.aliases.local"
+[[ -r ${HOME}/.local/etc/aliases.local ]] && . "${HOME}/.local/etc/aliases.local"
 [[ -r ${HOME}/.aliases ]] && . "${HOME}/.aliases"
