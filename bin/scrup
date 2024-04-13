@@ -4,11 +4,12 @@ set -e
 
 trap '[[ -f $SCR_TPF ]] && shred -u "$SCR_TPF"' ERR INT EXIT
 
+SCR_CHK="${HOME}/.local/etc/CHKLIST"
 SCR_TPF="$(mktemp /tmp/${0##*/}.XXXXXXXXXX)"
 SCR_GIT="https://raw.githubusercontent.com/Ypnose/dotfiles/master/bin"
 
-if [[ ! -f CHKLIST ]]; then
-	print -u2 "Unable to find ${PWD}/CHKLIST"
+if [[ ! -f $SCR_CHK ]]; then
+	print -u2 "Unable to find $SCR_CHK"
 	exit 1
 fi
 
@@ -30,6 +31,6 @@ while IFS=$'\n' read -r SCR_REQ; do
 		chmod +x "$SCR_REQ"
 		print "Updated $SCR_REQ"
 	fi
-done <CHKLIST
+done <"$SCR_CHK"
 
 exit
