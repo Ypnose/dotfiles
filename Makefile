@@ -96,7 +96,6 @@ xorg:
 	install -D -m 0600 -p gui/i3config ${DESTDIR}/.config/i3/config
 	install -D -m 0600 -p xkb/yp.xkb ${DESTDIR}/.config/xkb/yp.xkb
 	find ${DESTDIR}/.config/ -type d -exec chmod 0700 {} +
-	install -m 0600 -p xinitrc ${DESTDIR}/.xinitrc
 
 .PHONY: all list diff newbox base bin clean conf fonts gpg ssh wayland \
 	xorg
