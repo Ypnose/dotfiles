@@ -1,8 +1,8 @@
 #
 # For more information about this list, see: https://pgl.yoyo.org/adservers/
 # ----
-# last updated:   Fri, 26 Jul 2024 14:50:13 GMT
-# entries:        3547
+# last updated:   Mon, 12 Aug 2024 11:05:58 GMT
+# entries:        3542
 # format:         unbound (unbound -- for use with the Unbound DNS server)
 # credits:        Peter Lowe - pgl@yoyo.org - https://pgl.yoyo.org/ - https://twitter.com/pgl
 # this URL:       https://pgl.yoyo.org/adservers/serverlist.php?hostformat=unbound&mimetype=plaintext
@@ -18,8 +18,6 @@ server:
     local-data: "1-1ads.com A 127.0.0.1"
     local-zone: "101com.com" redirect
     local-data: "101com.com A 127.0.0.1"
-    local-zone: "101order.com" redirect
-    local-data: "101order.com A 127.0.0.1"
     local-zone: "180hits.de" redirect
     local-data: "180hits.de A 127.0.0.1"
     local-zone: "180searchassistant.com" redirect
@@ -134,8 +132,6 @@ server:
     local-data: "abruptroad.com A 127.0.0.1"
     local-zone: "absorbingband.com" redirect
     local-data: "absorbingband.com A 127.0.0.1"
-    local-zone: "absorbingcorn.com" redirect
-    local-data: "absorbingcorn.com A 127.0.0.1"
     local-zone: "abstractedauthority.com" redirect
     local-data: "abstractedauthority.com A 127.0.0.1"
     local-zone: "abtasty.com" redirect
@@ -472,8 +468,6 @@ server:
     local-data: "adhese.com A 127.0.0.1"
     local-zone: "adhigh.net" redirect
     local-data: "adhigh.net A 127.0.0.1"
-    local-zone: "adhoc4.net" redirect
-    local-data: "adhoc4.net A 127.0.0.1"
     local-zone: "adhunter.media" redirect
     local-data: "adhunter.media A 127.0.0.1"
     local-zone: "adimage.guardian.co.uk" redirect
@@ -720,8 +714,6 @@ server:
     local-data: "ads.administrator.de A 127.0.0.1"
     local-zone: "ads.adred.de" redirect
     local-data: "ads.adred.de A 127.0.0.1"
-    local-zone: "ads.adsbtc.fun" redirect
-    local-data: "ads.adsbtc.fun A 127.0.0.1"
     local-zone: "ads.adstream.com.ro" redirect
     local-data: "ads.adstream.com.ro A 127.0.0.1"
     local-zone: "ads.adultfriendfinder.com" redirect
@@ -1042,8 +1034,6 @@ server:
     local-data: "ads.mvscoelho.com A 127.0.0.1"
     local-zone: "ads.myadv.org" redirect
     local-data: "ads.myadv.org A 127.0.0.1"
-    local-zone: "ads.nccwebs.com" redirect
-    local-data: "ads.nccwebs.com A 127.0.0.1"
     local-zone: "ads.ndtv1.com" redirect
     local-data: "ads.ndtv1.com A 127.0.0.1"
     local-zone: "ads.networksolutions.com" redirect
@@ -1530,6 +1520,8 @@ server:
     local-data: "adsmetadata.startappservice.com A 127.0.0.1"
     local-zone: "adsmogo.com" redirect
     local-data: "adsmogo.com A 127.0.0.1"
+    local-zone: "adsnative.com" redirect
+    local-data: "adsnative.com A 127.0.0.1"
     local-zone: "adsoftware.com" redirect
     local-data: "adsoftware.com A 127.0.0.1"
     local-zone: "adsolut.in" redirect
@@ -1616,8 +1608,6 @@ server:
     local-data: "adtraction.com A 127.0.0.1"
     local-zone: "adtrade.net" redirect
     local-data: "adtrade.net A 127.0.0.1"
-    local-zone: "adtriplex.com" redirect
-    local-data: "adtriplex.com A 127.0.0.1"
     local-zone: "adultadvertising.com" redirect
     local-data: "adultadvertising.com A 127.0.0.1"
     local-zone: "adv-adserver.com" redirect
@@ -1710,6 +1700,8 @@ server:
     local-data: "adyoulike.com A 127.0.0.1"
     local-zone: "adz.rashflash.com" redirect
     local-data: "adz.rashflash.com A 127.0.0.1"
+    local-zone: "adz2you.com" redirect
+    local-data: "adz2you.com A 127.0.0.1"
     local-zone: "adzbazar.com" redirect
     local-data: "adzbazar.com A 127.0.0.1"
     local-zone: "adzerk.net" redirect
@@ -1952,8 +1944,6 @@ server:
     local-data: "apture.com A 127.0.0.1"
     local-zone: "apu.samsungelectronics.com" redirect
     local-data: "apu.samsungelectronics.com A 127.0.0.1"
-    local-zone: "aquaticanswer.com" redirect
-    local-data: "aquaticanswer.com A 127.0.0.1"
     local-zone: "aquaticowl.com" redirect
     local-data: "aquaticowl.com A 127.0.0.1"
     local-zone: "ar1nvz5.com" redirect
@@ -2528,8 +2518,6 @@ server:
     local-data: "chartbeat.net A 127.0.0.1"
     local-zone: "chartboost.com" redirect
     local-data: "chartboost.com A 127.0.0.1"
-    local-zone: "checkm8.com" redirect
-    local-data: "checkm8.com A 127.0.0.1"
     local-zone: "checkstat.nl" redirect
     local-data: "checkstat.nl A 127.0.0.1"
     local-zone: "cherriescare.com" redirect
@@ -2720,8 +2708,6 @@ server:
     local-data: "clkrev.com A 127.0.0.1"
     local-zone: "clksite.com" redirect
     local-data: "clksite.com A 127.0.0.1"
-    local-zone: "cloisteredcord.com" redirect
-    local-data: "cloisteredcord.com A 127.0.0.1"
     local-zone: "closedcows.com" redirect
     local-data: "closedcows.com A 127.0.0.1"
     local-zone: "cloudflareinsights.com" redirect
@@ -3168,6 +3154,8 @@ server:
     local-data: "elitetoplist.com A 127.0.0.1"
     local-zone: "em1.yoursantander.co.uk" redirect
     local-data: "em1.yoursantander.co.uk A 127.0.0.1"
+    local-zone: "email-link.adtidy.info" redirect
+    local-data: "email-link.adtidy.info A 127.0.0.1"
     local-zone: "email-link.adtidy.net" redirect
     local-data: "email-link.adtidy.net A 127.0.0.1"
     local-zone: "email-link.adtidy.org" redirect
@@ -3180,6 +3168,8 @@ server:
     local-data: "email-open.adtidy.org A 127.0.0.1"
     local-zone: "email.mg1.substack.com" redirect
     local-data: "email.mg1.substack.com A 127.0.0.1"
+    local-zone: "emailer.stockbit.com" redirect
+    local-data: "emailer.stockbit.com A 127.0.0.1"
     local-zone: "emaillinks.soundiiz.com" redirect
     local-data: "emaillinks.soundiiz.com A 127.0.0.1"
     local-zone: "emebo.io" redirect
@@ -3386,8 +3376,6 @@ server:
     local-data: "findcommerce.com A 127.0.0.1"
     local-zone: "findyourcasino.com" redirect
     local-data: "findyourcasino.com A 127.0.0.1"
-    local-zone: "fineoffer.net" redirect
-    local-data: "fineoffer.net A 127.0.0.1"
     local-zone: "fingahvf.top" redirect
     local-data: "fingahvf.top A 127.0.0.1"
     local-zone: "fireworkadservices.com" redirect
@@ -3746,8 +3734,6 @@ server:
     local-data: "homelycrown.com A 127.0.0.1"
     local-zone: "homepageking.de" redirect
     local-data: "homepageking.de A 127.0.0.1"
-    local-zone: "honorablehall.com" redirect
-    local-data: "honorablehall.com A 127.0.0.1"
     local-zone: "honorableland.com" redirect
     local-data: "honorableland.com A 127.0.0.1"
     local-zone: "hostedads.realitykings.com" redirect
@@ -3922,8 +3908,6 @@ server:
     local-data: "inspectlet.com A 127.0.0.1"
     local-zone: "install.365-stream.com" redirect
     local-data: "install.365-stream.com A 127.0.0.1"
-    local-zone: "instantmadness.com" redirect
-    local-data: "instantmadness.com A 127.0.0.1"
     local-zone: "insticator.com" redirect
     local-data: "insticator.com A 127.0.0.1"
     local-zone: "intelliads.com" redirect
@@ -4008,6 +3992,8 @@ server:
     local-data: "jsrdn.com A 127.0.0.1"
     local-zone: "jubilantglimmer.com" redirect
     local-data: "jubilantglimmer.com A 127.0.0.1"
+    local-zone: "juiceblocks.com" redirect
+    local-data: "juiceblocks.com A 127.0.0.1"
     local-zone: "juicyads.com" redirect
     local-data: "juicyads.com A 127.0.0.1"
     local-zone: "juicyads.me" redirect
@@ -4030,8 +4016,6 @@ server:
     local-data: "kanoodle.com A 127.0.0.1"
     local-zone: "kargo.com" redirect
     local-data: "kargo.com A 127.0.0.1"
-    local-zone: "karonty.com" redirect
-    local-data: "karonty.com A 127.0.0.1"
     local-zone: "keymedia.hu" redirect
     local-data: "keymedia.hu A 127.0.0.1"
     local-zone: "kindads.com" redirect
@@ -4102,8 +4086,6 @@ server:
     local-data: "leadinfo.net A 127.0.0.1"
     local-zone: "leadingedgecash.com" redirect
     local-data: "leadingedgecash.com A 127.0.0.1"
-    local-zone: "leadplace.fr" redirect
-    local-data: "leadplace.fr A 127.0.0.1"
     local-zone: "leadspace.com" redirect
     local-data: "leadspace.com A 127.0.0.1"
     local-zone: "leadzupc.com" redirect
@@ -4286,6 +4268,8 @@ server:
     local-data: "luckyorange.com A 127.0.0.1"
     local-zone: "ludicrousarch.com" redirect
     local-data: "ludicrousarch.com A 127.0.0.1"
+    local-zone: "lyricshook.com" redirect
+    local-data: "lyricshook.com A 127.0.0.1"
     local-zone: "lytics.io" redirect
     local-data: "lytics.io A 127.0.0.1"
     local-zone: "lzjl.com" redirect
@@ -4436,6 +4420,8 @@ server:
     local-data: "mediax.angloinfo.com A 127.0.0.1"
     local-zone: "mediaz.angloinfo.com" redirect
     local-data: "mediaz.angloinfo.com A 127.0.0.1"
+    local-zone: "mediumshort.com" redirect
+    local-data: "mediumshort.com A 127.0.0.1"
     local-zone: "medleyads.com" redirect
     local-data: "medleyads.com A 127.0.0.1"
     local-zone: "medyanetads.com" redirect
@@ -4460,6 +4446,8 @@ server:
     local-data: "metadsp.co.uk A 127.0.0.1"
     local-zone: "metaffiliation.com" redirect
     local-data: "metaffiliation.com A 127.0.0.1"
+    local-zone: "metajaws.com" redirect
+    local-data: "metajaws.com A 127.0.0.1"
     local-zone: "metanetwork.com" redirect
     local-data: "metanetwork.com A 127.0.0.1"
     local-zone: "methodcash.com" redirect
@@ -4698,8 +4686,6 @@ server:
     local-data: "netdirect.nl A 127.0.0.1"
     local-zone: "netech.postaffiliatepro.com" redirect
     local-data: "netech.postaffiliatepro.com A 127.0.0.1"
-    local-zone: "netincap.com" redirect
-    local-data: "netincap.com A 127.0.0.1"
     local-zone: "netmera-web.com" redirect
     local-data: "netmera-web.com A 127.0.0.1"
     local-zone: "netmera.com" redirect
@@ -4918,6 +4904,8 @@ server:
     local-data: "outbrain.com A 127.0.0.1"
     local-zone: "overconfidentfood.com" redirect
     local-data: "overconfidentfood.com A 127.0.0.1"
+    local-zone: "overkick.com" redirect
+    local-data: "overkick.com A 127.0.0.1"
     local-zone: "overture.com" redirect
     local-data: "overture.com A 127.0.0.1"
     local-zone: "ow.pubmatic.com" redirect
@@ -4938,8 +4926,6 @@ server:
     local-data: "oxen.hillcountrytexas.com A 127.0.0.1"
     local-zone: "p-n.io" redirect
     local-data: "p-n.io A 127.0.0.1"
-    local-zone: "p.nag.ru" redirect
-    local-data: "p.nag.ru A 127.0.0.1"
     local-zone: "pagead.l.google.com" redirect
     local-data: "pagead.l.google.com A 127.0.0.1"
     local-zone: "pagefair.com" redirect
@@ -5096,6 +5082,8 @@ server:
     local-data: "plugrush.com A 127.0.0.1"
     local-zone: "pocketfaucet.com" redirect
     local-data: "pocketfaucet.com A 127.0.0.1"
+    local-zone: "poemprompt.com" redirect
+    local-data: "poemprompt.com A 127.0.0.1"
     local-zone: "pointlesshour.com" redirect
     local-data: "pointlesshour.com A 127.0.0.1"
     local-zone: "pointlessprofit.com" redirect
@@ -5464,6 +5452,8 @@ server:
     local-data: "reklamdsp.com A 127.0.0.1"
     local-zone: "relmaxtop.com" redirect
     local-data: "relmaxtop.com A 127.0.0.1"
+    local-zone: "reloadphoto.com" redirect
+    local-data: "reloadphoto.com A 127.0.0.1"
     local-zone: "rememberdiscussion.com" redirect
     local-data: "rememberdiscussion.com A 127.0.0.1"
     local-zone: "remox.com" redirect
@@ -5878,6 +5868,8 @@ server:
     local-data: "soggysponge.com A 127.0.0.1"
     local-zone: "soggyzoo.com" redirect
     local-data: "soggyzoo.com A 127.0.0.1"
+    local-zone: "soicos.com" redirect
+    local-data: "soicos.com A 127.0.0.1"
     local-zone: "sombersea.com" redirect
     local-data: "sombersea.com A 127.0.0.1"
     local-zone: "sombersquirrel.com" redirect
@@ -5936,8 +5928,6 @@ server:
     local-data: "sponsorads.de A 127.0.0.1"
     local-zone: "sponsorpro.de" redirect
     local-data: "sponsorpro.de A 127.0.0.1"
-    local-zone: "sponsors.thoughtsmedia.com" redirect
-    local-data: "sponsors.thoughtsmedia.com A 127.0.0.1"
     local-zone: "spookysleet.com" redirect
     local-data: "spookysleet.com A 127.0.0.1"
     local-zone: "spot.fitness.com" redirect
@@ -5984,6 +5974,8 @@ server:
     local-data: "stalesummer.com A 127.0.0.1"
     local-zone: "starffa.com" redirect
     local-data: "starffa.com A 127.0.0.1"
+    local-zone: "starkscale.com" redirect
+    local-data: "starkscale.com A 127.0.0.1"
     local-zone: "startapp.com" redirect
     local-data: "startapp.com A 127.0.0.1"
     local-zone: "stat-track.com" redirect
@@ -6116,6 +6108,8 @@ server:
     local-data: "sumome.com A 127.0.0.1"
     local-zone: "superawesome.tv" redirect
     local-data: "superawesome.tv A 127.0.0.1"
+    local-zone: "superchichair.com" redirect
+    local-data: "superchichair.com A 127.0.0.1"
     local-zone: "superclix.de" redirect
     local-data: "superclix.de A 127.0.0.1"
     local-zone: "superficialsquare.com" redirect
@@ -6472,8 +6466,6 @@ server:
     local-data: "tracker.samplicio.us A 127.0.0.1"
     local-zone: "tracker.vgame.us" redirect
     local-data: "tracker.vgame.us A 127.0.0.1"
-    local-zone: "tracking.1-a1502-bi.co.uk" redirect
-    local-data: "tracking.1-a1502-bi.co.uk A 127.0.0.1"
     local-zone: "tracking.21-a4652-bi.co.uk" redirect
     local-data: "tracking.21-a4652-bi.co.uk A 127.0.0.1"
     local-zone: "tracking.28-91473-wbm.co.uk" redirect
@@ -6492,8 +6484,6 @@ server:
     local-data: "tracking.ibxlink.com A 127.0.0.1"
     local-zone: "tracking.intentsify.io" redirect
     local-data: "tracking.intentsify.io A 127.0.0.1"
-    local-zone: "tracking.internetstores.de" redirect
-    local-data: "tracking.internetstores.de A 127.0.0.1"
     local-zone: "tracking.intl.miui.com" redirect
     local-data: "tracking.intl.miui.com A 127.0.0.1"
     local-zone: "tracking.jiffyworld.com" redirect
@@ -6534,8 +6524,6 @@ server:
     local-data: "tradedoubler.com A 127.0.0.1"
     local-zone: "traffic-exchange.com" redirect
     local-data: "traffic-exchange.com A 127.0.0.1"
-    local-zone: "traffic-redirecting.com" redirect
-    local-data: "traffic-redirecting.com A 127.0.0.1"
     local-zone: "traffic.hyteck.de" redirect
     local-data: "traffic.hyteck.de A 127.0.0.1"
     local-zone: "trafficfactory.biz" redirect
@@ -7098,6 +7086,8 @@ server:
     local-data: "zm232.com A 127.0.0.1"
     local-zone: "zmedia.com" redirect
     local-data: "zmedia.com A 127.0.0.1"
+    local-zone: "zonewedgeshaft.com" redirect
+    local-data: "zonewedgeshaft.com A 127.0.0.1"
     local-zone: "zpu.samsungelectronics.com" redirect
     local-data: "zpu.samsungelectronics.com A 127.0.0.1"
     local-zone: "zqtk.net" redirect
