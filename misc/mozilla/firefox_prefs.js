@@ -65,6 +65,8 @@ user_pref("browser.startup.page", 0);
 user_pref("browser.tabs.crashReporting.sendReport", false);
 user_pref("browser.tabs.firefox-view", false);
 user_pref("browser.toolbars.bookmarks.visibility", "never");
+user_pref("browser.translations.automaticallyPopup ", false);
+user_pref("browser.translations.enable", false);
 user_pref("browser.urlbar.autocomplete.enabled", false);
 user_pref("browser.urlbar.groupLabels.enabled", false);
 user_pref("browser.urlbar.quicksuggest.enabled", false);
