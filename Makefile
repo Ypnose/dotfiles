@@ -51,9 +51,6 @@ conf:
 fonts:
 	install -D -m 0600 -p misc/fonts/fonts.conf \
 		${DESTDIR}/.config/fontconfig/fonts.conf
-	test -f ${DESTDIR}/.config/gtk-3.0/settings.ini \
-		|| install -D -m 0600 -p misc/fonts/settings.ini \
-			${DESTDIR}/.config/gtk-3.0/settings.ini
 	mkdir -p ${DESTDIR}/.local/share/fonts/bitmaps/
 	install -m 0600 -p misc/fonts/*.*tf ${DESTDIR}/.local/share/fonts/
 	install -m 0600 -p misc/fonts/*.pcf.gz ${DESTDIR}/.local/share/fonts/bitmaps/
@@ -93,6 +90,9 @@ xorg:
 	test -f ${DESTDIR}/.config/alacritty/alacritty.toml \
 		|| install -D -m 0600 -p gui/alacritty.toml \
 			${DESTDIR}/.config/alacritty/alacritty.toml
+	test -f ${DESTDIR}/.config/gtk-3.0/settings.ini \
+		|| install -D -m 0600 -p misc/fonts/settings.ini \
+			${DESTDIR}/.config/gtk-3.0/settings.ini
 	install -D -m 0600 -p gui/i3config ${DESTDIR}/.config/i3/config
 	install -D -m 0600 -p xkb/yp.xkb ${DESTDIR}/.config/xkb/yp.xkb
 	find ${DESTDIR}/.config/ -type d -exec chmod 0700 {} +
