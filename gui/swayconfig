@@ -243,6 +243,9 @@ bar {
 		xkb_numlock enabled
 	}
 
+	# Define GTK3 font-name
+	exec_always gsettings set org.gnome.desktop.interface font-name '$fontname $fontsize'
+
 	# Autolock screen and power management
 	exec swayidle \
 		timeout 300 'swaylock -f -c FFFFFF -eF' \
