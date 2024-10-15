@@ -10,7 +10,7 @@
 	set $mod Mod1
 
 	# Font
-	set $font Cantarell Bold
+	set $font Inter Display SemiBold
 	set $fontsize 11
 
 	# Colors
