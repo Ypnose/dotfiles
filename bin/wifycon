@@ -42,7 +42,9 @@ function get_con {
 
 function end_con {
 	chk_inf
-	dhcpcd -x "$W_INF"
+	if pgrep -f "dhcpcd: $W_INF" >/dev/null 2>&1; then
+		dhcpcd -x "$W_INF"
+	fi
 	# Make sure addresses are purged
 	ip addr flush dev "$W_INF"
 	pkill -f "wpa_supplicant -i $W_INF"
