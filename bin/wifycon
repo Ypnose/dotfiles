@@ -3,6 +3,7 @@
 
 W_SCR="${0##*/}"
 W_INF="wlo1"
+# If W_NNS is enabled, no DNS update with dhcpcd
 W_NNS="1"
 
 function p_err {
@@ -34,6 +35,7 @@ function get_con {
 	ip link set dev "$W_INF" up
 	wpa_supplicant -i "$W_INF" -B -c "$W_CON"
 	if (( W_NIP != 1 )); then
+		# -C prevent running hook script
 		dhcpcd ${W_NNS:+-C resolv.conf} -C wpa_supplicant -w "$W_INF"
 	fi
 }
