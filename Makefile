@@ -82,7 +82,6 @@ wayland:
 	install -D -m 0600 -p gui/swayconfig ${DESTDIR}/.config/sway/config
 	install -D -m 0600 -p gui/foot.ini ${DESTDIR}/.config/foot/foot.ini
 	install -D -m 0600 -p gui/imvconfig ${DESTDIR}/.config/imv/config
-	install -D -m 0600 -p gui/mpv.conf ${DESTDIR}/.config/mpv/mpv.conf
 	install -m 0600 -p gui/mpvinput.conf ${DESTDIR}/.config/mpv/input.conf
 	find ${DESTDIR}/.config/ -type d -exec chmod 0700 {} +
 

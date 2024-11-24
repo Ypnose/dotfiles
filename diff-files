@@ -24,7 +24,6 @@ diff_found "${HOME}/.config/git/config" misc/gitconfig
 diff_found "${HOME}/.config/alacritty/alacritty.toml" gui/alacritty.toml
 diff_found "${HOME}/.config/i3/config" gui/i3config
 diff_found "${HOME}/.config/imv/config" gui/imvconfig
-diff_found "${HOME}/.config/mpv/mpv.conf" gui/mpv.conf
 diff_found "${HOME}/.config/mpv/input.conf" gui/mpvinput.conf
 diff_found "${HOME}/.config/sway/config" gui/swayconfig
 diff_found "${HOME}/.config/tmux/tmux.conf" misc/tmuxconf
