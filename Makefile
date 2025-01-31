@@ -16,7 +16,7 @@ list:
 diff:
 	@sh diff-files | yiff
 
-newbox: clean base gpg ssh conf fonts
+newbox: clean base ssh conf fonts
 
 ####################
 
@@ -24,7 +24,6 @@ base:
 	for f in ${REQFILE}; \
 		do install -m 0600 -p "$${f}" "${DESTDIR}/.$${f}"; \
 	done
-	install -D -m 0600 -p misc/tmuxconf ${DESTDIR}/.config/tmux/tmux.conf
 	for o in ${OPTFILE}; \
 		do test -f ${DESTDIR}/.$${o} \
 			|| install -m 0600 -p $${o} ${DESTDIR}/.$${o}; \
@@ -41,7 +40,6 @@ clean:
 		.tig_history .xsession .xsession-errors
 
 conf:
-	install -D -m 0600 -p misc/gitconfig ${DESTDIR}/.config/git/config
 	install -D -m 0600 -p xkb/evdev ${DESTDIR}/.config/xkb/rules/evdev
 	install -D -m 0600 -p xkb/kbyp ${DESTDIR}/.config/xkb/symbols/kbyp
 	mkdir -p ${DESTDIR}/.local/share/tig/ ${DESTDIR}/.yusr/etc/
@@ -49,8 +47,6 @@ conf:
 		-type d -exec chmod 0700 {} +
 
 fonts:
-	install -D -m 0600 -p misc/fonts/fonts.conf \
-		${DESTDIR}/.config/fontconfig/fonts.conf
 	mkdir -p ${DESTDIR}/.local/share/fonts/bitmaps/
 	install -m 0600 -p misc/fonts/*.*tf ${DESTDIR}/.local/share/fonts/
 	install -m 0600 -p misc/fonts/*.pcf.gz ${DESTDIR}/.local/share/fonts/bitmaps/
@@ -60,16 +56,6 @@ fonts:
 	find ${DESTDIR}/.config/ ${DESTDIR}/.local/share/ -type d \
 		-exec chmod 0700 {} +
 
-gpg:
-	mkdir -p ${DESTDIR}/.gnupg/
-	test -f ${DESTDIR}/.gnupg/gpg.conf \
-		|| install -m 0400 -p gpg/gpg.conf ${DESTDIR}/.gnupg/
-	test -f ${DESTDIR}/.gnupg/gpg-agent.conf \
-		|| install -m 0400 -p gpg/gpg-agent.conf ${DESTDIR}/.gnupg/
-	find ${DESTDIR}/.gnupg/ -type d -exec chmod 0700 {} +
-	find ${DESTDIR}/.gnupg/ -type f -exec chmod 0600 {} +
-	chmod 0400 ${DESTDIR}/.gnupg/gpg.conf ${DESTDIR}/.gnupg/gpg-agent.conf
-
 ssh:
 	install -m 0700 -d ${DESTDIR}/.ssh/
 	test -f ${DESTDIR}/.ssh/config \
@@ -78,23 +64,8 @@ ssh:
 	! test -f ${DESTDIR}/.ssh/authorized_keys \
 		|| chmod 0600 ${DESTDIR}/.ssh/authorized_keys
 
-wayland:
-	install -D -m 0600 -p gui/swayconfig ${DESTDIR}/.config/sway/config
-	install -D -m 0600 -p gui/foot.ini ${DESTDIR}/.config/foot/foot.ini
-	install -D -m 0600 -p gui/imvconfig ${DESTDIR}/.config/imv/config
-	install -m 0600 -p gui/mpvinput.conf ${DESTDIR}/.config/mpv/input.conf
-	find ${DESTDIR}/.config/ -type d -exec chmod 0700 {} +
-
 xorg:
-	test -f ${DESTDIR}/.config/alacritty/alacritty.toml \
-		|| install -D -m 0600 -p gui/alacritty.toml \
-			${DESTDIR}/.config/alacritty/alacritty.toml
-	test -f ${DESTDIR}/.config/gtk-3.0/settings.ini \
-		|| install -D -m 0600 -p misc/fonts/settings.ini \
-			${DESTDIR}/.config/gtk-3.0/settings.ini
-	install -D -m 0600 -p gui/i3config ${DESTDIR}/.config/i3/config
 	install -D -m 0600 -p xkb/yp.xkb ${DESTDIR}/.config/xkb/yp.xkb
 	find ${DESTDIR}/.config/ -type d -exec chmod 0700 {} +
 
-.PHONY: all list diff newbox base bin clean conf fonts gpg ssh wayland \
-	xorg
+.PHONY: all list diff newbox base bin clean conf fonts ssh xorg
