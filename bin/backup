@@ -74,7 +74,7 @@ rsync \
 	--exclude="Desktop/" \
 	--exclude="Downloads/" \
 	--files-from="$BACK_INCL" \
-	--log-file="${BACK_DEST}/rsync-${BACK_DATE}.log" \
+	--log-file="${BACK_DEST}/rsync-$(hostname)-${BACK_DATE}.log" \
 	--numeric-ids \
 	--stats \
 	"${BACK_OPTS[@]}" \
