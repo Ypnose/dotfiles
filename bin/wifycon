@@ -63,7 +63,7 @@ if [[ $1 = "-h" ]]; then
 fi
 
 if (( USER_ID != 0 )); then
-	p_err "${0##*/} must be run as root"
+	p_err "wifycon must be run as root"
 fi
 
 while getopts "df:i:nrs" arg; do
