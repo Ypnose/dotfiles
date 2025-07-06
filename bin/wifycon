@@ -13,6 +13,12 @@ function p_err {
 
 function usage {
 	print "usage: $W_SCR [-d] [-f WPA_FILE] [-h] [-i INTERFACE] [-n] [-r] [-s]"
+	print "  -d    Update /etc/resolv.conf"
+	print "  -f    Specify wpa_supplicant configuration file"
+	print "  -i    Change wireless interface (defaults to ${W_INF})"
+	print "  -n    Do no request network settings using dhcpcd(8)"
+	print "  -r    Restart the connection"
+	print "  -s    Disconnect from wireless network"
 	exit
 }
 
