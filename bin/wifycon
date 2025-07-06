@@ -58,7 +58,7 @@ function end_con {
 
 trap 'end_con' INT TERM
 
-if [[ $1 = "-h" ]]; then
+if [[ -z $1 || $1 = "-h" ]]; then
 	usage
 fi
 
