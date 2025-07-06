@@ -1,7 +1,6 @@
 #!/usr/bin/mksh
 # Script by Ypnose - http://ywstd.fr
 
-W_SCR="${0##*/}"
 W_INF="wlo1"
 # If W_NNS is enabled, no DNS update with dhcpcd
 W_NNS="1"
@@ -12,7 +11,7 @@ function p_err {
 }
 
 function usage {
-	print "usage: $W_SCR [-d] [-f WPA_FILE] [-h] [-i INTERFACE] [-n] [-r] [-s]"
+	print "usage: wifycon [-d] [-f WPA_FILE] [-h] [-i INTERFACE] [-n] [-r] [-s]"
 	print "  -d    Update /etc/resolv.conf"
 	print "  -f    Specify wpa_supplicant configuration file"
 	print "  -i    Change wireless interface (defaults to ${W_INF})"
