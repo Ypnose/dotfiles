@@ -92,4 +92,8 @@ if (( BACK_SQSH == 1 && BACK_DRYR != 1 )); then
 		-xattrs
 fi
 
+if (( BACK_DRYR != 1 )); then
+	sync
+fi
+
 exit
