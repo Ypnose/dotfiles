@@ -7,7 +7,7 @@ p_err() {
 }
 
 usage() {
-	p_err "usage: ${0##*/} [-b ISO] [-c] [-f FMT] [-h] [-m RAM] [-n] [-p SSH PORT] [-s] [-u OVMF DIR] [IMG]"
+	p_err "usage: ${0##*/} [-b ISO] [-c] [-f FMT] [-h] [-m RAM] [-n] [-s] [-t] [-u OVMF DIR] [IMG]"
 }
 
 qemu_launch() {
@@ -16,20 +16,20 @@ qemu_launch() {
 		-m "${VM_RAM:-2G}" \
 		-enable-kvm \
 		-drive file="$VM_IMG",format="${VM_FMT:-qcow2}" \
-		-nic user,model=e1000,hostfwd=tcp::"${VM_SSH:-9922}"-:22,hostfwd=tcp::8080-:80,hostfwd=tcp::8389-:389,hostfwd=tcp::8443-:443,hostfwd=tcp::8888-:8888 \
+		-nic "${VM_NET:-user,model=e1000,hostfwd=tcp::9922-:22,hostfwd=tcp::8080-:80,hostfwd=tcp::8389-:389,hostfwd=tcp::8443-:443,hostfwd=tcp::8888-:8888}" \
 		"$@"
 }
 
-while getopts ":b:cf:hm:np:su:" opt; do
+while getopts ":b:cf:hm:nstu:" opt; do
 	case $opt in
 		b) VM_ISO="$OPTARG" ;;
 		c) VM_UI="curses" ;;
 		f) VM_FMT="$OPTARG" ;;
 		h) usage ;;
 		m) VM_RAM="$OPTARG" ;;
-		n) VM_UI="serial" ;;
-		p) VM_SSH="$OPTARG" ;;
+		n) VM_NET="none" ;;
 		s) VM_TMP=1 ;;
+		t) VM_UI="serial" ;;
 		u) VM_OVMF="$OPTARG" ;;
 		*) usage ;;
 	esac
