@@ -8,7 +8,7 @@ umask 077
 
 # -- *PATH -------------------------------------------------------------
 [[ -d ${HOME}/.local/bin ]] && PATH="${PATH}:${HOME}/.local/bin"
-[[ -d ${HOME}/.yusr/bin ]] && PATH="${PATH}:${HOME}/.yusr/bin"
+[[ -d ${HOME}/.local/ybin ]] && PATH="${PATH}:${HOME}/.local/ybin"
 CDPATH=".:${HOME}"
 
 # -- EDITOR ------------------------------------------------------------
@@ -21,11 +21,12 @@ LESS="-KLRx4"
 LESSHISTFILE="-"
 
 # -- XDG ---------------------------------------------------------------
-XDG_CACHE_HOME="/tmp"
+XDG_CACHE_HOME="/run/user/$(id -u)/tmp"
+XDG_CONFIG_HOME="${HOME}/.config"
 
 # -- EXPORT ------------------------------------------------------------
 export PATH CDPATH MANPATH EDITOR VISUAL PAGER LESS LESSHISTFILE \
-	XDG_CACHE_HOME
+	XDG_CACHE_HOME XDG_CONFIG_HOME
 
 # -- VARIOUS -----------------------------------------------------------
 unset HISTFILE
