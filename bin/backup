@@ -2,6 +2,7 @@
 # Script by Ypnose - http://ywstd.fr
 # $ ( cd /mnt && backup -f FILELIST -t $HOME BACKUP )
 
+BACK_SUMS="1"
 BACK_DATE="$(date '+%Y-%m-%d')"
 
 function p_err {
@@ -10,7 +11,7 @@ function p_err {
 }
 
 function usage {
-	print "usage: backup [-d] [-f FILELIST] [-h] [-t] [SRC] [DEST]"
+	print "usage: backup [-d] [-f FILELIST] [-h] [-n] [-t] [SRC] [DEST]"
 	exit
 }
 
@@ -22,7 +23,7 @@ if [[ ! -x $(whence -p rsync) ]]; then
 	p_err "rsync not found in the PATH"
 fi
 
-while getopts ":df:t" opt; do
+while getopts ":df:nt" opt; do
 	case $opt in
 		d)
 			BACK_DRYR="1"
@@ -30,6 +31,9 @@ while getopts ":df:t" opt; do
 			;;
 		f)
 			BACK_INCL="$OPTARG"
+			;;
+		n)
+			BACK_SUMS="0"
 			;;
 		t)
 			BACK_SQSH="1"
@@ -81,19 +85,25 @@ rsync \
 	"${BACK_OPTS[@]}" \
 	"$1" "$BACK_DEST"
 
-# Create a Squashfs filesystem only if it's not dry run
-if (( BACK_SQSH == 1 && BACK_DRYR != 1 )); then
-	sleep 5
-	mksquashfs \
-		"$BACK_DEST" \
-		"BACKUP-$(hostname)-${BACK_DATE}.sqsh" \
-		-comp gzip \
-		-keep-as-directory \
-		-reproducible \
-		-xattrs
-fi
-
 if (( BACK_DRYR != 1 )); then
+	# Calculate checksums
+	if (( BACK_SUMS == 1 )); then
+		if [[ ! -x $(whence -p b3sum) ]]; then
+			p_err "b3sum not found in the PATH"
+		fi
+		find "$BACK_DEST" -type f -exec b3sum {} \+ >"B3SUMS_${BACK_DEST}"
+	fi
+	# Create a Squashfs filesystem
+	if (( BACK_SQSH == 1 )); then
+		sleep 5
+		mksquashfs \
+			"$BACK_DEST" \
+			"BACKUP-$(hostname)-${BACK_DATE}.sqsh" \
+			-comp gzip \
+			-keep-as-directory \
+			-reproducible \
+			-xattrs
+	fi
 	sync
 fi
 
