@@ -2,7 +2,7 @@
 # Ypnose - http://ywstd.fr
 
 DESTDIR ?= dest
-REQFILE = aliases nexrc mkshrc profile
+REQFILE = aliases mkshrc profile
 
 ####################
 
