@@ -46,7 +46,7 @@ function lf {
 			print -r -- "${F_FIL##*/}"; done
 }
 function nd {
-	mkdir -p "$1" && cd "$1" && ls
+	mkdir -p "$1" && cd "$1" && ls -F
 }
 function reduc {
 	print -r -- "scale=2;(${1//,/.}*${2//,/.})/100;(${1//,/.}-.)/1" | bc
