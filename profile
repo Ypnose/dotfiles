@@ -8,11 +8,6 @@ umask 077
 TMPDIR="${XDG_RUNTIME_DIR:?}/tmp"
 RANDFILE="${TMPDIR:?}/rnd"
 
-# -- *PATH -------------------------------------------------------------
-[[ -d ${HOME}/.local/bin ]] && PATH="${PATH}:${HOME}/.local/bin"
-[[ -d ${HOME}/.local/ybin ]] && PATH="${PATH}:${HOME}/.local/ybin"
-CDPATH=".:${HOME}"
-
 # -- EDITOR ------------------------------------------------------------
 EDITOR=vi
 VISUAL="$EDITOR"
@@ -27,11 +22,19 @@ LESSHISTFILE="-"
 XDG_CACHE_HOME="${XDG_RUNTIME_DIR:?}/cache"
 XDG_CONFIG_HOME="${HOME}/.config"
 
+# -- *PATH -------------------------------------------------------------
+[[ -d ${HOME}/.local/bin ]] && PATH="${PATH}:${HOME}/.local/bin"
+[[ -d ${HOME}/.local/ybin ]] && PATH="${PATH}:${HOME}/.local/ybin"
+CDPATH=".:${HOME}"
+
 # -- EXPORT ------------------------------------------------------------
-export TMPDIR RANDFILE PATH CDPATH EDITOR VISUAL EXINIT PAGER \
-	LESS LESSHISTFILE XDG_CACHE_HOME XDG_CONFIG_HOME
+export TMPDIR RANDFILE EDITOR VISUAL EXINIT PAGER LESS LESSHISTFILE \
+	XDG_CACHE_HOME XDG_CONFIG_HOME PATH CDPATH
 
 # -- VARIOUS -----------------------------------------------------------
 unset HISTFILE
 mkdir -p "$TMPDIR"
-rm -rf "${HOME:?}/.pki" "${HOME:?}/Desktop"
+rm -rf \
+	"${HOME:?}/.pki" \
+	"${HOME:?}/.serverauth."* \
+	"${HOME:?}/Desktop"
