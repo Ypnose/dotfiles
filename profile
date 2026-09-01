@@ -37,4 +37,6 @@ mkdir -p "$TMPDIR"
 rm -rf \
 	"${HOME:?}/.pki" \
 	"${HOME:?}/.serverauth."* \
-	"${HOME:?}/Desktop"
+	"${HOME:?}/Desktop/" \
+	"${XDG_CONFIG_HOME:?}/chromium/" \
+	"${XDG_CONFIG_HOME:?}/GIMP/"
