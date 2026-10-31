@@ -5,6 +5,7 @@
 
 # -- ENVIRONMENT -------------------------------------------------------
 umask 077
+HOSTNAME="${HOSTNAME:=$(uname -n)}"
 TMPDIR="${XDG_RUNTIME_DIR:?}/tmp"
 RANDFILE="${TMPDIR:?}/rnd"
 
@@ -28,8 +29,8 @@ XDG_CONFIG_HOME="${HOME}/.config"
 CDPATH=".:${HOME}"
 
 # -- EXPORT ------------------------------------------------------------
-export TMPDIR RANDFILE EDITOR VISUAL EXINIT PAGER LESS LESSHISTFILE \
-	XDG_CACHE_HOME XDG_CONFIG_HOME PATH CDPATH
+export HOSTNAME TMPDIR RANDFILE EDITOR VISUAL EXINIT \
+	PAGER LESS LESSHISTFILE XDG_CACHE_HOME XDG_CONFIG_HOME PATH CDPATH
 
 # -- VARIOUS -----------------------------------------------------------
 unset HISTFILE
