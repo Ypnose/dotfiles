@@ -6,4 +6,3 @@
 # -- ALIASES -----------------------------------------------------------
 alias ls='ls -Fh'
 alias grep='grep -I'
-alias nocom='grep -E -v -n -e "^([[:blank:]]*#|$)"'
